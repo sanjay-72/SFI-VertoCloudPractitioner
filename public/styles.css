@@ -1,0 +1,40 @@
+.MyNavDiv {
+    text-align: center;
+    padding: 1.5vh 0 1.5vh 0;
+    background: linear-gradient(to bottom right, rgba(0, 255, 0, 0.904), rgb(255, 217, 0));
+}
+
+.MyNavDiv h2 {
+    color: white;
+    background-color: rgba(17, 136, 17, 0.781);
+    font-size: 2rem;
+}
+
+span {
+    color: rgb(255, 221, 0);
+}
+
+.MyNavDiv a button {
+    border-radius: 15px;
+    border-style: double;
+    font-size: 1.2rem;
+    background: none;
+    border-color: rgb(0, 77, 8);
+    color: rgb(0, 77, 8);
+    margin-top: 5px;
+}
+
+.MyNavDiv a button:hover {
+    background-color: rgb(0, 139, 16);
+    transition: all .4s ease;
+    color: white;
+    border-style: none;
+}
+
+.QuoteDiv {
+    text-align: center;
+}
+
+.QuoteDiv p {
+    margin: 0;
+}
