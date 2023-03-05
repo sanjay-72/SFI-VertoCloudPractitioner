@@ -2,7 +2,17 @@ html {
     overflow-x: hidden;
 }
 
+html::-webkit-scrollbar {
+    width: 0.5rem;
+}
 
+html::-webkit-scrollbar-track {
+    background: rgb(148, 255, 155);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #036500;
+}
 
 .MyNavDiv {
     text-align: center;
@@ -37,7 +47,7 @@ span {
 }
 
 .MyNavDiv a button {
-    border-radius: 15px;
+    border-radius: 10px;
     border-style: double;
     font-size: 1.2rem;
     background: none;
