@@ -16,7 +16,8 @@ const dbURL = process.env.DBURL;
 mongoose.connect(dbURL);
 const ProductSchema = new mongoose.Schema({
     ProductId: Number,
-    name: String,
+    ProductName: String,
+    Description: String,
     cost: Number,
     imageURL: String,
     SellerName: String,
@@ -28,7 +29,8 @@ const NewProduct = mongoose.model('NewProduct', ProductSchema);
 
 // const Product = {
 //     ProductId: 225,
-//     name: "String",
+//     ProductName: "String",
+//     Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj",
 //     cost: 500,
 //     imageURL: "String",
 //     SellerName: "String",
@@ -37,16 +39,15 @@ const NewProduct = mongoose.model('NewProduct', ProductSchema);
 // }
 
 // var newEntry = new NewProduct({
-//     ProductId: 225, name: "String", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769
+//     ProductId: 225, ProductName: "String", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769
 // });
 // newEntry.save();
 
 async function updateMarketData() {
-    console.log('calling');
     dbData = await NewProduct.find({});
-    console.log(dbData);
+    // console.log(dbData);
     const jsonString = JSON.stringify(dbData);
-    fs.writeFile('./MarketProducts.json', jsonString, err => {
+    fs.writeFile('./public/MarketProducts.json', jsonString, err => {
         if (err) {
             console.log('Error writing file', err)
         } else {

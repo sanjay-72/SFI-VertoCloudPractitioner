@@ -80,3 +80,42 @@ span {
 #myFeaturetteImage:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
+
+.breakAll {
+    word-break: break-all;
+}
+
+.narrow {
+    padding: 10px;
+    height: 60px;
+    width: 250px;
+    margin: 15px;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.myProductBox {
+    border: 1px solid;
+    text-align: center;
+    padding: 5px;
+    border-radius: 12px;
+    margin: 0 0 15px 15px;
+    display: inline-block;
+}
+
+.myProductBox:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.myProductBox img {
+    border-radius: 10px;
+    width: 300px;
+}
+
+.myProductBox h2 {
+    margin-bottom: 0;
+}
+
+.mainMarketDiv {
+    text-align: center;
+}

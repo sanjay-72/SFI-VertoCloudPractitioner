@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- J Query CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <!-- font awesome fonts  -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -22,7 +24,7 @@
 
 <body>
     <!-- Nav Bar start -->
-    <div class="MyNavDiv">
+    <div style="position: static;" class="MyNavDiv">
         <h2>Fruit<span>Ful</span></h2>
         <a href="/"><button>Home</button></a>
         <a href="#"><button>Agri-IOT</button></a>
@@ -32,6 +34,16 @@
     <!-- Nav Bar End  -->
 
 
+    <div style="margin: 15px;" id="productsContainer" class="mainMarketDiv">
+        <div class="myProductBox">
+            <img src="https://images.unsplash.com/photo-1584673961397-be26e009333f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z3JlZW4lMjBmaWVsZHxlbnwwfHwwfHw%3D&w=1000&q=80"
+                alt="...">
+            <h2>Green Chilli</h2>
+            <p class="breakAll narrow">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie mauris
+                augue, in lacinia leo sodales at. Aliquam risus nibh.</p>
+            <a href="#"><button class="btn btn-outline-success">Contact Seller</button></a>
+        </div>
+    </div>
 
 
     <!-- Bootstrap JS CDN link -->
@@ -39,13 +51,8 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 
-    <!-- Vanilla tilt -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
-        integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- JavaScript link -->
-    <script src="/index.js"></script>
+    <script src="/marketPage.js"></script>
 </body>
 
 </html>
