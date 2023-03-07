@@ -93,14 +93,24 @@ app.post("/", function (req, res) {
 
 app.post("/userRegister", function (req, res) {
     console.log(req.body);
-    usersId = usersId + 1;
-    let passwordHash = md5(req.body.password);
-    var newEntry = new Users({
-        usersId: usersId, userName: req.body.userName, age: req.body.age, Location: req.body.Location, Occupation: req.body.Location, Occupation: req.body.Occupation, mobileNo: req.body.mobileNo, emailId: req.body.emailId, passwordHash: passwordHash
-    });
-    newEntry.save();
+    async function verifyEmail() {
+        let presence = await Users.find({ emailId: req.body.emailId });
+        // console.log(presence);
+        if (presence == []) {
+            usersId = usersId + 1;
+            let passwordHash = md5(req.body.password);
+            var newEntry = new Users({
+                usersId: usersId, userName: req.body.userName, age: req.body.age, Location: req.body.Location, Occupation: req.body.Location, Occupation: req.body.Occupation, mobileNo: req.body.mobileNo, emailId: req.body.emailId, passwordHash: passwordHash
+            });
+            newEntry.save();
+            res.send("Registration successful.");
+        }
+        else {
+            res.send("User already exits");
+        }
+    }
+    verifyEmail();
 
-    res.send("Registration successful.");
 });
 
 
