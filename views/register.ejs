@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <title>Register for Fruitful.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            background-color: rgb(34, 255, 56);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Gruppo', bold;
+        }
+
+
+        #nameTextEng {
+            margin: 1rem;
+            text-align: center;
+            color: rgb(0, 0, 0);
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            color: rgb(52, 156, 0);
+        }
+
+        #container {
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            padding: 3rem;
+            border-radius: .7rem;
+            width: 45rem;
+            margin: 4rem auto;
+            outline: none;
+            border: 1px solid rgb(0, 255, 64);
+            border-radius: 1rem;
+            border-width: 1px;
+            transition: .3s;
+        }
+
+        .input-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 1rem;
+        }
+
+        .input-wrapper label {
+            font-size: 1.8rem;
+            text-align: left;
+            color: rgb(255, 153, 0);
+        }
+
+        .input-wrapper input {
+            padding: 1.2rem;
+            font-size: 2rem;
+            width: 100%;
+            margin-top: -1rem;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+            border: 1px solid gray;
+            color: rgb(0, 110, 0);
+            border-radius: .5rem;
+        }
+
+        .input-wrapper select {
+            padding: 1.2rem;
+            font-size: 2rem;
+            width: 100%;
+            margin-top: -1rem;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+            border: 1px solid gray;
+            color: rgb(0, 110, 0);
+            border-radius: .5rem;
+        }
+
+        .input-wrapper select:focus {
+            border: 1px solid rgb(0, 255, 0);
+        }
+
+        .input-wrapper input:focus {
+            border: 1px solid rgb(0, 255, 0);
+        }
+
+        .input-wrapper input::-webkit-outer-spin-button,
+        ::-webkit-inner-spin-button {
+            display: none;
+        }
+
+        #SubmitButton {
+            margin-top: 60px;
+            font-size: 200%;
+
+        }
+
+        #message p {
+            padding: 10px 35px;
+            font-size: 18px;
+        }
+
+        #message {
+            display: none;
+            background: #f1f1f1;
+            color: #000;
+            position: relative;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        /* Add a green text color and a checkmark when the requirements are right */
+        .valid {
+            color: green;
+        }
+
+        .valid:before {
+            position: relative;
+            left: -35px;
+            content: "✔";
+        }
+
+        /* Add a red text color and an "x" when the requirements are wrong */
+        .invalid {
+            color: red;
+        }
+
+        .invalid:before {
+            position: relative;
+            left: -35px;
+            content: "✖";
+        }
+
+
+        @media screen and (max-width:460px) {
+            html {
+                font-size: 52%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Box for inputs start -->
+    <div id="container">
+
+        <form action="/userRegister" method="post">
+            <h1><strong>Register in 🍒Fruitful🍊</strong></h1>
+            <div class="input-wrapper">
+                <label for="userName">Full Name:</label><br>
+                <input name="userName" type="text" value="" id="userNameField" required autofocus spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="Age">Age:</label><br>
+                <input name="age" type="number" value="" id="ageField" min="15" step="1" max="72" required autofocus
+                    spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="Location">Location:</label><br>
+                <input name="Location" type="text" value="" id="locationField" required autofocus spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="Occupation">Occupation:</label><br>
+                <select name="Occupation" id="occupationField">
+                    <option value="Farmer">Farmer</option>
+                    <option value="Agriculture Officer">Agriculture Officer</option>
+                    <option value="Trader">Trader</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="mobileNo">Mobile No(+91):</label><br>
+                <input type="tel" id="mobileNoField" name="mobileNo" pattern="[0-9]{10}" required
+                    placeholder="1234567891" autofocus spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="emailId">Email id:</label><br>
+                <input name="emailId" type="email" value="" id="emailField" required autofocus spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="password">Password:</label><br>
+                <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" id="psw"
+                    required style="font-size: 1.7rem;">
+            </div>
+            <div id="message" style="text-align: left;">
+                <br>
+                <h3>Password must contain the following:</h3>
+                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                <p id="number" class="invalid">A <b>number</b></p>
+                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            </div>
+            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Register</strong></button>
+
+        </form>
+        <!-- Box for inputs end -->
+    </div>
+    <!-- Footer text start -->
+    <h3 id="nameTextEng">©️ Fruitful technologies.</h3>
+    <!-- Footer text end -->
+
+    <script>
+        var myInput = document.getElementById("psw");
+        var letter = document.getElementById("letter");
+        var capital = document.getElementById("capital");
+        var number = document.getElementById("number");
+        var length = document.getElementById("length");
+
+        myInput.onfocus = function () {
+            document.getElementById("message").style.display = "block";
+        }
+
+        myInput.onblur = function () {
+            document.getElementById("message").style.display = "none";
+        }
+
+        myInput.onkeyup = function () {
+            var lowerCaseLetters = /[a-z]/g;
+            if (myInput.value.match(lowerCaseLetters)) {
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+            } else {
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+            }
+
+            var upperCaseLetters = /[A-Z]/g;
+            if (myInput.value.match(upperCaseLetters)) {
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+            } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+            }
+
+            var numbers = /[0-9]/g;
+            if (myInput.value.match(numbers)) {
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+            } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+            }
+
+            if (myInput.value.length >= 8) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+            } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

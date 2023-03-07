@@ -65,6 +65,10 @@ app.get("/login", function (req, res) {
     res.render("login", {});
 });
 
+app.get("/userRegister", function (req, res) {
+    res.render("register", {});
+})
+
 app.get("/market", function (req, res) {
     res.sendFile(__dirname + "/market.html")
 });
@@ -74,6 +78,10 @@ app.post("/", function (req, res) {
     res.send("Thankyou");
 });
 
+app.post("/userRegister", function (req, res) {
+    console.log(req.body);
+    res.send("Registration successful.");
+});
 
 
 app.listen(PORT, function () {
