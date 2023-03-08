@@ -2,17 +2,31 @@
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
-var md5 = require('md5');
+const session = require('express-session');
+const mongoose = require("mongoose");
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 const app = express();
+
+//middleware
+app.use(session({
+    secret: toString(process.env.MYSECRET),
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
 require('dotenv').config();
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 80;
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
+
 let usersId = 10000;
 
 //Mongoose initialisations
-const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
 const dbURL = process.env.DBURL;
 mongoose.connect(dbURL);
@@ -36,9 +50,9 @@ const UserSchema = new mongoose.Schema({
     Occupation: String,
     mobileNo: Number,
     emailId: String,
-    passwordHash: String
+    password: String
 });
-const Users = mongoose.model('Users', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 // const Product = {
 //     ProductId: 225,
@@ -70,40 +84,108 @@ async function updateMarketData() {
 }
 updateMarketData();
 
+// Passport.js initialisations
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Passport working
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+    const USER = await User.findById(id);
+    done(null, USER);
+});
+
+passport.use(new localStrategy({
+    usernameField: 'emailId',
+    passwordField: 'password'
+},
+    function (username, password, done) {
+        async function executer1() {
+            let user = [];
+            try {
+                user = await User.findOne({ emailId: username });
+            }
+            catch (err) {
+                return done(err);
+            }
+            function executer2(user) {
+                // if (err) return done(err);
+                if (!user) return done(null, false, { message: "Incorrect username" });
+
+                bcrypt.compare(password, user.password, function (err, res) {
+                    if (err) return done(err);
+                    if (res === false) return done(null, false, { message: "Incorrect password" });
+                    return done(null, user);
+                });
+            }
+            executer2(user);
+        }
+        executer1();
+    }
+));
+
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/login');
+}
+
+function isLoggedOut(req, res, next) {
+    if (!req.isAuthenticated()) return next();
+    res.redirect('/');
+}
+
+
+
+//routes
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/login", function (req, res) {
+app.get("/login", isLoggedOut, function (req, res) {
     res.render("login", {});
 });
 
 app.get("/userRegister", function (req, res) {
     res.render("register", {});
-})
+});
 
-app.get("/market", function (req, res) {
+app.get("/market", isLoggedIn, function (req, res) {
     res.sendFile(__dirname + "/market.html")
 });
 
+app.get("/logout", isLoggedIn, function (req, res) {
+    req.logout(req.user, err => {
+        if (err) return next(err);
+        res.redirect("/");
+    });
+});
+
+
 app.post("/", function (req, res) {
-    console.log(req.body);
     res.send("Thankyou");
 });
 
 app.post("/userRegister", function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     async function verifyEmail() {
-        let presence = await Users.find({ emailId: req.body.emailId });
-        // console.log(presence);
-        if (presence == []) {
+        let presence = await User.exists({ emailId: req.body.emailId });
+        if (!presence) {
             usersId = usersId + 1;
-            let passwordHash = md5(req.body.password);
-            var newEntry = new Users({
-                usersId: usersId, userName: req.body.userName, age: req.body.age, Location: req.body.Location, Occupation: req.body.Location, Occupation: req.body.Occupation, mobileNo: req.body.mobileNo, emailId: req.body.emailId, passwordHash: passwordHash
-            });
-            newEntry.save();
-            res.send("Registration successful.");
+            bcrypt.genSalt(10, function (err, salt) {
+                if (err) return next(err);
+                bcrypt.hash(req.body.password, salt, function (err, hash) {
+                    if (err) return next(err);
+                    var newEntry = new User({
+                        usersId: usersId, userName: req.body.userName, age: req.body.age, Location: req.body.Location, Occupation: req.body.Location, Occupation: req.body.Occupation, mobileNo: req.body.mobileNo, emailId: req.body.emailId, password: hash
+                    });
+                    newEntry.save();
+                    res.redirect("/login");
+                })
+            })
         }
         else {
             res.send("User already exits");
@@ -112,6 +194,22 @@ app.post("/userRegister", function (req, res) {
     verifyEmail();
 
 });
+
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login?error=true"
+}));
+
+// app.post('/login', function (req, res, next) {
+//     console.log(req.url);
+//     passport.authenticate('local', function (err, user, info) {
+//         console.log("authenticate");
+//         console.log(err);
+//         console.log(user);
+//         console.log(info);
+//     })(req, res, next);
+// });
+
 
 
 app.listen(PORT, function () {
