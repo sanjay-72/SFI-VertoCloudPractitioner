@@ -21,6 +21,22 @@
             font-size: 62.5%;
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
+        html::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        html::-webkit-scrollbar-track {
+            background: rgb(148, 255, 155);
+        }
+
+        html::-webkit-scrollbar-thumb {
+            background: #036500;
+        }
+
         body {
             background-color: rgb(34, 255, 56);
             min-height: 100vh;
@@ -205,6 +221,8 @@
                 <label for="password">Password:</label><br>
                 <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" id="psw"
                     required style="font-size: 1.7rem;">
+                <p style="text-align: left;font-size: 1.6rem;">if you already have account <a href="login">Click
+                        here</a>
             </div>
             <div id="message" style="text-align: left;">
                 <br>
@@ -214,6 +232,7 @@
                 <p id="number" class="invalid">A <b>number</b></p>
                 <p id="length" class="invalid">Minimum <b>8 characters</b></p>
             </div>
+
             <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Register</strong></button>
 
         </form>

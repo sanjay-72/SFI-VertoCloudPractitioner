@@ -142,7 +142,14 @@ function isLoggedOut(req, res, next) {
 
 //routes
 app.get("/", function (req, res) {
-    res.sendFile(__dirname + "/index.html");
+    // res.sendFile(__dirname + "/index.html");
+    let temp = "Login👤";
+    if (req.isAuthenticated()) {
+        // console.log(req.user.userName);
+        temp = req.user.userName
+    }
+
+    res.render("index", { name: temp });
 });
 
 app.get("/login", isLoggedOut, function (req, res) {
@@ -164,6 +171,9 @@ app.get("/logout", isLoggedIn, function (req, res) {
     });
 });
 
+app.get("/newProduct", isLoggedIn, function (req, res) {
+    res.render("productEntry", {});
+})
 
 app.post("/", function (req, res) {
     res.send("Thankyou");
@@ -196,7 +206,7 @@ app.post("/userRegister", function (req, res) {
 });
 
 app.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/?loggedin=true",
     failureRedirect: "/login?error=true"
 }));
 
@@ -209,6 +219,11 @@ app.post("/login", passport.authenticate("local", {
 //         console.log(info);
 //     })(req, res, next);
 // });
+
+
+app.post("/newProduct", function (req, res) {
+    console.log(req.body);
+});
 
 
 
