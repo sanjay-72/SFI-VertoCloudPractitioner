@@ -46,6 +46,11 @@ span {
     color: rgb(255, 221, 0);
 }
 
+.btn:hover,
+.btn:focus {
+    transition-duration: 0;
+}
+
 .MyNavDiv a button {
     border-radius: 10px;
     border-style: double;

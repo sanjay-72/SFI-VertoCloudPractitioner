@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+const { Console } = require('console');
 const app = express();
 
 //middleware
@@ -179,8 +180,12 @@ app.get("/newProduct", isLoggedIn, function (req, res) {
 app.get("/myProducts", isLoggedIn, function (req, res) {
     async function getMyProducts() {
         let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo });
-        console.log(myProductData);
-        res.send(myProductData);
+        // res.send(myProductData);
+        // console.log(myProductData);
+        res.render("customerProductsView", {
+            name: req.user.userName,
+            productList: myProductData
+        });
     }
     getMyProducts();
 
@@ -236,9 +241,26 @@ app.post("/newProduct", isLoggedIn, function (req, res) {
         ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, Mobile: req.user.mobileNo
     });
     newEntry.save();
-    console.log(newEntry);
+    // console.log(newEntry);
     updateMarketData();
     res.sendFile(__dirname + "/thankYou.html");
+});
+
+
+app.post("/myProducts", isLoggedIn, function (req, res) {
+    // console.log(req.body);
+    // console.log(Object.keys(req.body));
+    let deletingProducts = Object.keys(req.body);
+
+    async function deleteGivenProducts() {
+        for (var i = 0; i < deletingProducts.length; i++) {
+            let doc = await NewProduct.deleteOne({ ProductId: parseInt(deletingProducts[i]) });
+            // console.log(doc);
+        }
+    };
+    deleteGivenProducts();
+    updateMarketData();
+    res.send("Deleted the selected items Successfully.")
 });
 
 

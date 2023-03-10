@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- font awesome fonts  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- Bootstrap JS CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <!-- My CSS link -->
+    <link rel="stylesheet" href="/styles.css">
+    <title>🍒Fruitful🍊</title>
+</head>
+
+<body>
+    <!-- Nav Bar start -->
+    <div class="MyNavDiv" style="position: static;">
+        <h2>Fruit<span>Ful</span></h2>
+        <a href="/"><button>Home</button></a>
+        <a href="#"><button>Agri-IOT</button></a>
+        <a href="market"><button>Sell/Buy</button></a>
+        <a href="#"><button>About</button></a>
+        <% if(name !="Login👤" ) { %>
+            <h3>Welcome dear <span style="color: green;">
+                    <%=name%>
+                </span>
+            </h3>
+            <% }else{ %>
+                <a href="login"><button>Login👤</button></a>
+                <% } %>
+    </div>
+    <!-- Nav Bar End  -->
+    <div style="margin: 15px;">
+        <p>This is the list your products which are online.</p>
+        <form action="/myProducts" method="post">
+            <table>
+                <% for(var i=0; i<productList.length; i++) {%>
+                    <tr>
+                        <td>
+                            <input style="padding: 10px;" type="checkbox" name=<%=productList[i].ProductId %> id="">
+                        </td>
+                        <td style="padding-left: 10px;padding-right: 10px; font-size: 1.2rem;">
+                            <%= productList[i].ProductName %> (₹<%= productList[i].cost %>)
+                        </td>
+                    </tr>
+                    <% } %>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td style="padding-top: 15px;">
+                                <button type="submit" class="btn btn-outline-danger">Remove from Market</button>
+                            </td>
+                        </tr>
+            </table>
+        </form>
+
+    </div>
+
+
+
+
+
+    <!-- Vanilla tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
+        integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JavaScript link -->
+    <script src="/index.js"></script>
+</body>
+
+</html>
