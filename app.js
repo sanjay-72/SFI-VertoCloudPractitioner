@@ -78,9 +78,9 @@ async function updateMarketData() {
     const jsonString = JSON.stringify(dbData);
     fs.writeFile('./public/MarketProducts.json', jsonString, err => {
         if (err) {
-            console.log('Error writing file', err)
+            console.log('Error writing file', err);
         } else {
-            console.log('Successfully wrote file')
+            // console.log('Successfully wrote file');
         }
     })
 }
@@ -150,7 +150,6 @@ app.get("/", function (req, res) {
         // console.log(req.user.userName);
         temp = req.user.userName
     }
-
     res.render("index", { name: temp });
 });
 
@@ -163,6 +162,7 @@ app.get("/userRegister", function (req, res) {
 });
 
 app.get("/market", isLoggedIn, function (req, res) {
+    updateMarketData();
     res.sendFile(__dirname + "/market.html")
 });
 
@@ -235,7 +235,7 @@ app.post("/login", passport.authenticate("local", {
 
 
 app.post("/newProduct", isLoggedIn, function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     productId = productId + 1;
     var newEntry = new NewProduct({
         ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, Mobile: req.user.mobileNo
@@ -260,10 +260,8 @@ app.post("/myProducts", isLoggedIn, function (req, res) {
     };
     deleteGivenProducts();
     updateMarketData();
-    res.send("Deleted the selected items Successfully.")
+    res.sendFile(__dirname + "/thankYou.html");
 });
-
-
 
 app.listen(PORT, function () {
     console.log("App is running on port : " + PORT);
