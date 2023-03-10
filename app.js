@@ -25,6 +25,7 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 let usersId = 10000;
+let productId = 720000;
 
 //Mongoose initialisations
 mongoose.set('strictQuery', true);
@@ -140,7 +141,7 @@ function isLoggedOut(req, res, next) {
 
 
 
-//routes
+//Get routes
 app.get("/", function (req, res) {
     // res.sendFile(__dirname + "/index.html");
     let temp = "Login👤";
@@ -175,10 +176,17 @@ app.get("/newProduct", isLoggedIn, function (req, res) {
     res.render("productEntry", {});
 })
 
-app.post("/", function (req, res) {
-    res.send("Thankyou");
+app.get("/myProducts", isLoggedIn, function (req, res) {
+    async function getMyProducts() {
+        let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo });
+        console.log(myProductData);
+        res.send(myProductData);
+    }
+    getMyProducts();
+
 });
 
+//Post routes
 app.post("/userRegister", function (req, res) {
     // console.log(req.body);
     async function verifyEmail() {
@@ -221,8 +229,16 @@ app.post("/login", passport.authenticate("local", {
 // });
 
 
-app.post("/newProduct", function (req, res) {
+app.post("/newProduct", isLoggedIn, function (req, res) {
     console.log(req.body);
+    productId = productId + 1;
+    var newEntry = new NewProduct({
+        ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, Mobile: req.user.mobileNo
+    });
+    newEntry.save();
+    console.log(newEntry);
+    updateMarketData();
+    res.sendFile(__dirname + "/thankYou.html");
 });
 
 
