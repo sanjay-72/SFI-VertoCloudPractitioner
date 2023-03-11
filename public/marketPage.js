@@ -10,7 +10,7 @@ function showProducts(products) {
     products.forEach(product => {
         skillHTML += `
             <div class="myProductBox">
-            <img src="images/${product.ProductName}.jpg"
+            <img src="images/Products/${product.ProductName}.jpg"
                 alt="${product.ProductName} Image">
             <h2>${product.ProductName}</h2>
             <h4><span style="font-size:1.4rem; color:blue;">(₹${product.cost}/Kg)<span></h4>
