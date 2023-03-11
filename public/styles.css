@@ -53,7 +53,7 @@ span {
 
 .MyNavDiv a button {
     border-radius: 10px;
-    border-style: double;
+    border-style: solid;
     font-size: 1.2rem;
     background: none;
     border-color: rgb(0, 77, 8);

@@ -191,6 +191,22 @@ app.get("/myProducts", isLoggedIn, function (req, res) {
 
 });
 
+app.get("/contactSeller/:SellerMobile", isLoggedIn, function (req, res) {
+    // console.log(req.params.SellerMobile);
+    async function getSellerDetails() {
+        let mySellerData = await NewProduct.findOne({ Mobile: req.params.SellerMobile });
+        // console.log(mySellerData);
+        if (mySellerData != null)
+            res.render("sellerInfo", {
+                name: req.user.userName,
+                sellerData: mySellerData
+            });
+        else
+            res.send("Sorry :( product already SOLD. Please refresh the market page.");
+    }
+    getSellerDetails();
+})
+
 //Post routes
 app.post("/userRegister", function (req, res) {
     // console.log(req.body);

@@ -13,8 +13,9 @@ function showProducts(products) {
             <img src="images/${product.ProductName}.jpg"
                 alt="${product.ProductName} Image">
             <h2>${product.ProductName}</h2>
+            <h4><span style="font-size:1.4rem; color:blue;">(₹${product.cost}/Kg)<span></h4>
             <p class="breakAll narrow">${product.Description}</p>
-            <a href="#"><button class="btn btn-outline-success">Contact Seller</button></a>
+            <a target = "__blank" href="contactSeller/${product.Mobile}"><button class="btn btn-outline-success">Contact Seller</button></a>
         </div>
             `
     });
