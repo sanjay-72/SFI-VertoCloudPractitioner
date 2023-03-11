@@ -115,6 +115,7 @@ span {
 .myProductBox img {
     border-radius: 10px;
     width: 300px;
+    height: 200px;
 }
 
 .myProductBox h2 {
