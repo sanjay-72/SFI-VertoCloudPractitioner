@@ -191,10 +191,11 @@ app.get("/myProducts", isLoggedIn, function (req, res) {
 
 });
 
-app.get("/contactSeller/:SellerMobile", isLoggedIn, function (req, res) {
+app.get("/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, res) {
     // console.log(req.params.SellerMobile);
+    // console.log(req.params.pID);
     async function getSellerDetails() {
-        let mySellerData = await NewProduct.findOne({ Mobile: req.params.SellerMobile });
+        let mySellerData = await NewProduct.findOne({ Mobile: req.params.SellerMobile, ProductId: req.params.pID });
         // console.log(mySellerData);
         if (mySellerData != null)
             res.render("sellerInfo", {
