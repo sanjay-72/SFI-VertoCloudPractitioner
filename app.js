@@ -73,7 +73,7 @@ const User = mongoose.model('User', UserSchema);
 // newEntry.save();
 
 async function updateMarketData() {
-    dbData = await NewProduct.find({});
+    dbData = await NewProduct.find({}).sort({ ProductName: 1 });
     // console.log(dbData);
     const jsonString = JSON.stringify(dbData);
     fs.writeFile('./public/MarketProducts.json', jsonString, err => {
