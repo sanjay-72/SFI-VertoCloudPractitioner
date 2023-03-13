@@ -49,6 +49,14 @@
             font-family: 'Gruppo', bold;
         }
 
+        .errorMSG {
+            font-size: 1.6rem;
+            background-color: rgb(255, 210, 210);
+            border-radius: 15px;
+            color: rgb(179, 0, 0);
+            border: 1px solid rgb(179, 0, 0);
+            transition: 0.3s;
+        }
 
         #nameTextEng {
             margin: 1rem;
@@ -134,20 +142,25 @@
 
         <form action="/login" method="post">
             <h1><strong>Login to 🍒Fruitful🍊</strong></h1>
-
-            <div class="input-wrapper">
-                <label for="emailId">Email id:</label><br>
-                <input name="emailId" type="email" value="" id="emailField" required autofocus spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="password">Password:</label><br>
-                <input name="password" type="password" value="" id="PasswordField" required style="font-size: 1.7rem;">
-                <p style="text-align: left;font-size: 1.6rem;">if you are new to Fruitful <a href="userRegister">Click
-                        here</a>
-                </p>
-            </div>
-            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Login</strong></button>
+            <% if(error){ %>
+                <p class="errorMSG">Incorrect Email ID or Password</p>
+                <% } %>
+                    <div class="input-wrapper">
+                        <label for="emailId">Email id:</label><br>
+                        <input name="emailId" type="email" value="" id="emailField" required autofocus
+                            spellcheck="false" autocomplete="off">
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="password">Password:</label><br>
+                        <input name="password" type="password" value="" id="PasswordField" required
+                            style="font-size: 1.7rem;">
+                        <p style="text-align: left;font-size: 1.6rem;">if you are new to Fruitful <a
+                                href="userRegister">Click
+                                here</a>
+                        </p>
+                    </div>
+                    <button class="btn btn-outline-warning" type="submit"
+                        id="SubmitButton"><strong>Login</strong></button>
         </form>
 
         <!-- Box for inputs end -->

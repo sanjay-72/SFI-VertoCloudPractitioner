@@ -154,7 +154,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/login", isLoggedOut, function (req, res) {
-    res.render("login", {});
+    res.render("login", { error: req.query.error });
 });
 
 app.get("/userRegister", function (req, res) {
