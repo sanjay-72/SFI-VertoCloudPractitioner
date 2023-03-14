@@ -14,6 +14,14 @@ html::-webkit-scrollbar-thumb {
     background: #036500;
 }
 
+html::-webkit-scrollbar-thumb:hover {
+    background: #035200;
+}
+
+html::-webkit-scrollbar-thumb:active {
+    background: #40ff06;
+}
+
 .MyNavDiv {
     text-align: center;
     padding: 1.5vh 0 1.5vh 0;
