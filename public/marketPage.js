@@ -6,9 +6,9 @@ async function fetchData() {
 
 function showProducts(products) {
     let productsContainer = document.getElementById("productsContainer");
-    let skillHTML = "";
+    let productsHTML = "";
     products.forEach(product => {
-        skillHTML += `
+        productsHTML += `
             <div class="myProductBox">
             <img src="images/Products/${product.ProductName}.jpg"
                 alt="${product.ProductName} Image">
@@ -19,7 +19,7 @@ function showProducts(products) {
         </div>
             `
     });
-    productsContainer.innerHTML = skillHTML;
+    productsContainer.innerHTML = productsHTML;
 }
 
 fetchData().then(data => {
