@@ -25,3 +25,11 @@ function showProducts(products) {
 fetchData().then(data => {
     showProducts(data);
 });
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === 'visible') {
+        document.title = "🍒Fruitful🍊";
+    } else {
+        document.title = "Increase your yield with Technology.";
+    }
+});

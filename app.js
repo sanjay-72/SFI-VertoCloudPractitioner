@@ -161,9 +161,27 @@ app.get("/userRegister", function (req, res) {
     res.render("register", {});
 });
 
+app.get("/test", isLoggedIn, function (req, res) {
+    res.sendFile(__dirname + "/marketIntro.html")
+});
+
 app.get("/market", isLoggedIn, function (req, res) {
     updateMarketData();
     res.sendFile(__dirname + "/market.html")
+});
+
+app.get("/market/:productName", isLoggedIn, function (req, res) {
+    // console.log(req.params);
+    async function getParticularProduct() {
+        let myProductData = await NewProduct.find({ ProductName: req.params.productName });
+        // res.send(myProductData);
+        console.log(myProductData);
+        res.render("mainMarket", {
+            productList: myProductData
+        });
+    }
+    getParticularProduct();
+    // res.render("mainMarket", { pName: req.params.productName });
 });
 
 app.get("/logout", isLoggedIn, function (req, res) {
@@ -191,7 +209,7 @@ app.get("/myProducts", isLoggedIn, function (req, res) {
 
 });
 
-app.get("/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, res) {
+app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, res) {
     // console.log(req.params.SellerMobile);
     // console.log(req.params.pID);
     async function getSellerDetails() {
