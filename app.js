@@ -1,5 +1,4 @@
 //jshint esversion:6
-const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -72,20 +71,6 @@ const User = mongoose.model('User', UserSchema);
 // });
 // newEntry.save();
 
-async function updateMarketData() {
-    dbData = await NewProduct.find({}).sort({ ProductName: 1 });
-    // console.log(dbData);
-    const jsonString = JSON.stringify(dbData);
-    fs.writeFile('./public/MarketProducts.json', jsonString, err => {
-        if (err) {
-            console.log('Error writing file', err);
-        } else {
-            // console.log('Successfully wrote file');
-        }
-    })
-}
-updateMarketData();
-
 // Passport.js initialisations
 app.use(passport.initialize());
 app.use(passport.session());
@@ -140,8 +125,6 @@ function isLoggedOut(req, res, next) {
     res.redirect('/');
 }
 
-
-
 //Get routes
 app.get("/", function (req, res) {
     // res.sendFile(__dirname + "/index.html");
@@ -161,13 +144,8 @@ app.get("/userRegister", function (req, res) {
     res.render("register", {});
 });
 
-app.get("/test", isLoggedIn, function (req, res) {
-    res.sendFile(__dirname + "/marketIntro.html")
-});
-
 app.get("/market", isLoggedIn, function (req, res) {
-    updateMarketData();
-    res.sendFile(__dirname + "/market.html")
+    res.sendFile(__dirname + "/marketIntro.html")
 });
 
 app.get("/market/:productName", isLoggedIn, function (req, res) {
@@ -175,13 +153,12 @@ app.get("/market/:productName", isLoggedIn, function (req, res) {
     async function getParticularProduct() {
         let myProductData = await NewProduct.find({ ProductName: req.params.productName });
         // res.send(myProductData);
-        console.log(myProductData);
+        // console.log(myProductData);
         res.render("mainMarket", {
             productList: myProductData
         });
     }
     getParticularProduct();
-    // res.render("mainMarket", { pName: req.params.productName });
 });
 
 app.get("/logout", isLoggedIn, function (req, res) {
@@ -206,7 +183,6 @@ app.get("/myProducts", isLoggedIn, function (req, res) {
         });
     }
     getMyProducts();
-
 });
 
 app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, res) {
@@ -277,7 +253,6 @@ app.post("/newProduct", isLoggedIn, function (req, res) {
     });
     newEntry.save();
     // console.log(newEntry);
-    updateMarketData();
     res.sendFile(__dirname + "/thankYou.html");
 });
 
@@ -294,7 +269,6 @@ app.post("/myProducts", isLoggedIn, function (req, res) {
         }
     };
     deleteGivenProducts();
-    updateMarketData();
     res.sendFile(__dirname + "/thankYou.html");
 });
 
