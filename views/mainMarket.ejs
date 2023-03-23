@@ -19,6 +19,70 @@
 
     <!-- My CSS link -->
     <link rel="stylesheet" href="/styles.css">
+    <style>
+        .costPrice {
+            font-size: 1.4rem;
+            color: blue;
+        }
+
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 0.5s;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+            transition: all 0.5s;
+        }
+
+
+        .hidden:nth-child(2) {
+            transition-delay: 100ms;
+        }
+
+        .hidden:nth-child(3) {
+            transition-delay: 200ms;
+        }
+
+        .hidden:nth-child(4) {
+            transition-delay: 300ms;
+        }
+
+        @media(max-width:380px) {
+            .myProductBox {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            .myProductBox img {
+                width: 100%;
+                height: auto;
+            }
+
+            .narrow {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            h2 {
+                font-size: 100%;
+            }
+
+            .costPrice {
+                font-size: 75%;
+            }
+
+            .btn {
+                font-size: 75%;
+            }
+        }
+    </style>
     <title>Fruitful-Market</title>
 </head>
 
@@ -28,9 +92,9 @@
         <h2>Fruit<span>Ful</span></h2>
         <a href="/"><button>Home</button></a>
         <a href="#"><button>Agri-IOT</button></a>
-        <a href="market"><button disabled style="background-color: green;color: white;">Sell/Buy</button></a>
-        <a href="newProduct"><button>Sell Online</button></a>
-        <a href="myProducts"><button>My Products</button></a>
+        <a href="/market"><button style="background-color: green;color: white;">Sell/Buy</button></a>
+        <a href="/newProduct"><button>Sell Online</button></a>
+        <a href="/myProducts"><button>My Products</button></a>
     </div>
     <!-- Nav Bar End  -->
 
@@ -47,13 +111,13 @@
                 </div>
                 <% break; %>
                     <% } %>
-                        <div class="myProductBox">
+                        <div class="myProductBox hidden">
                             <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
                                 alt="<%= productList[i].ProductName %> Image">
                             <h2>
                                 <%= productList[i].ProductName %>
                             </h2>
-                            <h4><span style="font-size:1.4rem; color:blue;">(₹<%= productList[i].cost %>/Kg)<span></h4>
+                            <h4><span class="costPrice">(₹<%= productList[i].cost %>/Kg)<span></h4>
                             <p class="breakAll narrow">
                                 <%= productList[i].Description %>
                             </p>
@@ -71,7 +135,7 @@
         crossorigin="anonymous"></script>
 
     <!-- JavaScript link -->
-    <script src="/marketPage.js"></script>
+    <script src="/mainMarket.js"></script>
     <script src="/index.js"></script>
 </body>
 

@@ -151,7 +151,7 @@ app.get("/market", isLoggedIn, function (req, res) {
 app.get("/market/:productName", isLoggedIn, function (req, res) {
     // console.log(req.params);
     async function getParticularProduct() {
-        let myProductData = await NewProduct.find({ ProductName: req.params.productName });
+        let myProductData = await NewProduct.find({ ProductName: req.params.productName }).sort({ 'cost': 1 });
         // res.send(myProductData);
         // console.log(myProductData);
         res.render("mainMarket", {
