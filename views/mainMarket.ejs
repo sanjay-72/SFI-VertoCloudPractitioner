@@ -107,32 +107,25 @@
 
 
     <div style="margin: 15px;" id="productsContainer" class="mainMarketDiv">
-
+        <h1>
+            Deals found = <%= productList.length %>
+        </h1>
         <% for(var i=0; i<productList.length; i++) {%>
-            <% if(productList.length < 1) { %>
-                <div class="myProductBox">
-                    <p>Sorry no sellers available for .</p>
-                    <h1>
-                        <%= pName %>
-                    </h1>
-                </div>
-                <% break; %>
-                    <% } %>
-                        <div class="myProductBox hidden">
-                            <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
-                                alt="<%= productList[i].ProductName %> Image">
-                            <h2>
-                                <%= productList[i].ProductName %>
-                            </h2>
-                            <h4><span class="costPrice">(₹<%= productList[i].cost %>/Kg)<span></h4>
-                            <p class="breakAll narrow">
-                                <%= productList[i].Description %>
-                            </p>
-                            <a target="__blank"
-                                href="contactSeller/<%= productList[i].Mobile %>/<%= productList[i].ProductId %>"><button
-                                    class="btn btn-outline-success">Contact Seller</button></a>
-                        </div>
-                        <% } %>
+            <div class="myProductBox hidden">
+                <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
+                    alt="<%= productList[i].ProductName %> Image">
+                <h2>
+                    <%= productList[i].ProductName %>
+                </h2>
+                <h4><span class="costPrice">(₹<%= productList[i].cost %>/Kg)<span></h4>
+                <p class="breakAll narrow">
+                    <%= productList[i].Description %>
+                </p>
+                <a target="__blank"
+                    href="contactSeller/<%= productList[i].Mobile %>/<%= productList[i].ProductId %>"><button
+                        class="btn btn-outline-success">Contact Seller</button></a>
+            </div>
+            <% } %>
     </div>
 
 
