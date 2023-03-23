@@ -150,12 +150,24 @@ app.get("/market", isLoggedIn, function (req, res) {
 
 app.get("/market/:productName", isLoggedIn, function (req, res) {
     // console.log(req.params);
+    // console.log(req.query);
+    let myProductData = [];
     async function getParticularProduct() {
-        let myProductData = await NewProduct.find({ ProductName: req.params.productName }).sort({ 'cost': 1 });
+        if (req.query.sort == "PriceLowToHigh")
+            myProductData = await NewProduct.find({ ProductName: req.params.productName }).sort({ 'cost': 1 });
+        else if (req.query.sort == "PriceHighToLow")
+            myProductData = await NewProduct.find({ ProductName: req.params.productName }).sort({ 'cost': -1 });
+        else if (req.query.sort == "LatestFirst")
+            myProductData = await NewProduct.find({ ProductName: req.params.productName }).sort({ 'ProductId': -1 });
+        else if (req.query.sort == "OldestFirst")
+            myProductData = await NewProduct.find({ ProductName: req.params.productName }).sort({ 'ProductId': 1 });
+        else
+            myProductData = await NewProduct.find({ ProductName: req.params.productName });
         // res.send(myProductData);
         // console.log(myProductData);
         res.render("mainMarket", {
-            productList: myProductData
+            productList: myProductData,
+            sortingKey: req.query.sort
         });
     }
     getParticularProduct();

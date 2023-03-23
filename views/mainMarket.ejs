@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="/loaderStyle.css">
 
     <style>
+        h6 {
+            text-align: left;
+            margin: 15px;
+        }
+
         .costPrice {
             font-size: 1.4rem;
             color: blue;
@@ -74,8 +79,11 @@
                 margin: 0;
             }
 
-            h2 {
+            h2,
+            h6 {
                 font-size: 100%;
+                margin: 0;
+                margin-bottom: 5px;
             }
 
             .costPrice {
@@ -105,11 +113,27 @@
     </div>
     <!-- Nav Bar End  -->
 
+    <!-- Deals Count  -->
+    <h1>
+        Total deals found = <%= productList.length %>
+    </h1>
 
     <div style="margin: 15px;" id="productsContainer" class="mainMarketDiv">
-        <h1>
-            Deals found = <%= productList.length %>
-        </h1>
+        <h6>
+            Sort by :
+            <span style="color: rgb(0, 107, 0);">
+                <%=sortingKey%>
+            </span>
+            <form action="?sort=this.sort.value" method="get" style="display: inline-block;">
+                <select name="sort" onchange=this.form.submit()>
+                    <option value="Relevant">Change Here</option>
+                    <option value="PriceLowToHigh">Price Low to High</option>
+                    <option value="PriceHighToLow">Price High to Low</option>
+                    <option value="LatestFirst">Latest First</option>
+                    <option value="OldestFirst">Oldest First</option>
+                </select>
+            </form>
+        </h6>
         <% for(var i=0; i<productList.length; i++) {%>
             <div class="myProductBox hidden">
                 <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
