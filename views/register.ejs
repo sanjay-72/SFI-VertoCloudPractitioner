@@ -10,6 +10,10 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <title>Register for Fruitful.</title>
+
+    <!-- Loader CSS link -->
+    <link rel="stylesheet" href="/loaderStyle.css">
+
     <style>
         * {
             margin: 0;
@@ -194,7 +198,10 @@
     </style>
 </head>
 
-<body>
+<body style="overflow-y: hidden;">
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
     <!-- Box for inputs start -->
     <div id="container">
 
@@ -311,6 +318,12 @@
             }
         }
     </script>
+
+    <!-- JQuery Link  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- LoaderJs file Link  -->
+    <script src="/loaderAnimation.js"></script>
 
 </body>
 

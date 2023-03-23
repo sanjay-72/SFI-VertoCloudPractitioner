@@ -17,10 +17,17 @@
 
     <!-- My CSS link -->
     <link rel="stylesheet" href="/styles.css">
+
+    <!-- Loader CSS link -->
+    <link rel="stylesheet" href="/loaderStyle.css">
+
     <title>🍒Fruitful🍊</title>
 </head>
 
-<body>
+<body style="overflow-y: hidden;">
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
     <!-- Nav Bar start -->
     <div class="MyNavDiv">
         <h2>Fruit<span>Ful</span></h2>
@@ -135,6 +142,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
         integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JQuery Link  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- LoaderJs file Link  -->
+    <script src="/loaderAnimation.js"></script>
 
     <!-- JavaScript link -->
     <script src="/index.js"></script>
