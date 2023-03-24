@@ -31,7 +31,7 @@ html::-webkit-scrollbar-thumb:active {
     text-align: center;
     padding: 1.5vh 0 1.5vh 0;
     background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     display: block;
     z-index: 5;
