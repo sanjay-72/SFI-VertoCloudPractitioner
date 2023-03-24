@@ -237,8 +237,8 @@ span {
 .internalWordsDiv:hover {
     /* box-shadow: 0px 5px 15px rgba(199, 214, 0, 0.5); */
     box-shadow: 0 5px 15px #000000;
-    background: linear-gradient(to bottom right, rgb(10, 120, 0), rgb(0, 255, 0));
-    color: white;
+    background: linear-gradient(to bottom right, rgb(188, 255, 182), rgb(0, 255, 0));
+    color: rgb(17, 89, 10);
     transition: all 0.5s;
 }
 
