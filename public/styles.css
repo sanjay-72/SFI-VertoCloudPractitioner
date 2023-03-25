@@ -37,11 +37,19 @@ html::-webkit-scrollbar-thumb:active {
     z-index: 5;
 }
 
+.navDivBtns {
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
 /* Common Nav button styles */
 .nav-button {
-    position: relative;
-    height: 2.4rem;
-    width: 2.8rem;
+    position: absolute;
+    right: 10%;
+    top: 18px;
+    z-index: 10;
+    height: 1.4rem;
+    width: 1.8rem;
     background-color: transparent;
     background-image: linear-gradient(to right, currentColor, currentColor);
     background-position: center;
@@ -110,6 +118,26 @@ html::-webkit-scrollbar-thumb:active {
     #myFeaturetteImage {
         width: 100%;
         height: auto;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 
