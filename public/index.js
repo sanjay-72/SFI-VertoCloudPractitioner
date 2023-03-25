@@ -23,7 +23,8 @@ document.getElementById("toggle-button").addEventListener("click", () => {
     iotBtn.classList.toggle("hide");
     marketBtn.classList.toggle("hide");
     aboutBtn.classList.toggle("hide");
-    loginBtn.classList.toggle("hide");
+    if (loginBtn != undefined)
+        loginBtn.classList.toggle("hide");
     if (btnState == 1) {
         document.getElementById("toggle-button").blur();
         btnState = 0;
