@@ -182,7 +182,11 @@ app.get("/logout", isLoggedIn, function (req, res) {
 
 app.get("/newProduct", isLoggedIn, function (req, res) {
     res.render("productEntry", {});
-})
+});
+
+app.get("/about", function (req, res) {
+    res.sendFile(__dirname + "/about.html");
+});
 
 app.get("/myProducts", isLoggedIn, function (req, res) {
     async function getMyProducts() {
