@@ -11,6 +11,16 @@ VanillaTilt.init(document.querySelectorAll(".tilt"), {
     speed: 400
 });
 
+document.getElementById("toggle-button").style.display = "none";
+window.addEventListener('resize', function (event) {
+    var w = window.innerWidth;
+    if (w > 768)
+        document.getElementById("toggle-button").style.display = "none";
+    else
+        document.getElementById("toggle-button").style.display = "block";
+}, true);
+
+
 //0 is unclicked and 1 is clicked
 let btnState = 0;
 homeBtn = document.getElementById("homeBtn");

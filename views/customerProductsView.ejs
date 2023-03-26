@@ -40,14 +40,14 @@
         <a href="/market"><button>Sell/Buy</button></a>
         <a href="/newProduct"><button>Sell Online</button></a>
         <a href="/myProducts"><button disabled style="background-color: green;color: white;">My Products</button></a>
-        <h3>Welcome dear <span style="color: green;">
+        <h3 style="margin:0">Welcome dear <span style="color: green;">
                 <%=name%>
             </span>
         </h3>
     </div>
     <!-- Nav Bar End  -->
     <div style="margin: 15px;">
-        <p>This is the list your products which are online.</p>
+        <h5>This is the list of your products which are online.</h5>
         <form action="/myProducts" method="post">
             <table>
                 <% for(var i=0; i<productList.length; i++) {%>
@@ -56,7 +56,9 @@
                             <input style="padding: 10px;" type="checkbox" name=<%=productList[i].ProductId %> id="">
                         </td>
                         <td style="padding-left: 10px;padding-right: 10px; font-size: 1.2rem;">
-                            <%= productList[i].ProductName %> (₹<%= productList[i].cost %>)
+                            <h4>
+                                <%= productList[i].ProductName %> (₹<%= productList[i].cost %>)
+                            </h4>
                         </td>
                     </tr>
                     <% } %>
