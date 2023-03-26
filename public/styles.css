@@ -236,24 +236,33 @@ span {
 .myProductBox {
     border: 1px solid;
     text-align: center;
-    padding: 5px;
+    padding: 10px;
     border-radius: 12px;
-    margin: 0 0 15px 15px;
+    margin: 0 0 30px 30px;
     display: inline-block;
 }
 
 .myProductBox:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom right, rgb(188, 255, 182), rgb(0, 255, 0));
+    color: rgb(17, 89, 10);
 }
 
 .myProductBox img {
     border-radius: 10px;
     width: 300px;
     height: 200px;
+    margin-bottom: 5px;
+}
+
+.myProductBox button {
+    margin-bottom: 15px;
+    margin-top: 5px;
 }
 
 .myProductBox h2 {
     margin-bottom: 0;
+    color: green;
 }
 
 .mainMarketDiv {
@@ -289,7 +298,6 @@ span {
 }
 
 .internalWordsDiv:hover {
-    /* box-shadow: 0px 5px 15px rgba(199, 214, 0, 0.5); */
     background: linear-gradient(to bottom right, rgb(188, 255, 182), rgb(0, 255, 0));
     color: rgb(17, 89, 10);
     transition: all 0.5s;
