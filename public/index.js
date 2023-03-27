@@ -44,3 +44,9 @@ document.getElementById("toggle-button").addEventListener("click", () => {
     else
         btnState = 1;
 });
+
+//Auto sliding next carousal image feature
+let CarousalNextBtn = document.getElementById("carousel-control-next-btn");
+setInterval(() => {
+    CarousalNextBtn.click();
+}, 5000);
