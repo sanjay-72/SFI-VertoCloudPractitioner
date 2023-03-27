@@ -11,7 +11,9 @@ VanillaTilt.init(document.querySelectorAll(".tilt"), {
     speed: 400
 });
 
-document.getElementById("toggle-button").style.display = "none";
+var w = window.innerWidth;
+if (w > 768)
+    document.getElementById("toggle-button").style.display = "none";
 window.addEventListener('resize', function (event) {
     var w = window.innerWidth;
     if (w > 768)
