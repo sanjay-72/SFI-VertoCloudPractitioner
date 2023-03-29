@@ -41,6 +41,10 @@ html::-webkit-scrollbar-thumb:active {
     .nav-button {
         opacity: 100%;
     }
+
+    body {
+        overflow-x: hidden;
+    }
 }
 
 .MyNavDiv {
@@ -213,7 +217,8 @@ span {
 
 @media(max-width:768px) {
     #myFeaturetteImage {
-        margin-left: 12px;
+        margin: 12px;
+        width: 80%;
     }
 }
 
