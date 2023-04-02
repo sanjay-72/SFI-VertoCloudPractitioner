@@ -203,10 +203,6 @@ app.get("/newProduct", isLoggedIn, function (req, res) {
     res.render("productEntry", {});
 });
 
-app.get("/about", function (req, res) {
-    res.sendFile(__dirname + "/about.html");
-});
-
 app.get("/myProducts", isLoggedIn, function (req, res) {
     async function getMyProducts() {
         let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo });
@@ -240,7 +236,7 @@ app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, r
 app.get("/IOT", isLoggedIn, function (req, res) {
     async function getDeviceData() {
         let devicesInfo = await Device.findOne({ userId: req.user.usersId });
-        console.log(devicesInfo.Links);
+        // console.log(devicesInfo.Links);
         res.render("agriIOT", { deviceList: devicesInfo.Links });
     }
     getDeviceData();

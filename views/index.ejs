@@ -40,7 +40,7 @@
                 disabled>Home</button></a>
         <a href="/IOT" id="agriIOTBtn" class="hide navDivBtns"><button>Agri-IOT</button></a>
         <a href="/market" id="marketBtn" class="hide navDivBtns"><button>Sell/Buy</button></a>
-        <a href="/about" id="aboutBtn" class="hide navDivBtns"><button>About</button></a>
+        <a href="#aboutUs" id="aboutBtn" class="hide navDivBtns"><button>About</button></a>
         <% if(name !="Login👤" ) { %>
             <h3 style="margin:0">Welcome dear <span style="color: green;">
                     <%=name%>
@@ -127,9 +127,6 @@
                             Our mission is to make it easy for farmers to find buyers for their products, and for
                             sellers to find high-quality agricultural products to sell to their customers.
                             <br>
-                            We believe that by leveraging technology and innovation, we can create a more efficient and
-                            transparent agricultural supply chain that benefits everyone involved.
-                            <br>
                             At Fruitful, we understand the challenges that farmers and sellers face in today's
                             competitive marketplace. Farmers often struggle to find buyers for their products, while
                             sellers struggle to find reliable suppliers who can provide high-quality agricultural
@@ -144,8 +141,7 @@
             <table style="width: 100%;height: 100%;">
                 <tr>
                     <td>
-                        <img class="tilt" id="myFeaturetteImage" style="border-radius: 25px; width: 500px;"
-                            src="/images/Feature1.jpg" />
+                        <img class="tilt" id="myFeaturetteImage" src="/images/Feature1.jpg" />
                     </td>
                 </tr>
             </table>
@@ -154,7 +150,7 @@
     <!-- Our Mission Section End  -->
 
     <!-- Our Services section start  -->
-    <div class="row featurette" style="background-color: #fdff96; padding-top: 0;">
+    <div class="row featurette" id="aboutUs" style="background-color: #fdff96; padding-top: 0;">
         <h2 class="OurMission">Our <span style="color: green;">Services</span></h2>
 
         <hr class="featurette-divider">
@@ -173,15 +169,17 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <h2 class="featurette-heading">Breaking the chains. <span class="text-muted">Serving the
+                            <h2 class="featurette-heading">Breaking the chains. <span class="text-muted">Serving
                                     Jawans.</span></h2>
                             <p class="lead">
                                 Our platform is user-friendly and easy to navigate, allowing farmers to list their
                                 products for sale and provide detailed information about their farming practices and the
                                 quality of their products.
                                 <br>
-                                Buyers can see for products based on their need, price, and
-                                other criteria, making it easy to find the right products for their needs.
+                                This direct sell platform for agriculture provide farmers with a convenient and
+                                profitable
+                                way to sell their products directly to consumers, cutting out intermediaries and
+                                reducing costs while promoting local and sustainable food systems.
                             </p>
                         </td>
                     </tr>
@@ -195,13 +193,15 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow
-                                    your
-                                    mind.</span></h2>
+                            <h2 class="featurette-heading">Smart Crop. <span class="text-muted">Smart work.</span></h2>
                             <p class="lead">
                                 Smart IOT is used to increase the yielding and also helps the farmers by providing
                                 services like, remote operation of motors, crop moisture analysis and we can also record
                                 the periodic sensory data to improve yielding and profits for the farmers.
+                                <br>
+                                Agri IoT is crucial for improving agricultural efficiency, productivity, and
+                                sustainability by using data and technology to optimize farming practices, reduce waste,
+                                and increase yields.
                             </p>
                         </td>
                     </tr>
@@ -211,8 +211,8 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt" id="myFeaturetteImage" style="border-radius: 50%;"
-                                src="https://via.placeholder.com/500" />
+                            <img class="tilt" id="myFeaturetteImage"
+                                style="border-radius: 50%;width: 500px;height: 500px;" src="/images/Feature2.jpg" />
                         </td>
                     </tr>
                 </table>
@@ -225,8 +225,8 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt" id="myFeaturetteImage" style="border-radius: 50%;"
-                                src="https://via.placeholder.com/500" />
+                            <img class="tilt" id="myFeaturetteImage"
+                                style="border-radius: 50%;width: 500px;height: 500px;" src="/images/Feature3.jpg" />
                         </td>
                     </tr>
                 </table>
@@ -235,14 +235,17 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll
-                                    blow
-                                    your
-                                    mind.</span></h2>
+                            <h2 class="featurette-heading">Experience is the <span class="text-muted">key for
+                                    growth.</span></h2>
                             <p class="lead">
-                                We have experts and highly experienced professionals in agriculture field, who can
-                                advice individual farmers about their agriculture practices & make them reach the market
-                                demand.
+                                Our team of experts and highly experienced professionals in the agriculture field are
+                                dedicated to providing personalized advice to individual farmers. We work closely with
+                                farmers to understand their specific needs and goals, and develop customized solutions
+                                that improve their agriculture practices and help them reach market demand.
+                                <br>
+                                By working with us, farmers can benefit from our expertise and gain access to new
+                                markets, ultimately increasing their profitability and contributing to the growth of a
+                                sustainable food system.
                             </p>
                         </td>
                     </tr>
@@ -265,17 +268,14 @@
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
                 <h2 class="fw-normal">Amelia Yu</h2>
-                <p>I'm from Sweden, I love India that's why I choosed university named Lovely Professional
-                    University in
-                    India.
-                    My dreams to travel different places in India was succeeded by the help of Sanjay Travels.
-                    They have
-                    Lady
-                    Drivers also if we
-                    need. They showed us different places and they are very friendly. It's my pleasure to travel
-                    with
-                    Sanjay
-                    Travels.</p>
+                <p>"Organic products are an excellent choice for those who prioritize health, sustainability, and
+                    environmental responsibility. I'm satisfied with the products sold by FruitFul.Choosing organic
+                    products can also
+                    support small-scale farmers and sustainable agriculture, which is crucial for our long-term food
+                    security and health.
+                    <br>
+                    Thankyou fruitful for providing a platform like this."
+                </p>
             </div>
         </div><!-- /.col-lg-4 CustomerWordsDiv -->
         <div class="col-lg-4 CustomerWordsDiv" style="text-align: center;">
@@ -284,16 +284,12 @@
                     role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
-                <h2 class="fw-normal">Dr. Gourav Singh</h2>
-                <p>I'm a senior professor at Lovely Professional University. Sanjay Travels is an initiative
-                    taken by a
-                    student
-                    of our university. So I gave it a try and booked for a trip. I am impressed
-                    with their service and the drivers were very polite during my trip. After my trip I've
-                    suggested
-                    this
-                    travels
-                    with many of my collegues.
+                <h2 class="fw-normal">Dr. Gourav</h2>
+                <p>Organic farming practices avoid the use of synthetic pesticides and
+                    fertilizers, promoting soil health and biodiversity.
+                    I have been consistently satisfied with the quality and variety of produce you offer, and the
+                    convenience of purchasing directly from the farmer is unparalleled. The platform you have created
+                    has made it possible for me to support local farmers and enjoy the freshest produce available.
                 <p>
             </div>
 
@@ -304,21 +300,21 @@
                     role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
-                <h2 class="fw-normal">Micheal Smith</h2>
-                <p>I'm from North America. Actually I'm a little bit introvert and I am not talkative. But still
-                    my
-                    journey
-                    with
-                    Sanjay Travels gave me
-                    new friends and great memories. Thanks a lot Sanjay Travels, keep going.</p>
+                <h2 class="fw-normal">Anil Kumar</h2>
+                <p>While organic products may be more expensive than conventionally grown products, the benefits to our
+                    health and the environment make them well worth the investment.
+
+                    Overall, I highly recommend trying organic products and incorporating them into your daily diet.
+                    From fruits and vegetables to dairy, meat, and grains, there are a wide variety of organic options
+                    available to suit any taste or preference.</p>
             </div>
         </div><!-- /.col-lg-4 CustomerWordsDiv -->
     </div><!-- /.row -->
-    </div>
+
     <!-- Our clients Section end  -->
 
     <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
-
+    <p style="margin-top: 35px;padding-bottom: 20px;">©️ Fruitful technologies.</p>
     <!-- Bootstrap JS CDN link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
