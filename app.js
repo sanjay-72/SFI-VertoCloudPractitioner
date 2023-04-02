@@ -90,6 +90,18 @@ const Device = mongoose.model('Device', DeviceSchema);
 // });
 // newDevice.save();
 
+async function updateIds() {
+    let LastProduct = await NewProduct.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
+    let LastUser = await User.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
+    // console.log(LastProduct.ProductId);
+    // console.log(LastUser.usersId);
+    if (LastProduct != null)
+        productId = LastProduct.ProductId;
+    if (LastUser != null)
+        usersId = LastUser.usersId;
+}
+updateIds();
+
 // Passport.js initialisations
 app.use(passport.initialize());
 app.use(passport.session());
