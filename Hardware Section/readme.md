@@ -37,3 +37,13 @@ To get started with ThingSpeak, you can create a free account and channels to co
 
 <img width="854" alt="image" src="https://user-images.githubusercontent.com/94438149/229370373-55f81c0f-fe54-4dac-ab50-6aa607c1bbb8.png">
 
+
+- You can now start sending data to your channel using the provided API key.
+
+- To view the data collected from your devices or sensors, you can use ThingSpeak's built-in visualization tools, or you can export the data to other platforms or tools for further analysis.
+
+<img width="1268" alt="image" src="https://user-images.githubusercontent.com/94438149/229370604-420c6e77-3cd9-4bf1-9db4-38371385d907.png">
+
+
+## That's it! You now have a ThingSpeak account and channels set up to collect data from your devices or sensors.
+
