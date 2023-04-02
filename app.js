@@ -55,6 +55,14 @@ const UserSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', UserSchema);
 
+const DeviceSchema = new mongoose.Schema({
+    userId: Number,
+    userName: String,
+    Location: String,
+    Links: Array
+});
+const Device = mongoose.model('Device', DeviceSchema);
+
 // const Product = {
 //     ProductId: 225,
 //     ProductName: "String",
@@ -70,6 +78,17 @@ const User = mongoose.model('User', UserSchema);
 //     ProductId: 225, ProductName: "String", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769
 // });
 // newEntry.save();
+
+// var newDevice = new Device({
+//     userId: req.user.usersId,
+//     userName: req.user.userName,
+//     Location: req.user.Location,
+//     Links: ["https://thingspeak.com/channels/2065077/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
+//         "https://thingspeak.com/channels/2065077/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
+//         "https://thingspeak.com/channels/2065077/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
+//         "https://thingspeak.com/channels/2065077/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"]
+// });
+// newDevice.save();
 
 // Passport.js initialisations
 app.use(passport.initialize());
@@ -216,7 +235,17 @@ app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, r
             res.send("Sorry :( product already SOLD. Please refresh the market page.");
     }
     getSellerDetails();
-})
+});
+
+app.get("/IOT", isLoggedIn, function (req, res) {
+    async function getDeviceData() {
+        let devicesInfo = await Device.findOne({ userId: req.user.usersId });
+        console.log(devicesInfo.Links);
+        res.render("agriIOT", { deviceList: devicesInfo.Links });
+    }
+    getDeviceData();
+
+});
 
 //Post routes
 app.post("/userRegister", function (req, res) {
