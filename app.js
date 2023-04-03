@@ -249,7 +249,10 @@ app.get("/IOT", isLoggedIn, function (req, res) {
     async function getDeviceData() {
         let devicesInfo = await Device.findOne({ userId: req.user.usersId });
         // console.log(devicesInfo.Links);
-        res.render("agriIOT", { deviceList: devicesInfo.Links });
+        if (devicesInfo != null)
+            res.render("agriIOT", { deviceList: devicesInfo.Links });
+        else
+            res.render("agriIOT", { deviceList: [] });
     }
     getDeviceData();
 
