@@ -3,7 +3,7 @@
 This is solution developed by Verto Cloud Practitioner team in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google 
 Cloud Platform and AMD.
 
-Document link :
+Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
 
 Video Demo link : 
 
@@ -55,3 +55,5 @@ in it making this an all-rounder solution for many of the problems that are face
 # Internal Architecture
 
 ![Internal Architecture](https://user-images.githubusercontent.com/94420508/229662738-f091086f-cec3-4030-893e-eea576ae7b2e.jpeg)
+
+
