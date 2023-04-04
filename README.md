@@ -33,3 +33,6 @@ in it making this an all-rounder solution for many of the problems that are face
 9. ThingSpeak - Used as IOT tool for collecting data for monitoring the farm.
 
 
+# High level Architecture
+
+![FruitFul High level Architecture](https://user-images.githubusercontent.com/94420508/229657895-0a7a6111-f802-4668-9a53-e20b041eaf94.jpeg)
