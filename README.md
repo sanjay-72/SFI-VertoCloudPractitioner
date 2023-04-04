@@ -4,6 +4,7 @@ This is solution developed by Verto Cloud Practitioner team in Solving for India
 Cloud Platform and AMD.
 
 Document link :
+
 Video Demo link : 
 
 ![end devices](https://user-images.githubusercontent.com/94420508/229655286-cca22d3c-75dd-469d-a581-bbed0687e9c7.jpg)
@@ -51,3 +52,6 @@ in it making this an all-rounder solution for many of the problems that are face
 9. Once the user is authenticated then they can access IOT page but, they don't have any devices registered because the devices has to be manually entered to database.
 10. For demonstration purpose we entered few sensory data to IOT page for our own account which is shown in video page.
 
+# Internal Architecture
+
+![Internal Architecture](https://user-images.githubusercontent.com/94420508/229662738-f091086f-cec3-4030-893e-eea576ae7b2e.jpeg)
