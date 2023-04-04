@@ -3,6 +3,9 @@
 This is solution developed by Verto Cloud Practitioner team in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google 
 Cloud Platform and AMD.
 
+Document link :
+Video Demo link : 
+
 ![end devices](https://user-images.githubusercontent.com/94420508/229655286-cca22d3c-75dd-469d-a581-bbed0687e9c7.jpg)
 
 ## Problem
@@ -36,3 +39,15 @@ in it making this an all-rounder solution for many of the problems that are face
 # High level Architecture
 
 ![FruitFul High level Architecture](https://user-images.githubusercontent.com/94420508/229657895-0a7a6111-f802-4668-9a53-e20b041eaf94.jpeg)
+
+1. Firstly, any user can access the home page without logging in but, when they need to access market page or IOT page then they must login.
+2. Any user can firstly register in the FruitFul and then can login.
+3. There are simple validation techniques used for email, age and password to maintain data integrity and security. ![Login Difference](https://user-images.githubusercontent.com/94420508/229661705-51506c3e-c829-4ca7-a55b-c41ca506ebbf.jpeg)
+4. Once they are logged in, the main page shows the user's name and they can access market. 
+5. In Sell/Buy page they can see the list of products that are available for trade by farmers.
+6. In same page if the user want to sell any product they can directly click sell online button provided on the navigation bar.
+7. Products entered in that page will be directly shown in market place.
+8. After lisiting the product online if the user want to remove products then he can go to "my products" page and can directly remove the product.
+9. Once the user is authenticated then they can access IOT page but, they don't have any devices registered because the devices has to be manually entered to database.
+10. For demonstration purpose we entered few sensory data to IOT page for our own account which is shown in video page.
+
