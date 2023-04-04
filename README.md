@@ -56,4 +56,16 @@ in it making this an all-rounder solution for many of the problems that are face
 
 ![Internal Architecture](https://user-images.githubusercontent.com/94420508/229662738-f091086f-cec3-4030-893e-eea576ae7b2e.jpeg)
 
+# Features
+1. Secured and responsive design.
+2. Simple in architecture.
+3. Easy to understand and use.
+4. Farmers can create accounts and sell their products.
+5. Farmers can add products directly.
+6. They can remove and update their list of products.
+7. Buyers can buy products directly after the creation of the account.
+8. All the crucial info like database urls and secrets are stored safely.
+9. Customized IOT can be implemented for the farmers.
+10. Buyers can contact farmers easily.
 
+Everything is explained in depth in video and document please take a look at them.
