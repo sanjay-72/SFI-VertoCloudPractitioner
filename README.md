@@ -70,4 +70,5 @@ in it making this an all-rounder solution for many of the problems that are face
 9. Customized IOT can be implemented for the farmers.
 10. Buyers can contact farmers easily.
 
-Everything is explained in depth in video and document please take a look at them.
+
+### <p align="center">Everything is explained in depth in video and document please take a look at them.</p>
