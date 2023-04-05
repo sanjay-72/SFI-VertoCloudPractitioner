@@ -49,5 +49,7 @@ To get started with ThingSpeak, you can create a free account and channels to co
 
 
 # SCHEMATIC DIAGRAM
-<img width="1144" alt="image" src="https://user-images.githubusercontent.com/94438149/230154036-5e4feba5-2d7c-494b-9ca7-e5df219eb2c2.png">
+
+<img width="1165" alt="image" src="https://user-images.githubusercontent.com/94438149/230155115-70097bb7-c4f9-437f-8184-90633c57fc3d.png">
+
 
