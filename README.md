@@ -5,6 +5,7 @@
 This is solution developed by Verto Cloud Practitioner team in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google 
 Cloud Platform and AMD.
 
+
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
 
 Video Demo link : <a href="https://youtu.be/qQHeBLEP7Ck">Video Demo</a>
@@ -71,4 +72,8 @@ in it making this an all-rounder solution for many of the problems that are face
 10. Buyers can contact farmers easily.
 
 
-### <p align="center">Everything is explained in depth in video and document please take a look at them.</p>
+## <p align="center">Everything is explained in depth in video and document please take a look at them.</p>
+
+Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
+
+Video Demo link : <a href="https://youtu.be/qQHeBLEP7Ck">Video Demo</a>
