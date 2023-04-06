@@ -7,7 +7,7 @@ Cloud Platform and AMD.
 
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
 
-Video Demo link : 
+Video Demo link : <a href="https://youtu.be/qQHeBLEP7Ck">Video Demo</a>
 
 ![end devices](https://user-images.githubusercontent.com/94420508/229655286-cca22d3c-75dd-469d-a581-bbed0687e9c7.jpg)
 
