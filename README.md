@@ -21,8 +21,7 @@ In addition to this, there is no unified IOT platform for the farmers to monitor
 
 ## Our solution
 
-We are presenting FruitFul, a MERN-based full-stack web application which acts as a platform that connects farmers, traders, and common people in addition to 
-customized IOT features for the farmers to help them monitor their farm to increase the yielding by following the best practices.
+We are presenting FruitFul, a MERN-based full-stack web application which acts as a platform that connects farmers, traders, and common people. In addition to this, we also have customized IOT features for registered farmers to help them monitor their farm to increase the yielding by following the best practices.
 
 This application is not a biased solution to a particular problem in agro tech. This is made to solve most of the problems that can be solved in one go. So that 
 farmers can find this helpful because they can do many things in one app like they can see the market status, and sell their products and even IOT is embedded 
