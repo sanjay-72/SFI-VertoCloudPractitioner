@@ -36,20 +36,21 @@
         <h2>Fruit<span>Ful</span></h2>
         <button class="nav-button cross-button" type="button" id="toggle-button"
             aria-label="open/close navigation"></button>
+
         <a href="/" id="homeBtn" class="hide navDivBtns"><button style="background-color: green;color: white;"
                 disabled>Home</button></a>
         <a href="/IOT" id="agriIOTBtn" class="hide navDivBtns"><button>Agri-IOT</button></a>
         <a href="/market" id="marketBtn" class="hide navDivBtns"><button>Sell/Buy</button></a>
         <a href="#aboutUs" id="aboutBtn" class="hide navDivBtns"><button>About</button></a>
         <% if(name !="Login👤" ) { %>
-            <h3 style="margin:0">Welcome dear <span style="color: green;">
-                    <%=name%>
+            <h3 style="margin:0">Welcome dear <span style="color: green;"> <strong>
+                        <%=name%>
+                    </strong>
                 </span>
             </h3>
             <% }else{ %>
                 <a href="login" id="loginBtn" class="hide navDivBtns"><button>Login👤</button></a>
                 <% } %>
-
     </div>
     <!-- Nav Bar End  -->
 
@@ -65,21 +66,21 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/images/agri1.jpg" class="d-block w-100 mainPageImage" alt="...">
+                <img src="/images/agri1.jpg" draggable="false" class="d-block w-100 mainPageImage" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 style="color: green;">Proud for innovations</h5>
                     <p style="color: green;">We are providing our hand in agro tech advancements.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/images/agri4.jpg" class="d-block w-100 mainPageImage" alt="...">
+                <img src="/images/agri4.jpg" draggable="false" class="d-block w-100 mainPageImage" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <!-- <h5>Second slide label</h5>
                     <p>Some representative placeholder content for the second slide.</p> -->
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="/images/agriIOT.jpg" class="d-block w-100 mainPageImage" alt="...">
+                <img src="/images/agriIOT.jpg" draggable="false" class="d-block w-100 mainPageImage" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Proud for innovations</h5>
                     <p>We are helping many farmers to improve their
@@ -141,7 +142,7 @@
             <table style="width: 100%;height: 100%;">
                 <tr>
                     <td>
-                        <img class="tilt" id="myFeaturetteImage" src="/images/Feature1.jpg" />
+                        <img class="tilt" draggable="false" id="myFeaturetteImage" src="/images/Feature1.jpg" />
                     </td>
                 </tr>
             </table>
@@ -159,7 +160,7 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt" id="myFeaturetteImage" style="border-radius: 25%; width: 500px;"
+                            <img id="myFeaturetteImage" draggable="false" style="border-radius: 25%; width: 500px;"
                                 src="/images/logo.png" />
                         </td>
                     </tr>
@@ -211,7 +212,7 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt" id="myFeaturetteImage"
+                            <img class="tilt" id="myFeaturetteImage" draggable="false"
                                 style="border-radius: 50%;width: 500px;height: 500px;" src="/images/Feature2.jpg" />
                         </td>
                     </tr>
@@ -225,7 +226,7 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt" id="myFeaturetteImage"
+                            <img class="tilt" id="myFeaturetteImage" draggable="false"
                                 style="border-radius: 50%;width: 500px;height: 500px;" src="/images/Feature3.jpg" />
                         </td>
                     </tr>
@@ -263,8 +264,9 @@
     <div class="row">
         <div class="col-lg-4 CustomerWordsDiv" style="text-align: center; padding-left: 50px;">
             <div class="internalWordsDiv">
-                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="/images/people/person1.jpg"
-                    role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img class="bd-placeholder-img rounded-circle" draggable="false" width="140" height="140"
+                    src="/images/people/person1.jpg" role="img" aria-label="Placeholder: 140x140"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
                 <h2 class="fw-normal">Amelia Yu</h2>
@@ -280,11 +282,12 @@
         </div><!-- /.col-lg-4 CustomerWordsDiv -->
         <div class="col-lg-4 CustomerWordsDiv" style="text-align: center;">
             <div class="internalWordsDiv">
-                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="/images/people/person2.jpg"
-                    role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img class="bd-placeholder-img rounded-circle" draggable="false" width="140" height="140"
+                    src="/images/people/person2.jpg" role="img" aria-label="Placeholder: 140x140"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
-                <h2 class="fw-normal">Dr. Gourav</h2>
+                <h2 class="fw-normal">Dr. Gourav Seth</h2>
                 <p>Organic farming practices avoid the use of synthetic pesticides and
                     fertilizers, promoting soil health and biodiversity.
                     I have been consistently satisfied with the quality and variety of produce you offer, and the
@@ -296,11 +299,12 @@
         </div><!-- /.col-lg-4 CustomerWordsDiv -->
         <div class="col-lg-4 CustomerWordsDiv" style="text-align: center; padding-right: 50px;">
             <div class="internalWordsDiv">
-                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="/images/people/person3.jpg"
-                    role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img draggable="false" class="bd-placeholder-img rounded-circle" width="140" height="140"
+                    src="/images/people/person3.jpg" role="img" aria-label="Placeholder: 140x140"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
-                <h2 class="fw-normal">Anil Kumar</h2>
+                <h2 class="fw-normal">Ayush Saxena</h2>
                 <p>While organic products may be more expensive than conventionally grown products, the benefits to our
                     health and the environment make them well worth the investment.
 
@@ -313,26 +317,30 @@
 
     <!-- Our clients Section end  -->
 
-    <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
-    <p style="margin-top: 35px;padding-bottom: 20px;">©️ Fruitful technologies.</p>
-    <!-- Bootstrap JS CDN link -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+    <% if(name !="Login👤" ) { %>
+        <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
+        </h3>
+        <% } %>
 
-    <!-- Vanilla tilt -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
-        integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <p style="margin-top: 35px;padding-bottom: 20px;">©️ Fruitful technologies.</p>
+            <!-- Bootstrap JS CDN link -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+                crossorigin="anonymous"></script>
 
-    <!-- JQuery Link  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <!-- Vanilla tilt -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
+                integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- LoaderJs file Link  -->
-    <script src="/loaderAnimation.js"></script>
+            <!-- JQuery Link  -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- JavaScript link -->
-    <script src="/index.js"></script>
+            <!-- LoaderJs file Link  -->
+            <script src="/loaderAnimation.js"></script>
+
+            <!-- JavaScript link -->
+            <script src="/index.js"></script>
 </body>
 
 </html>
