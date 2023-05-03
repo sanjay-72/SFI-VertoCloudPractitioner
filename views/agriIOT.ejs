@@ -76,17 +76,21 @@
     <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
+    <!-- Page Starting -->
+    <div class="MyNavDiv" id="MyNavTitle">
+        <h2 style="margin: 0;">Fruit<span>Ful</span></h2>
+    </div>
     <!-- Nav Bar start -->
-    <div style="position: static;" class="MyNavDiv">
-        <h2>Fruit<span>Ful</span></h2>
-        <a href="/"><button>Home</button></a>
-        <a href="/IOT"><button style="background-color: green;color: white;">Agri-IOT</button></a>
-        <a href="/market"><button>Sell/Buy</button></a>
-        <a href="/newProduct"><button>Sell Online</button></a>
-        <a href="/myProducts"><button>My Products</button></a>
+    <div class="MyNavDiv" id="NavBar">
+        <div class="container">
+            <a href="/"><button>Home</button></a>
+            <a href="/IOT"><button style="background-color: green;color: white;">Agri-IOT</button></a>
+            <a href="/market"><button>Sell/Buy</button></a>
+            <a href="/newProduct"><button>Sell Online</button></a>
+            <a href="/myProducts"><button>My Products</button></a>
+        </div>
     </div>
     <!-- Nav Bar End  -->
-
     <!-- Deals Count Start  -->
     <h1>
         Total Devices found in your account = <%= deviceList.length %>

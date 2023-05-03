@@ -53,9 +53,8 @@
                             <% } %>
     </div>
     <!-- Nav Bar start -->
-    <div class="MyNavDiv">
-        <div class="container" style="position: -webkit-sticky;">
-
+    <div class="MyNavDiv" id="NavBar">
+        <div class="container">
             <a href="/" id="homeBtn" class="hide navDivBtns"><button style="background-color: green;color: white;"
                     disabled>Home</button></a>
             <a href="/IOT" id="agriIOTBtn" class="hide navDivBtns"><button>Agri-IOT</button></a>
@@ -93,8 +92,10 @@
             <div class="carousel-item">
                 <img src="/images/agri4.jpg" draggable="false" class="d-block w-100 mainPageImage" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <!-- <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p> -->
+                    <!-- <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. </h5>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quisquam necessitatibus
+                        consequatur alias aliquam, ut voluptatibus dolores maxime, iusto ad cupiditate molestiae
+                        voluptatum ducimus quia enim, eum eos harum veniam.</p> -->
                 </div>
             </div>
             <div class="carousel-item">
@@ -160,7 +161,7 @@
             <table style="width: 100%;height: 100%;">
                 <tr>
                     <td>
-                        <img class="tilt" draggable="false" id="myFeaturetteImage" src="/images/Feature1.jpg" />
+                        <img class="tilt myFeaturetteImage" draggable="false" src="/images/Feature1.jpg" />
                     </td>
                 </tr>
             </table>
@@ -178,7 +179,7 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img id="myFeaturetteImage" draggable="false" style="border-radius: 25%; width: 500px;"
+                            <img class="myFeaturetteImage" draggable="false" style="border-radius: 25%;"
                                 src="/images/logo.png" />
                         </td>
                     </tr>
@@ -205,9 +206,11 @@
                 </table>
             </div>
         </div>
+    </div>
 
+    <div class="row featurette" id="aboutUs2" style="background-color: #ffffff; padding-top: 0;">
         <hr class="featurette-divider">
-        <div class="row featurette">
+        <div class="row featurette" style="background-color: white;">
             <div class="col-md-7">
                 <table style="width: 100%;height: 100%;">
                     <tr>
@@ -230,22 +233,24 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt" id="myFeaturetteImage" draggable="false"
-                                style="border-radius: 50%;width: 500px;height: 500px;" src="/images/Feature2.jpg" />
+                            <img class="tilt myFeaturetteImage" draggable="false" style="border-radius: 50%;"
+                                src="/images/Feature2.jpg" />
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
-        <hr class="featurette-divider">
+    </div>
 
+    <div class="row featurette" id="aboutUs2" style="background-color: #fdff96; padding-top: 0;">
+        <hr class="featurette-divider">
         <div class="row featurette">
             <div class="col-md-5 featuretteImage servicesImages" style="padding: 0;">
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt" id="myFeaturetteImage" draggable="false"
-                                style="border-radius: 50%;width: 500px;height: 500px;" src="/images/Feature3.jpg" />
+                            <img class="tilt myFeaturetteImage" draggable="false" style="border-radius: 50%;"
+                                src="/images/Feature3.jpg" />
                         </td>
                     </tr>
                 </table>
@@ -332,33 +337,27 @@
             </div>
         </div><!-- /.col-lg-4 CustomerWordsDiv -->
     </div><!-- /.row -->
-
     <!-- Our clients Section end  -->
 
-    <% if(name !="Login👤" ) { %>
-        <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
-        </h3>
-        <% } %>
+    <p style="margin-top: 35px;padding-bottom: 20px;">©️ Fruitful technologies.</p>
+    <!-- Bootstrap JS CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 
-            <p style="margin-top: 35px;padding-bottom: 20px;">©️ Fruitful technologies.</p>
-            <!-- Bootstrap JS CDN link -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-                crossorigin="anonymous"></script>
+    <!-- Vanilla tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
+        integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-            <!-- Vanilla tilt -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
-                integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- JQuery Link  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-            <!-- JQuery Link  -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- LoaderJs file Link  -->
+    <script src="/loaderAnimation.js"></script>
 
-            <!-- LoaderJs file Link  -->
-            <script src="/loaderAnimation.js"></script>
-
-            <!-- JavaScript link -->
-            <script src="/index.js"></script>
+    <!-- JavaScript link -->
+    <script src="/index.js"></script>
 </body>
 
 </html>

@@ -33,6 +33,12 @@ html::-webkit-scrollbar-thumb:active {
     transition: all 0.5s;
 }
 
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 @media(max-width:768px) {
     .hide {
         display: none;
@@ -58,7 +64,7 @@ html::-webkit-scrollbar-thumb:active {
 
 .MyNavDiv {
     text-align: center;
-    padding: 1.5vh 0 1.5vh 0;
+    /* padding: 1.5vh 0 1.5vh 0; */
     background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
     /* position: fixed; */
     width: 100%;
@@ -144,7 +150,7 @@ html::-webkit-scrollbar-thumb:active {
 }
 
 @media(max-width:1260px) {
-    #myFeaturetteImage {
+    .myFeaturetteImage {
         width: 100%;
         height: auto;
     }
@@ -230,13 +236,13 @@ span {
 }
 
 @media(max-width:768px) {
-    #myFeaturetteImage {
+    .myFeaturetteImage {
         margin: 12px;
         width: 80%;
     }
 }
 
-#myFeaturetteImage {
+.myFeaturetteImage {
     border-radius: 25px;
     width: 85%;
 }

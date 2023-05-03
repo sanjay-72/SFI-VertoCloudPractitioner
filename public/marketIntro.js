@@ -6,6 +6,17 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
+const navbar = document.querySelector('#NavBar');
+let top1 = navbar.offsetTop;
+function stickynavbar() {
+    if (window.scrollY >= top1) {
+        navbar.classList.add('sticky');
+    } else {
+        navbar.classList.remove('sticky');
+    }
+}
+window.addEventListener('scroll', stickynavbar);
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
