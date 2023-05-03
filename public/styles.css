@@ -47,6 +47,15 @@ html::-webkit-scrollbar-thumb:active {
     }
 }
 
+#MyNavTitle {
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    background: none;
+    display: block;
+    z-index: 5;
+}
+
 .MyNavDiv {
     text-align: center;
     padding: 1.5vh 0 1.5vh 0;
@@ -66,7 +75,7 @@ html::-webkit-scrollbar-thumb:active {
 .nav-button {
     position: absolute;
     right: 10%;
-    top: 18px;
+    top: 20px;
     z-index: 10;
     height: 1.4rem;
     width: 1.8rem;
@@ -163,7 +172,7 @@ html::-webkit-scrollbar-thumb:active {
 
 .MyNavDiv h2 {
     color: white;
-    background-color: rgba(17, 136, 17, 0.781);
+    background-color: rgb(44, 185, 44);
     font-size: 2rem;
     font-family: 'Dancing Script', cursive;
 }

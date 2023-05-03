@@ -31,26 +31,44 @@
     <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
+    <div class="MyNavDiv" id="MyNavTitle">
+        <h2 style="margin: 0;">Fruit<span>Ful</span></h2>
+
+        <% if(name=="Login👤" ){ %>
+            <button class="nav-button cross-button" type="button" id="toggle-button" aria-label="open/close navigation"
+                style="top: 7px;"></button>
+            <% } %>
+                <% if(name!="Login👤" ){ %>
+                    <button class="nav-button cross-button" type="button" id="toggle-button"
+                        aria-label="open/close navigation"></button>
+                    <% } %>
+                        <% if(name !="Login👤" ) { %>
+                            <div style="background-color: rgb(44, 185, 44);">
+                                <h3 style="margin:0">Welcome dear <span style="color: rgb(168, 255, 165);"> <strong>
+                                            <%=name%>
+                                        </strong>
+                                    </span>
+                                </h3>
+                            </div>
+                            <% } %>
+    </div>
     <!-- Nav Bar start -->
     <div class="MyNavDiv">
-        <h2>Fruit<span>Ful</span></h2>
-        <button class="nav-button cross-button" type="button" id="toggle-button"
-            aria-label="open/close navigation"></button>
+        <div class="container" style="position: -webkit-sticky;">
 
-        <a href="/" id="homeBtn" class="hide navDivBtns"><button style="background-color: green;color: white;"
-                disabled>Home</button></a>
-        <a href="/IOT" id="agriIOTBtn" class="hide navDivBtns"><button>Agri-IOT</button></a>
-        <a href="/market" id="marketBtn" class="hide navDivBtns"><button>Sell/Buy</button></a>
-        <a href="#aboutUs" id="aboutBtn" class="hide navDivBtns"><button>About</button></a>
-        <% if(name !="Login👤" ) { %>
-            <h3 style="margin:0">Welcome dear <span style="color: green;"> <strong>
-                        <%=name%>
-                    </strong>
-                </span>
-            </h3>
-            <% }else{ %>
-                <a href="login" id="loginBtn" class="hide navDivBtns"><button>Login👤</button></a>
+            <a href="/" id="homeBtn" class="hide navDivBtns"><button style="background-color: green;color: white;"
+                    disabled>Home</button></a>
+            <a href="/IOT" id="agriIOTBtn" class="hide navDivBtns"><button>Agri-IOT</button></a>
+            <a href="/market" id="marketBtn" class="hide navDivBtns"><button>Sell/Buy</button></a>
+            <a href="#aboutUs" id="aboutBtn" class="hide navDivBtns"><button>About</button></a>
+            <% if(name=="Login👤" ){ %>
+                <a href="login" id="loginBtn" class="hide navDivBtns"><button><strong>Login👤</strong></button></a>
                 <% } %>
+                    <% if(name!="Login👤" ){ %>
+                        <a href="/logout" id="loginBtn"
+                            class="hide navDivBtns"><button><strong>Logout</strong></button></a>
+                        <% } %>
+        </div>
     </div>
     <!-- Nav Bar End  -->
 
