@@ -236,8 +236,8 @@
             </div>
             <div class="input-wrapper">
                 <label for="mobileNo">Mobile No(+91):</label><br>
-                <input type="tel" id="mobileNoField" name="mobileNo" pattern="[0-9]{10}" required
-                    placeholder="1234567891" autofocus spellcheck="false" autocomplete="off">
+                <input name="mobileNo" type="tel" value="<%=mobile %>" id="mobileNoField" required spellcheck="false"
+                    placeholder="<%=mobile %>" autocomplete="off" readonly>
             </div>
             <div class="input-wrapper">
                 <label for="emailId">Email id:</label><br>
