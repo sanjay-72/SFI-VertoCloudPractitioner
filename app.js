@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-var request = require('request');
 const { Console } = require('console');
 const { verify } = require('crypto');
 const app = express();
@@ -28,6 +27,11 @@ app.set('view engine', 'ejs');
 
 let usersId = 10000;
 let productId = 720000;
+
+//Twilio Client Initialisation
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 //Mongoose initialisations
 mongoose.set('strictQuery', true);
@@ -339,30 +343,19 @@ app.post("/sendOtp", function (req, res) {
     async function checkMobileExists() {
         let presence = await User.exists({ mobileNo: req.body.mobile });
         if (!presence) {
-            var options = {
-                'method': 'POST',
-                'url': 'https://verify.twilio.com/v2/Services/VA5a2288a3067c06fa0f1257c6eaa9223a/Verifications',
-                'headers': {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': process.env.TWILIO_KEY
-                },
-                form: {
-                    'To': userMobile,
-                    'Channel': 'sms'
-                }
-            };
-            request(options, function (error, response) {
-                if (error) throw new Error(error);
-                console.log(response.body);
-            });
-            res.render("verifyMobile", { error: req.query.error, mobile: req.body.mobile });
+            client.verify.v2.services('VA5a2288a3067c06fa0f1257c6eaa9223a')
+                .verifications
+                .create({ to: userMobile, channel: 'sms' })
+                .then(verification => {
+                    // console.log(verification.status)
+                    res.render("verifyMobile", { error: req.query.error, mobile: req.body.mobile });
+                });
         }
         else {
             res.send("User already exits");
         }
     }
     checkMobileExists();
-
 });
 
 app.post("/verifyOtp", function (req, res) {
@@ -370,30 +363,18 @@ app.post("/verifyOtp", function (req, res) {
     var userMobile = req.body.mobile;
     var otp = req.body.otp;
     let verified = false;
-    var options = {
-        'method': 'POST',
-        'url': 'https://verify.twilio.com/v2/Services/VA5a2288a3067c06fa0f1257c6eaa9223a/VerificationCheck',
-        'headers': {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': process.env.TWILIO_KEY
-        },
-        form: {
-            'To': "+91" + userMobile,
-            'Code': otp
-        }
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-        if (response.body.status == 'approved')
-            verified = true;
-    });
-    if (verified) {
-        res.render("register", { mobile: userMobile });
-    }
-    else {
-        res.render("verifyMobile", { error: true, mobile: userMobile });
-    }
+    client.verify.v2.services('VA5a2288a3067c06fa0f1257c6eaa9223a')
+        .verificationChecks
+        .create({ to: "+91" + userMobile, code: otp })
+        .then(verification_check => {
+            // console.log(verification_check.status);
+            if (verification_check.status == "approved") {
+                res.render("register", { mobile: userMobile });
+            }
+            else {
+                res.render("verifyMobile", { error: true, mobile: userMobile });
+            }
+        });
 });
 
 app.listen(PORT, function () {

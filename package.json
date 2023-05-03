@@ -21,6 +21,6 @@
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "request": "^2.88.2"
+    "twilio": "^4.10.0"
   }
 }
