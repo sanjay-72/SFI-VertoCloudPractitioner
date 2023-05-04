@@ -81,7 +81,7 @@ html::-webkit-scrollbar-thumb:active {
 .nav-button {
     position: absolute;
     right: 10%;
-    top: 20px;
+    top: 9px;
     z-index: 10;
     height: 1.4rem;
     width: 1.8rem;

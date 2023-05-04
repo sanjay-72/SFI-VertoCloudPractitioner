@@ -293,7 +293,7 @@ app.post("/userRegister", function (req, res) {
 });
 
 app.post("/login", passport.authenticate("local", {
-    successRedirect: "/?loggedin=true",
+    successRedirect: "/market",
     failureRedirect: "/login?error=true"
 }));
 
