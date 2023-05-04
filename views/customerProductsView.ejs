@@ -28,6 +28,67 @@
 
     <!-- My CSS link -->
     <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        h6 {
+            text-align: left;
+            margin: 15px;
+        }
+
+        .costPrice {
+            font-size: 1.4rem;
+            color: blue;
+        }
+
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 0.5s;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+            transition: all 0.5s;
+        }
+
+        @media(max-width:380px) {
+            .myProductBox {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            .myProductBox img {
+                width: 100%;
+                height: auto;
+            }
+
+            .narrow {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            h2,
+            h6 {
+                font-size: 100%;
+                margin: 0;
+                margin-bottom: 5px;
+            }
+
+            .costPrice {
+                font-size: 75%;
+            }
+
+            .btn {
+                font-size: 75%;
+            }
+        }
+    </style>
+
     <title>🍒Fruitful🍊</title>
 </head>
 
@@ -54,52 +115,55 @@
             <a href="/newProduct"><button>Sell Online</button></a>
             <a href="/myProducts"><button disabled style="background-color: green;color: white;">My
                     Products</button></a>
-
         </div>
     </div>
     <!-- Nav Bar End  -->
-    <div style="margin: 15px;">
-        <h5>This is the list of your products which are online.</h5>
-        <form action="/myProducts" method="post">
-            <table>
+
+    <div>
+        <h5 style="margin: 15px;">Total products found in your account = <%= productList.length %>
+        </h5>
+        <div style="text-align: center; margin: 15px; margin-left: -15px;">
+            <form action="/myProducts" method="post">
                 <% for(var i=0; i<productList.length; i++) {%>
-                    <tr>
-                        <td>
-                            <input style="padding: 10px;" type="checkbox" name=<%=productList[i].ProductId %> id="">
-                        </td>
-                        <td style="padding-left: 10px;padding-right: 10px; font-size: 1.2rem;">
-                            <h4>
-                                <%= productList[i].ProductName %> (₹<%= productList[i].cost %>)
-                            </h4>
-                        </td>
-                    </tr>
+                    <div class="myProductBox hidden markerDiv" style="cursor: pointer;">
+                        <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
+                            alt="<%= productList[i].ProductName %> Image">
+                        <h2>
+                            <%= productList[i].ProductName %>
+                        </h2>
+                        <h4><span class="costPrice">(₹<%= productList[i].cost %>/Kg)<span></h4>
+                        <input style="padding: 10px;" type="checkbox" name=<%=productList[i].ProductId %> >
+                    </div>
                     <% } %>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td style="padding-top: 15px;">
-                                <button type="submit" class="btn btn-outline-danger">Remove from Market</button>
-                            </td>
-                        </tr>
-            </table>
-        </form>
-
+                        <% if(productList.length> 0) { %>
+                            <div style="text-align: center; padding-left: 30px;">
+                                <button type="submit" class="btn btn-outline-danger" id="checkBtn">Remove from
+                                    Market</button>
+                            </div>
+                            <% } %>
+            </form>
+        </div>
+    </div>
+    <div style="text-align: center;" class="pb-4">
+        <a href="/newProduct"><button class="btn btn-outline-success">Add new
+                Product</button></a>
     </div>
 
-    <!-- Vanilla tilt -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
-        integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <%- include("footer") -%>
 
-    <!-- JQuery Link  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Vanilla tilt -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
+            integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- LoaderJs file Link  -->
-    <script src="/loaderAnimation.js"></script>
+        <!-- JQuery Link  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- JavaScript link -->
-    <script src="/sellerInfo.js"></script>
+        <!-- LoaderJs file Link  -->
+        <script src="/loaderAnimation.js"></script>
+
+        <!-- JavaScript link -->
+        <script src="/customerProductsView.js"></script>
 </body>
 
 </html>

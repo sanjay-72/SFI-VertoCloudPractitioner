@@ -224,7 +224,7 @@ app.get("/newProduct", isLoggedIn, function (req, res) {
 
 app.get("/myProducts", isLoggedIn, function (req, res) {
     async function getMyProducts() {
-        let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo });
+        let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo }).sort({ 'ProductName': 1 });;
         // res.send(myProductData);
         // console.log(myProductData);
         res.render("customerProductsView", {
@@ -316,7 +316,7 @@ app.post("/newProduct", isLoggedIn, function (req, res) {
     });
     newEntry.save();
     // console.log(newEntry);
-    res.sendFile(__dirname + "/thankYou.html");
+    res.sendFile(__dirname + "/added.html");
 });
 
 
@@ -332,7 +332,7 @@ app.post("/myProducts", isLoggedIn, function (req, res) {
         }
     };
     deleteGivenProducts();
-    res.sendFile(__dirname + "/thankYou.html");
+    res.sendFile(__dirname + "/deleted.html");
 });
 
 app.post("/sendOtp", function (req, res) {

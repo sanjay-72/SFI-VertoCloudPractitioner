@@ -1,3 +1,3 @@
 setTimeout(function () {
-    window.location.href = "/";
+    window.location.href = "/market";
 }, 5000);
