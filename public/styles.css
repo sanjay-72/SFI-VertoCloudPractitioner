@@ -64,8 +64,9 @@ html::-webkit-scrollbar-thumb:active {
 
 .MyNavDiv {
     text-align: center;
-    /* padding: 1.5vh 0 1.5vh 0; */
-    background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
+    padding: 1.2vh 0 0.6vh 0;
+    background: linear-gradient(to bottom right, rgba(0, 255, 0, 0.75), rgba(255, 217, 0, 0.75));
+    backdrop-filter: blur(4px);
     /* position: fixed; */
     width: 100%;
     display: block;
@@ -239,6 +240,10 @@ span {
     .myFeaturetteImage {
         margin: 12px;
         width: 80%;
+    }
+
+    .MyNavDiv {
+        padding: 0;
     }
 }
 
