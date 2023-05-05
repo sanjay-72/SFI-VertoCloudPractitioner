@@ -159,7 +159,7 @@ function isLoggedIn(req, res, next) {
 
 function isLoggedOut(req, res, next) {
     if (!req.isAuthenticated()) return next();
-    res.redirect('/');
+    res.redirect('/market');
 }
 
 //Get routes
@@ -285,7 +285,7 @@ app.post("/userRegister", function (req, res) {
             })
         }
         else {
-            res.send("User already exits");
+            res.render("message", { myMessage: "User already exists" });
         }
     }
     verifyEmail();
@@ -352,7 +352,7 @@ app.post("/sendOtp", function (req, res) {
                 });
         }
         else {
-            res.send("User already exits");
+            res.render("message", { myMessage: "User already exists" });
         }
     }
     checkMobileExists();

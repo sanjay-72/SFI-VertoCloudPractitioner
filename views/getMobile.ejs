@@ -165,20 +165,19 @@
     <!-- Box for inputs start -->
     <div id="container">
 
-        <form action="/sendOtp" method="post">
+        <form action="/sendOtp" method="post" id="myForm">
             <h1>Verification for <span style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
             <div class="input-wrapper">
                 <label for="mobile">Mobile No: (+91)</label><br>
-                <input name="mobile" type="tel" value="" id="mobileField" required autofocus spellcheck="false"
-                    autocomplete="off">
+                <input name="mobile" type="number" value="" id="mobileField" autofocus spellcheck="false"
+                    autocomplete="off" class="noEnterSubmit" required>
             </div>
             <p style="text-align: left;font-size: 1.6rem;">If you already have account <a href="login">Click
                     here</a>
             </p>
-            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Send
-                    OTP</strong></button>
         </form>
-
+        <button class="btn btn-outline-warning" id="SubmitButton"><strong>Send
+                OTP</strong></button>
         <!-- Box for inputs end -->
     </div>
     <!-- Footer text start -->
@@ -190,7 +189,34 @@
 
     <!-- LoaderJs file Link  -->
     <script src="/loaderAnimation.js"></script>
+    <script>
+        //Simple code for validation of mobile numbers
+        $(document).ready(function () {
+            $('#SubmitButton').click(function () {
+                //All telecom operators numbers starts with digits 6-9
+                var re = /^[6-9]\d{9}$/
+                let number = document.getElementById("mobileField").value;
+                if(number == "")
+                {
+                    alert("Please enter your mobile number");
+                }
+                else if (re.test(number)) {
+                    document.getElementById("myForm").submit();
+                }
+                else {
+                    alert(`${number} is not a valid Indian mobile number`);
+                }
+            });
+        });
 
+        //Disabling form submission on pressing enter key
+        var el = document.getElementById("mobileField");
+        el.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

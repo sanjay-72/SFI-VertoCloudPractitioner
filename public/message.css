@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@500&family=Dancing+Script:wght@700&family=Great+Vibes&family=Gruppo&family=Satisfy&display=swap');
+
+:root {
+    --headingSize: 4rem;
+    --background-color: black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+h1 {
+    margin: 0;
+    letter-spacing: -1px;
+    font-size: 3.8vw;
+}
+
+.container {
+    width: 50%;
+}
+
+span {
+    display: inline-block;
+    overflow: hidden;
+    animation: .3s swift-up ease-in-out forwards;
+}
+
+i {
+    font-style: normal;
+    position: relative;
+    top: var(--headingSize);
+    animation: .5s swift-up ease-in-out forwards;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+html::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+html::-webkit-scrollbar-track {
+    background: rgb(148, 255, 155);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #036500;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #036500;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #035200;
+}
+
+html::-webkit-scrollbar-thumb:active {
+    background: #ffffff;
+}
+
+body {
+    background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-y: hidden;
+    font-family: 'Alkatra', cursive;
+}
+
+#nameTextEng {
+    margin: 1rem;
+    text-align: center;
+    color: rgb(69, 69, 69);
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    color: rgb(52, 156, 0);
+}
+
+.container {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    padding: 3rem;
+    border-radius: .7rem;
+    width: 45rem;
+    margin: 4rem auto;
+    outline: none;
+    border: 1px solid rgb(0, 255, 64);
+    border-radius: 1rem;
+    border-width: 1px;
+    transition: .3s;
+}
+
+@media screen and (max-width:460px) {
+    html {
+        font-size: 52%;
+    }
+}
+
+@keyframes swift-up {
+    to {
+        top: 0;
+    }
+}
+
+@media screen and (max-width:1110px) {
+    h1 {
+        font-size: 3.4vw;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    h1 {
+        font-size: 3.6rem;
+    }
+}
