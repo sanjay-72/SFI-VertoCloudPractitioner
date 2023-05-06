@@ -78,6 +78,11 @@
             color: rgb(52, 156, 0);
         }
 
+        .hide{
+            transition: all 1s;
+            display: none;
+        }
+
         .btn:hover,
         .btn:focus {
             transition-duration: 0;
@@ -163,11 +168,6 @@
             border: 1px solid rgb(0, 255, 0);
         }
 
-        .input-wrapper input::-webkit-outer-spin-button,
-        ::-webkit-inner-spin-button {
-            display: none;
-        }
-
         #SubmitButton {
             margin-top: 60px;
             font-size: 200%;
@@ -180,6 +180,20 @@
             }
         }
     </style>
+    <script>
+        function checkOther() {
+            if (document.getElementById("cropNameField").value == "Other") {
+                document.getElementById("otherLabel").classList.remove("hide");
+                document.getElementById("otherField").classList.remove("hide");
+                document.getElementById("otherField").value = "";
+            }
+            else {
+                document.getElementById("otherLabel").classList.add("hide");
+                document.getElementById("otherField").classList.add("hide");
+                document.getElementById("otherField").value = "Something";
+            }
+        }
+    </script>
 </head>
 
 <body style="overflow-y: hidden;">
@@ -193,7 +207,7 @@
             <h1>Sell on <span style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
             <div class="input-wrapper">
                 <label for="CropName">Crop name: *</label><br>
-                <select name="CropName" id="cropNameField">
+                <select name="CropName" id="cropNameField" onchange="checkOther()">
                     <option value="Apple">Apple</option>
                     <option value="Banana">Banana</option>
                     <option value="Corn">Corn</option>
@@ -211,7 +225,12 @@
                     <option value="Other">Other</option>
                 </select>
             </div>
-            <div class="input-wrapper">
+            <div class="input-wrapper hide">
+                <label for="OtherName" class="hide" id="otherLabel">Other Name: *</label><br>
+                <input name="OtherName" class="hide" type="text" id="otherField" value="Something"
+                    placeholder="Name of your product" required spellcheck="false" autocomplete="off">
+            </div>
+                <div class="input-wrapper">
                 <label for="Description">Description (max 150 characters): *</label><br>
                 <textarea name="Description" id="DescriptionField" cols="30" rows="4" autocomplete="off"
                     spellcheck="false" autocomplete="off" maxlength="150" required
@@ -219,10 +238,14 @@
             </div>
             <div class="input-wrapper">
                 <label for="Cost">Cost (per Kg) ₹: *</label><br>
-                <input name="Cost" type="number" step="0.01" value="" id="CostField"
+                <input name="Cost" type="number" min="20" step="0.01" value="" id="CostField"
                     placeholder="Please enter selling price" required spellcheck="false" autocomplete="off">
             </div>
             <div class="input-wrapper">
+                <label for="Quantity">Quantity: *</label><br>
+                <input type="number" min="15" max="1000" name="Quantity" placeholder="Quantity in KGs">
+                </div>
+                <div class="input-wrapper">
                 <label for="Location">Location: *</label><br>
                 <input name="Location" type="text" value="" id="locationField" placeholder="Please enter valid address"
                     required spellcheck="false" autocomplete="off">

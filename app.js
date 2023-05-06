@@ -46,7 +46,10 @@ const ProductSchema = new mongoose.Schema({
     imageURL: String,
     SellerName: String,
     SellerAddress: String,
-    Mobile: Number
+    Mobile: Number,
+    emailId: String,
+    Quantity: Number,
+    OtherName: String
 });
 const NewProduct = mongoose.model('NewProduct', ProductSchema);
 
@@ -70,6 +73,21 @@ const DeviceSchema = new mongoose.Schema({
 });
 const Device = mongoose.model('Device', DeviceSchema);
 
+const PaymentSchema = new mongoose.Schema({
+    SellerName: String,
+    SellerEmail: String,
+    SellerMobile: Number,
+    BuyerName: String,
+    BuyerEmail: String,
+    BuyerMobile: Number,
+    SellerNotifiedStatus: String,
+    ProductId: Number,
+    ProductName: String,
+    cost: Number,
+    Quantity: Number
+});
+const Payment = mongoose.model("Payment", PaymentSchema);
+
 // const Product = {
 //     ProductId: 225,
 //     ProductName: "String",
@@ -82,7 +100,7 @@ const Device = mongoose.model('Device', DeviceSchema);
 // }
 
 // var newEntry = new NewProduct({
-//     ProductId: 225, ProductName: "String", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769
+//     ProductId: 225, ProductName: "String", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769, emailId:"sanjaykumarkonakandla@gmail.com", Quantity:25
 // });
 // newEntry.save();
 
@@ -96,6 +114,21 @@ const Device = mongoose.model('Device', DeviceSchema);
 //         "https://thingspeak.com/channels/2065077/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"]
 // });
 // newDevice.save();
+
+// const SampleTransaction = new Payment({
+//     SellerName: "Sanjay Kumar",
+//     SellerEmail: "sanjaykumarkonakandla@gmail.com",
+//     SellerMobile: 9515306769,
+//     BuyerName: "Durga Prasad",
+//     BuyerEmail: "dpakurathi1616@gmail.com",
+//     BuyerMobile: 7893924278,
+//     SellerNotifiedStatus: "Yes",
+//     ProductId: 7200016,
+//     ProductName: "Apple",
+//     cost: 40,
+//     Quantity: 5
+// });
+// SampleTransaction.save();
 
 async function updateIds() {
     let LastProduct = await NewProduct.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
@@ -267,6 +300,42 @@ app.get("/IOT", isLoggedIn, function (req, res) {
 });
 
 app.get("/success", function (req, res) {
+    async function insertPayment() {
+        // console.log(req.query.Pid);
+        let mySellerData = await NewProduct.findOne({ ProductId: req.query.Pid });
+        // console.log(mySellerData);
+        if (mySellerData != null) {
+            const MyTransaction = new Payment({
+                SellerName: mySellerData.SellerName,
+                SellerEmail: mySellerData.emailId,
+                SellerMobile: mySellerData.Mobile,
+                BuyerName: req.user.userName,
+                BuyerEmail: req.user.emailId,
+                BuyerMobile: req.user.mobileNo,
+                SellerNotifiedStatus: "Yes",
+                ProductId: mySellerData.ProductId,
+                ProductName: mySellerData.ProductName,
+                cost: mySellerData.cost,
+                Quantity: req.query.quant,
+            });
+            console.log(MyTransaction);
+            MyTransaction.save();
+        }
+        else
+            res.send("Sorry :( product already SOLD. Please refresh the market page.");
+    }
+    async function reduceStock() {
+        let oldData = await NewProduct.findOne({ ProductId: req.query.Pid });
+        let newQuant = oldData.Quantity - req.query.quant;
+        await NewProduct.updateOne({ ProductId: req.query.Pid }, { Quantity: newQuant });
+        let updated = await NewProduct.findOne({ ProductId: req.query.Pid });
+        // console.log(updated);
+        if (updated.Quantity <= 0) {
+            await NewProduct.deleteOne({ ProductId: req.query.Pid });
+        }
+    }
+    reduceStock();
+    insertPayment();
     res.render("message", { myMessage: "Your payment is successful." });
 });
 
@@ -321,7 +390,7 @@ app.post("/newProduct", isLoggedIn, function (req, res) {
     // console.log(req.body);
     productId = productId + 1;
     var newEntry = new NewProduct({
-        ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, Mobile: req.user.mobileNo
+        ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, Mobile: req.user.mobileNo, emailId: req.user.emailId, Quantity: req.body.Quantity, OtherName: req.body.OtherName
     });
     newEntry.save();
     // console.log(newEntry);
@@ -388,31 +457,43 @@ app.post("/verifyOtp", function (req, res) {
 
 
 app.post("/create-checkout-session", isLoggedIn, async (req, res) => {
-    try {
-        let amount = req.body.cost;
-        let quantity = req.body.quantity;
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
-            mode: "payment",
-            customer_email: req.body.emailId,
-            line_items: [{
-                price_data: {
-                    currency: "inr",
-                    product_data: {
-                        name: req.body.ProductName + ` (${req.body.quantity} Kg)`,
-                    },
-                    unit_amount: amount * 100 * quantity,
-                },
-                quantity: 1,
-            }],
-            success_url: `${process.env.SERVER_URL}/success?Pid=${req.body.ProductId}&quant=${req.body.quantity}`,
-            cancel_url: `${process.env.SERVER_URL}/cancel`,
-        })
-        // console.log(session);
-        res.redirect(session.url);
-    } catch (e) {
-        res.status(500).json({ error: e.message })
+    async function checkMatch() {
+        let mySellerData = await NewProduct.findOne({ ProductId: req.body.ProductId });
+        if (mySellerData.Mobile == req.user.mobileNo) {
+            // console.log(mySellerData.Mobile);
+            // console.log(req.user.mobileNo);
+            res.render("message", { myMessage: "😅 You are the seller of this product." });
+        }
+        else {
+            try {
+                let amount = parseInt(req.body.cost);
+                let quantity = req.body.quantity;
+                const session = await stripe.checkout.sessions.create({
+                    payment_method_types: ["card"],
+                    mode: "payment",
+                    customer_email: req.body.emailId,
+                    line_items: [{
+                        price_data: {
+                            currency: "inr",
+                            product_data: {
+                                name: req.body.ProductName + ` (${req.body.quantity} Kg)`,
+                            },
+                            unit_amount: amount * 100 * quantity,
+                        },
+                        quantity: 1,
+                    }],
+                    success_url: `${process.env.SERVER_URL}/success?Pid=${req.body.ProductId}&quant=${req.body.quantity}`,
+                    cancel_url: `${process.env.SERVER_URL}/cancel`,
+                })
+                // console.log(session);
+                res.redirect(session.url);
+            } catch (e) {
+                res.status(500).json({ error: e.message })
+            }
+        }
     }
+    checkMatch();
+
 })
 
 
