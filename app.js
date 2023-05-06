@@ -1,4 +1,5 @@
 //jshint esversion:6
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -8,6 +9,7 @@ const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const { Console } = require('console');
 const { verify } = require('crypto');
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
 const app = express();
 
 //middleware
@@ -19,7 +21,6 @@ app.use(session({
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-require('dotenv').config();
 // app.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 80;
 app.use(express.static("public"));
@@ -265,6 +266,14 @@ app.get("/IOT", isLoggedIn, function (req, res) {
 
 });
 
+app.get("/success", function (req, res) {
+    res.render("message", { myMessage: "Your payment is successful." });
+});
+
+app.get("/cancel", function (req, res) {
+    res.render("message", { myMessage: "Your payment is cancelled." });
+})
+
 //Post routes
 app.post("/userRegister", function (req, res) {
     // console.log(req.body);
@@ -376,6 +385,36 @@ app.post("/verifyOtp", function (req, res) {
             }
         });
 });
+
+
+app.post("/create-checkout-session", isLoggedIn, async (req, res) => {
+    try {
+        let amount = req.body.cost;
+        let quantity = req.body.quantity;
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            mode: "payment",
+            customer_email: req.body.emailId,
+            line_items: [{
+                price_data: {
+                    currency: "inr",
+                    product_data: {
+                        name: req.body.ProductName + ` (${req.body.quantity} Kg)`,
+                    },
+                    unit_amount: amount * 100 * quantity,
+                },
+                quantity: 1,
+            }],
+            success_url: `${process.env.SERVER_URL}/success?Pid=${req.body.ProductId}&quant=${req.body.quantity}`,
+            cancel_url: `${process.env.SERVER_URL}/cancel`,
+        })
+        // console.log(session);
+        res.redirect(session.url);
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
+})
+
 
 app.listen(PORT, function () {
     console.log("App is running on port : " + PORT);
