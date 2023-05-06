@@ -8,6 +8,7 @@ const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const { Console } = require('console');
 const { verify } = require('crypto');
+const nodeMailer = require("nodemailer");
 const app = express();
 
 //middleware
