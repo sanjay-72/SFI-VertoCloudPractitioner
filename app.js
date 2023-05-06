@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 const { Console } = require('console');
 const { verify } = require('crypto');
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
-const nodeMailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 const app = express();
 
 //middleware
@@ -34,6 +34,17 @@ let productId = 720000;
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
+
+// NodeMailer Initialisation
+let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.EMAIL_ID,
+        pass: process.env.EMAIL_KEY
+    },
+});
 
 //Mongoose initialisations
 mongoose.set('strictQuery', true);
@@ -301,9 +312,10 @@ app.get("/IOT", isLoggedIn, function (req, res) {
 });
 
 app.get("/success", function (req, res) {
+    let mySellerData = "";
     async function insertPayment() {
         // console.log(req.query.Pid);
-        let mySellerData = await NewProduct.findOne({ ProductId: req.query.Pid });
+        mySellerData = await NewProduct.findOne({ ProductId: req.query.Pid });
         // console.log(mySellerData);
         if (mySellerData != null) {
             const MyTransaction = new Payment({
@@ -319,7 +331,7 @@ app.get("/success", function (req, res) {
                 cost: mySellerData.cost,
                 Quantity: req.query.quant,
             });
-            console.log(MyTransaction);
+            // console.log(MyTransaction);
             MyTransaction.save();
         }
         else
@@ -335,8 +347,28 @@ app.get("/success", function (req, res) {
             await NewProduct.deleteOne({ ProductId: req.query.Pid });
         }
     }
+    async function notifySeller() {
+        mySellerData = await NewProduct.findOne({ ProductId: req.query.Pid });
+        let info = await transporter.sendMail({
+            from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+            to: mySellerData.emailId,
+            subject: `You received order for Product with Product Id : ${mySellerData.ProductId}`,
+            html: `
+            <h1>Hello dear ${mySellerData.SellerName},</h1>
+            <p>Greetings of the day. This email is to inform you that you have received an order for ${mySellerData.ProductName}(s) with a quantity requirement of ${req.query.quant}. <br>Payment for the order has been processed. You can find more details in this email or you can visit our Fruitful app to know more.</p>
+            <h3>Customer Name   : ${req.user.userName} </h3>
+            <h3>Customer email  : ${req.user.emailId} </h3>
+            <h3>Customer mobile : ${req.user.mobileNo} </h3>
+            <a href=${process.env.SERVER_URL}><button>Visit FruitFul Now</button></a>
+            <p>This is system generated email by FruitFul.<p>
+            `,
+        });
+        // console.log(info.messageId);
+    }
     reduceStock();
     insertPayment();
+    notifySeller();
+
     res.render("message", { myMessage: "Your payment is successful." });
 });
 
