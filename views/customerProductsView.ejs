@@ -126,11 +126,18 @@
             <form action="/myProducts" method="post">
                 <% for(var i=0; i<productList.length; i++) {%>
                     <div class="myProductBox hidden markerDiv" style="cursor: pointer;">
+                        <p style="margin-bottom: 0;">Stock available : <%= productList[i].Quantity %>Kg</p>
                         <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
                             alt="<%= productList[i].ProductName %> Image">
-                        <h2>
-                            <%= productList[i].ProductName %>
-                        </h2>
+                        <% if(productList[i].ProductName=="Other" ){ %>
+                            <h2>
+                                <%= productList[i].OtherName %>
+                            </h2>
+                            <% }else{ %>
+                                <h2>
+                                    <%= productList[i].ProductName %>
+                                </h2>
+                                <% } %>
                         <h4><span class="costPrice">(₹<%= productList[i].cost %>/Kg)<span></h4>
                         <input style="padding: 10px;" type="checkbox" name=<%=productList[i].ProductId %> >
                     </div>

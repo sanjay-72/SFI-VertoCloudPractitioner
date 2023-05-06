@@ -30,3 +30,10 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll(".hidden");
 hiddenElements.forEach((el) => observer.observe(el));
+
+function updatePrice(priceID, quantID, cost) {
+    let a = parseInt(cost, 10);
+    let b = parseInt(document.getElementById(quantID).value, 10);
+    // console.log(a * b)
+    document.getElementById(priceID).innerText = `₹${a * b}/-`;
+}
