@@ -56,9 +56,8 @@
 
         @media(max-width:380px) {
             .myProductBox {
-                width: 100%;
                 height: auto;
-                margin: 0;
+                margin-left: 30px;
             }
 
             .myProductBox img {
@@ -122,6 +121,16 @@
     <div>
         <h5 style="margin: 15px;">Total products found in your account = <%= productList.length %>
         </h5>
+        <div style="text-align: center;" class="pb-4">
+            <button disabled style="background-color: rgb(0, 121, 0);color: white;opacity: 100%;"
+                class="btn btn-outline-success m-2 mb-0">My
+                Products</button>
+            <a href="/ordersReceived"><button class="btn btn-outline-success m-2 mb-0">Orders Received</button></a>
+            <a href="/myOrders"><button class="btn btn-outline-success m-2 mb-0">My Orders</button></a>
+            <a href="/newProduct"><button class="btn btn-outline-success m-2 mb-0">Add new
+                    Product</button></a>
+        </div>
+
         <div style="text-align: center; margin: 15px; margin-left: -15px;">
             <form action="/myProducts" method="post">
                 <% for(var i=0; i<productList.length; i++) {%>
@@ -151,10 +160,7 @@
             </form>
         </div>
     </div>
-    <div style="text-align: center;" class="pb-4">
-        <a href="/newProduct"><button class="btn btn-outline-success">Add new
-                Product</button></a>
-    </div>
+    
 
     <%- include("footer") -%>
 

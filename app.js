@@ -134,7 +134,7 @@ const Payment = mongoose.model("Payment", PaymentSchema);
 //     BuyerName: "Durga Prasad",
 //     BuyerEmail: "dpakurathi1616@gmail.com",
 //     BuyerMobile: 7893924278,
-//     SellerNotifiedStatus: "Yes",
+//     SellerNotifiedStatus: "No",
 //     ProductId: 7200016,
 //     ProductName: "Apple",
 //     cost: 40,
@@ -270,7 +270,7 @@ app.get("/newProduct", isLoggedIn, function (req, res) {
 
 app.get("/myProducts", isLoggedIn, function (req, res) {
     async function getMyProducts() {
-        let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo }).sort({ 'ProductName': 1 });;
+        let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo }).sort({ 'ProductName': 1 });
         // res.send(myProductData);
         // console.log(myProductData);
         res.render("customerProductsView", {
@@ -287,16 +287,24 @@ app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, r
     async function getSellerDetails() {
         let mySellerData = await NewProduct.findOne({ Mobile: req.params.SellerMobile, ProductId: req.params.pID });
         // console.log(mySellerData);
-        if (mySellerData != null)
+        if (mySellerData.Mobile == req.user.mobileNo) {
+            res.redirect("/messageRoute?Message=You are the seller of this product.");
+        }
+        else if (mySellerData != null) {
             res.render("sellerInfo", {
                 name: req.user.userName,
                 sellerData: mySellerData
             });
+        }
         else
             res.send("Sorry :( product already SOLD. Please refresh the market page.");
     }
     getSellerDetails();
 });
+
+app.get("/messageRoute", function (req, res) {
+    res.render("message", { myMessage: req.query.Message });
+})
 
 app.get("/IOT", isLoggedIn, function (req, res) {
     async function getDeviceData() {
@@ -311,7 +319,7 @@ app.get("/IOT", isLoggedIn, function (req, res) {
 
 });
 
-app.get("/success", function (req, res) {
+app.get("/success", isLoggedIn, function (req, res) {
     let mySellerData = "";
     async function insertPayment() {
         // console.log(req.query.Pid);
@@ -325,7 +333,7 @@ app.get("/success", function (req, res) {
                 BuyerName: req.user.userName,
                 BuyerEmail: req.user.emailId,
                 BuyerMobile: req.user.mobileNo,
-                SellerNotifiedStatus: "Yes",
+                SellerNotifiedStatus: "No",
                 ProductId: mySellerData.ProductId,
                 ProductName: mySellerData.ProductName,
                 cost: mySellerData.cost,
@@ -372,9 +380,37 @@ app.get("/success", function (req, res) {
     res.render("message", { myMessage: "Your payment is successful." });
 });
 
-app.get("/cancel", function (req, res) {
+app.get("/cancel", isLoggedIn, function (req, res) {
     res.render("message", { myMessage: "Your payment is cancelled." });
-})
+});
+
+app.get("/ordersReceived", isLoggedIn, function (req, res) {
+    let receivedOrders = "";
+    async function getUserOrders() {
+        receivedOrders = await Payment.find({ SellerMobile: req.user.mobileNo, SellerNotifiedStatus: "No" }).sort({ _id: -1 });
+        // res.send(receivedOrders);
+        // console.log(receivedOrders);
+        res.render("receivedOrders", {
+            name: req.user.userName,
+            productList: receivedOrders
+        });
+    }
+    getUserOrders();
+});
+
+app.get("/myOrders", isLoggedIn, function (req, res) {
+    let myOrders = "";
+    async function getMyOrders() {
+        myOrders = await Payment.find({ BuyerMobile: req.user.mobileNo }).sort({ _id: -1 });
+        // res.send(myOrders);
+        // console.log(myOrders);
+        res.render("myOrders", {
+            name: req.user.userName,
+            productList: myOrders
+        });
+    }
+    getMyOrders();
+});
 
 //Post routes
 app.post("/userRegister", function (req, res) {
@@ -526,9 +562,22 @@ app.post("/create-checkout-session", isLoggedIn, async (req, res) => {
         }
     }
     checkMatch();
+});
 
-})
+app.post("/ordersReceived", isLoggedIn, function (req, res) {
+    let completedProducts = Object.keys(req.body);
+    // console.log(Object.keys(req.body));
 
+    async function updateReceivedOrders() {
+        for (var i = 0; i < completedProducts.length; i++) {
+            let doc = await Payment.updateOne({ _id: completedProducts[i] }, { SellerNotifiedStatus: "Yes" });
+            // console.log(doc);
+            // console.log();
+        }
+        res.render("message", { myMessage: "Marked as completed. 😌" });
+    };
+    updateReceivedOrders();
+});
 
 app.listen(PORT, function () {
     console.log("App is running on port : " + PORT);
