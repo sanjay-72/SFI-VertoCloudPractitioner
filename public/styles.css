@@ -360,6 +360,10 @@ span {
     opacity: .8;
 }
 
+.footerLinks:hover {
+    color: rgb(255, 242, 0);
+    font-size: 1.01rem;
+}
 .copy-right {
     font-size: .75rem;
     opacity: .8;
