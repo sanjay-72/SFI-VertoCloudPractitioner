@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const md5 = require('md5');
 const mongoose = require("mongoose");
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
@@ -29,6 +30,7 @@ app.set('view engine', 'ejs');
 
 let usersId = 10000;
 let productId = 720000;
+let adminPassKeyHash = md5((process.env.ADMIN_PLAIN));
 
 //Twilio Client Initialisation
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -69,6 +71,7 @@ const UserSchema = new mongoose.Schema({
     usersId: Number,
     userName: String,
     age: Number,
+    status: String,
     Location: String,
     Occupation: String,
     mobileNo: Number,
@@ -412,6 +415,55 @@ app.get("/myOrders", isLoggedIn, function (req, res) {
     getMyOrders();
 });
 
+app.get("/admin/:passKeyHash", isLoggedIn, function (req, res) {
+    // console.log(parseInt(process.env.ADMIN_ID));
+    // console.log((req.user.usersId));
+    // console.log(((process.env.ADMIN_EMAIL)));
+    // console.log((req.user.emailId));
+
+    if (parseInt(process.env.ADMIN_ID) == (req.user.usersId) && (process.env.ADMIN_EMAIL) == (req.user.emailId)) {
+        // console.log(md5((process.env.ADMIN_PLAIN)));
+        // console.log(req.params.passKeyHash);
+        if (req.params.passKeyHash == adminPassKeyHash) {
+            // console.log(req.params.passKeyHash);
+            console.log("Admin accessed - Now");
+            res.render("adminMainPage", { passKeyHash: adminPassKeyHash });
+        }
+        else {
+            console.log(`Admin used password = ${req.params.passKeyHash} and failed to login`);
+            res.send(`Wrong Passkey ${req.params.passKeyHash}`);
+        }
+    }
+    else {
+        console.log(`Intruder trying to access admin portal with \n\tkeyHash = ${req.params.passKeyHash} \n\tName = ${req.user.userName} \n\tUser id = ${(req.user.usersId)}`);
+        res.send(`Cannot GET /admin/:${req.params.passKeyHash}`);
+    }
+});
+
+app.get(`/admin/${adminPassKeyHash}/SeeUserData`, isLoggedIn, function (req, res) {
+    async function sendAllUsers() {
+        let data = await User.find({});
+        res.render("allUserData", { userData: data });
+    }
+    sendAllUsers();
+});
+
+app.get(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
+    res.send("Working on this Feature");
+});
+
+app.get(`/admin/${adminPassKeyHash}/ProActiveUsers`, isLoggedIn, function (req, res) {
+    res.send("Working on this Feature");
+});
+
+app.get(`/admin/${adminPassKeyHash}/BlockUsers`, isLoggedIn, function (req, res) {
+    res.send("Working on this Feature");
+});
+
+app.get(`/admin/${adminPassKeyHash}/BlockedUsers`, isLoggedIn, function (req, res) {
+    res.send("Working on this Feature");
+});
+
 //Post routes
 app.post("/userRegister", function (req, res) {
     // console.log(req.body);
@@ -424,7 +476,7 @@ app.post("/userRegister", function (req, res) {
                 bcrypt.hash(req.body.password, salt, function (err, hash) {
                     if (err) return next(err);
                     var newEntry = new User({
-                        usersId: usersId, userName: req.body.userName, age: req.body.age, Location: req.body.Location, Occupation: req.body.Location, Occupation: req.body.Occupation, mobileNo: req.body.mobileNo, emailId: req.body.emailId, password: hash
+                        usersId: usersId, userName: req.body.userName, age: req.body.age, status: "Active", Location: req.body.Location, Occupation: req.body.Location, Occupation: req.body.Occupation, mobileNo: req.body.mobileNo, emailId: req.body.emailId, password: hash
                     });
                     newEntry.save();
                     res.redirect("/login");
