@@ -449,7 +449,7 @@ app.get(`/admin/${adminPassKeyHash}/SeeUserData`, isLoggedIn, function (req, res
 });
 
 app.get(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
-    res.send("Working on this Feature");
+    res.send("W on this Feature");
 });
 
 app.get(`/admin/${adminPassKeyHash}/ProActiveUsers`, isLoggedIn, function (req, res) {
