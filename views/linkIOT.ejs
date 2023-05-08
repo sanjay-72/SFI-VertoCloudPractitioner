@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <title>Admin portal.</title>
+    <title>Link device to 🍒Fruitful🍊.</title>
 
     <!-- Favicon Link  -->
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
@@ -143,10 +143,10 @@
             display: none;
         }
 
-        .myButton {
-            margin-top: 15px;
+        #SubmitButton {
+            margin-top: 60px;
             font-size: 200%;
-            width: 300px;
+
         }
 
 
@@ -164,23 +164,27 @@
     </div>
     <!-- Box for inputs start -->
     <div id="container">
-        <h1 style="margin-bottom: 45px;"><strong>🍒Fruitful🍊</strong></h1>
-        <h1><strong>Welcome Admin,</strong></h1>
-        <a href="/admin/<%= passKeyHash %>/SeeUserData">
-            <button class="btn btn-outline-success myButton"><strong>All users details</strong></button>
-        </a>
-        <br>
-        <a href="/admin/<%= passKeyHash %>/LinkIOT">
-            <button class="btn btn-outline-success myButton"><strong>Link IOT device</strong></button>
-        </a>
-        <br>
-        <a href="/admin/<%= passKeyHash %>/BlockedUsers">
-            <button class="btn btn-outline-secondary myButton"><strong>Blocked Users</strong></button>
-        </a>
-        <a href="/admin/<%= passKeyHash %>/BlockUsers">
-            <button class="btn btn-outline-danger myButton"><strong>Block Users</strong></button>
-        </a>
-        <br>
+
+        <form action="/admin/<%= passKeyHash %>/LinkIOT" method="post">
+            <h1>Login to <span style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
+            <div class="input-wrapper">
+                <label for="userId">User ID : </label><br>
+                <input name="userId" type="number" required autofocus spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="userName">Name of user : </label><br>
+                <input name="userName" type="text" required spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="Location">Location : </label><br>
+                <input name="Location" type="text" required spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="Link">Link : </label><br>
+                <input name="Link" type="url" required spellcheck="false" autocomplete="off">
+            </div>
+            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Link</strong></button>
+        </form>
 
         <!-- Box for inputs end -->
     </div>
@@ -193,9 +197,7 @@
 
     <!-- LoaderJs file Link  -->
     <script src="/loaderAnimation.js"></script>
-    <script>
-        document.getElementById("mobileField").innerHTML = parseInt(document.getElementById("mobileField").placeholder);
-    </script>
+
 </body>
 
 </html>

@@ -89,7 +89,7 @@
         <div class="container">
             <a href="/"><button>Home</button></a>
             <a href="/IOT"><button>Agri-IOT</button></a>
-            <a href="/market"><button style="background-color: green;color: white;">Sell/Buy</button></a>
+            <a href="/market"><button>Sell/Buy</button></a>
             <a href="/newProduct"><button>Sell Online</button></a>
             <a href="/myProducts"><button>My Products</button></a>
 
@@ -97,7 +97,10 @@
     </div>
     <!-- Nav Bar End  -->
     <div class="mainDiv">
-        <h2>Here is the list of all our users</h2>
+        <h2>
+            <%=type%> (Count: <%= userData.length%>
+                    )
+        </h2>
         <% for(var i=0;i<userData.length;i++) { %>
             <div class="detailsBox p-4 m-2">
                 <table>

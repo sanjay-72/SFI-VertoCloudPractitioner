@@ -84,7 +84,7 @@ const DeviceSchema = new mongoose.Schema({
     userId: Number,
     userName: String,
     Location: String,
-    Links: Array
+    Link: String
 });
 const Device = mongoose.model('Device', DeviceSchema);
 
@@ -123,12 +123,13 @@ const Payment = mongoose.model("Payment", PaymentSchema);
 //     userId: req.user.usersId,
 //     userName: req.user.userName,
 //     Location: req.user.Location,
-//     Links: ["https://thingspeak.com/channels/2065077/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
-//         "https://thingspeak.com/channels/2065077/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
-//         "https://thingspeak.com/channels/2065077/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
-//         "https://thingspeak.com/channels/2065077/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"]
+//     Link: "https://thingspeak.com/channels/2065077/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
 // });
 // newDevice.save();
+
+//         "https://thingspeak.com/channels/2065077/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
+//         "https://thingspeak.com/channels/2065077/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
+//         "https://thingspeak.com/channels/2065077/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
 
 // const SampleTransaction = new Payment({
 //     SellerName: "Sanjay Kumar",
@@ -187,7 +188,9 @@ passport.use(new localStrategy({
             function executer2(user) {
                 // if (err) return done(err);
                 if (!user) return done(null, false, { message: "Incorrect username" });
-
+                if (user.status == "Blocked") {
+                    done(null, false, { message: "User Blocked." });
+                }
                 bcrypt.compare(password, user.password, function (err, res) {
                     if (err) return done(err);
                     if (res === false) return done(null, false, { message: "Incorrect password" });
@@ -306,15 +309,15 @@ app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, r
 });
 
 app.get("/messageRoute", function (req, res) {
-    res.render("message", { myMessage: req.query.Message });
+    res.render("message", { redirectTo: "/market", myMessage: req.query.Message });
 })
 
 app.get("/IOT", isLoggedIn, function (req, res) {
     async function getDeviceData() {
-        let devicesInfo = await Device.findOne({ userId: req.user.usersId });
-        // console.log(devicesInfo.Links);
+        let devicesInfo = await Device.find({ userId: req.user.usersId });
+        // console.log(devicesInfo);
         if (devicesInfo != null)
-            res.render("agriIOT", { deviceList: devicesInfo.Links });
+            res.render("agriIOT", { deviceList: devicesInfo });
         else
             res.render("agriIOT", { deviceList: [] });
     }
@@ -380,11 +383,11 @@ app.get("/success", isLoggedIn, function (req, res) {
     insertPayment();
     notifySeller();
 
-    res.render("message", { myMessage: "Your payment is successful." });
+    res.render("message", { redirectTo: "/market", myMessage: "Your payment is successful." });
 });
 
 app.get("/cancel", isLoggedIn, function (req, res) {
-    res.render("message", { myMessage: "Your payment is cancelled." });
+    res.render("message", { redirectTo: "/market", myMessage: "Your payment is cancelled." });
 });
 
 app.get("/ordersReceived", isLoggedIn, function (req, res) {
@@ -443,17 +446,13 @@ app.get("/admin/:passKeyHash", isLoggedIn, function (req, res) {
 app.get(`/admin/${adminPassKeyHash}/SeeUserData`, isLoggedIn, function (req, res) {
     async function sendAllUsers() {
         let data = await User.find({});
-        res.render("allUserData", { userData: data });
+        res.render("allUserData", { type: "All our users", userData: data });
     }
     sendAllUsers();
 });
 
 app.get(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
-    res.send("W on this Feature");
-});
-
-app.get(`/admin/${adminPassKeyHash}/ProActiveUsers`, isLoggedIn, function (req, res) {
-    res.send("Working on this Feature");
+    res.render("linkIOT", { passKeyHash: adminPassKeyHash });
 });
 
 app.get(`/admin/${adminPassKeyHash}/BlockUsers`, isLoggedIn, function (req, res) {
@@ -461,7 +460,11 @@ app.get(`/admin/${adminPassKeyHash}/BlockUsers`, isLoggedIn, function (req, res)
 });
 
 app.get(`/admin/${adminPassKeyHash}/BlockedUsers`, isLoggedIn, function (req, res) {
-    res.send("Working on this Feature");
+    async function sendBlockedUsers() {
+        let data = await User.find({ status: "Blocked" });
+        res.render("allUserData", { type: "Blocked Users", userData: data });
+    }
+    sendBlockedUsers();
 });
 
 //Post routes
@@ -484,7 +487,7 @@ app.post("/userRegister", function (req, res) {
             })
         }
         else {
-            res.render("message", { myMessage: "User already exists" });
+            res.render("message", { redirectTo: "/market", myMessage: "User already exists" });
         }
     }
     verifyEmail();
@@ -551,7 +554,7 @@ app.post("/sendOtp", function (req, res) {
                 });
         }
         else {
-            res.render("message", { myMessage: "User already exists" });
+            res.render("message", { redirectTo: "/market", myMessage: "User already exists" });
         }
     }
     checkMobileExists();
@@ -583,7 +586,7 @@ app.post("/create-checkout-session", isLoggedIn, async (req, res) => {
         if (mySellerData.Mobile == req.user.mobileNo) {
             // console.log(mySellerData.Mobile);
             // console.log(req.user.mobileNo);
-            res.render("message", { myMessage: "😅 You are the seller of this product." });
+            res.render("message", { redirectTo: "/market", myMessage: "😅 You are the seller of this product." });
         }
         else {
             try {
@@ -626,9 +629,21 @@ app.post("/ordersReceived", isLoggedIn, function (req, res) {
             // console.log(doc);
             // console.log();
         }
-        res.render("message", { myMessage: "Marked as completed. 😌" });
+        res.render("message", { redirectTo: "/market", myMessage: "Marked as completed. 😌" });
     };
     updateReceivedOrders();
+});
+
+app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
+    console.log(req.body);
+    var newDevice = new Device({
+        userId: req.body.userId,
+        userName: req.body.userName,
+        Location: req.body.Location,
+        Link: req.body.Link
+    });
+    newDevice.save();
+    res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "IOT device Linked" });
 });
 
 app.listen(PORT, function () {
