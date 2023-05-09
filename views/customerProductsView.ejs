@@ -136,7 +136,7 @@
                 <% for(var i=0; i<productList.length; i++) {%>
                     <div class="myProductBox hidden markerDiv" style="cursor: pointer;">
                         <p style="margin-bottom: 0;">Stock available : <%= productList[i].Quantity %>Kg</p>
-                        <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
+                        <img src="./../images/<%= myPictures[Math.floor(Math.random() * myPictures.length)] %>/<%= productList[i].ProductName %>.jpg"
                             alt="<%= productList[i].ProductName %> Image">
                         <% if(productList[i].ProductName=="Other" ){ %>
                             <h2>
@@ -147,8 +147,8 @@
                                     <%= productList[i].ProductName %>
                                 </h2>
                                 <% } %>
-                        <h4><span class="costPrice">(₹<%= productList[i].cost %>/Kg)<span></h4>
-                        <input style="padding: 10px;" type="checkbox" name=<%=productList[i].ProductId %> >
+                                    <h4><span class="costPrice">(₹<%= productList[i].cost %>/Kg)<span></h4>
+                                    <input style="padding: 10px;" type="checkbox" name=<%=productList[i].ProductId %> >
                     </div>
                     <% } %>
                         <% if(productList.length> 0) { %>
@@ -160,7 +160,7 @@
             </form>
         </div>
     </div>
-    
+
 
     <%- include("footer") -%>
 

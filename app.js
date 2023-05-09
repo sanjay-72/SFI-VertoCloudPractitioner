@@ -232,6 +232,7 @@ app.get("/market/:productName", isLoggedIn, function (req, res) {
     // console.log(req.query);
     let myProductData = [];
     async function getParticularProduct() {
+        let pictures = ["Products", "Products1", "Products2"];
         if (req.query.sort == "PriceLowToHigh")
             myProductData = await NewProduct.find({ ProductName: req.params.productName }).sort({ 'cost': 1 });
         else if (req.query.sort == "PriceHighToLow")
@@ -246,7 +247,8 @@ app.get("/market/:productName", isLoggedIn, function (req, res) {
         // console.log(myProductData);
         res.render("mainMarket", {
             productList: myProductData,
-            sortingKey: req.query.sort
+            sortingKey: req.query.sort,
+            myPictures: pictures
         });
     }
     getParticularProduct();
@@ -265,12 +267,14 @@ app.get("/newProduct", isLoggedIn, function (req, res) {
 
 app.get("/myProducts", isLoggedIn, function (req, res) {
     async function getMyProducts() {
+        let pictures = ["Products", "Products1", "Products2"];
         let myProductData = await NewProduct.find({ Mobile: req.user.mobileNo }).sort({ 'ProductName': 1 });
         // res.send(myProductData);
         // console.log(myProductData);
         res.render("customerProductsView", {
             name: req.user.userName,
-            productList: myProductData
+            productList: myProductData,
+            myPictures: pictures
         });
     }
     getMyProducts();
@@ -454,12 +458,14 @@ app.get("/cancel", isLoggedIn, function (req, res) {
 app.get("/ordersReceived", isLoggedIn, function (req, res) {
     let receivedOrders = "";
     async function getUserOrders() {
+        let pictures = ["Products", "Products1", "Products2"];
         receivedOrders = await Payment.find({ SellerMobile: req.user.mobileNo, SellerNotifiedStatus: "No" }).sort({ _id: -1 });
         // res.send(receivedOrders);
         // console.log(receivedOrders);
         res.render("receivedOrders", {
             name: req.user.userName,
-            productList: receivedOrders
+            productList: receivedOrders,
+            myPictures: pictures
         });
     }
     getUserOrders();
@@ -468,12 +474,14 @@ app.get("/ordersReceived", isLoggedIn, function (req, res) {
 app.get("/myOrders", isLoggedIn, function (req, res) {
     let myOrders = "";
     async function getMyOrders() {
+        let pictures = ["Products", "Products1", "Products2"];
         myOrders = await Payment.find({ BuyerMobile: req.user.mobileNo }).sort({ _id: -1 });
         // res.send(myOrders);
         // console.log(myOrders);
         res.render("myOrders", {
             name: req.user.userName,
-            productList: myOrders
+            productList: myOrders,
+            myPictures: pictures
         });
     }
     getMyOrders();

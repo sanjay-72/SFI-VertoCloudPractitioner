@@ -134,7 +134,7 @@
             <form action="/ordersReceived" method="post">
                 <% for(var i=0; i<productList.length; i++) {%>
                     <div class="myProductBox hidden markerDiv" style="cursor: pointer;">
-                        <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
+                        <img src="./../images/<%= myPictures[Math.floor(Math.random() * myPictures.length)] %>/<%= productList[i].ProductName %>.jpg"
                             alt="<%= productList[i].ProductName %> Image">
                         <% if(productList[i].ProductName=="Other" ){ %>
                             <h2>

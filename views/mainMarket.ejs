@@ -152,7 +152,7 @@
                 <p
                     style="margin-top: -5px; margin-bottom: 0;margin-left: -10px; margin-right: -10px; background-color: rgb(255, 82, 82);color: rgb(255, 255, 255); border-top-left-radius: 4px;border-top-right-radius: 4px;">
                     Stock available : <%= productList[i].Quantity %>Kg(s) only</p>
-                <img src="./../images/Products/<%= productList[i].ProductName %>.jpg"
+                        <img src="./../images/<%= myPictures[Math.floor(Math.random() * myPictures.length)] %>/<%= productList[i].ProductName %>.jpg"
                     alt="<%= productList[i].ProductName %> Image" style="margin-top: 5px;">
                 <% if(productList[i].ProductName=="Other" ){ %>
                     <h2>
