@@ -355,15 +355,87 @@ app.get("/success", isLoggedIn, function (req, res) {
         let info = await transporter.sendMail({
             from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
             to: mySellerData.emailId,
-            subject: `You received order for Product with Product Id : ${mySellerData.ProductId}`,
+            subject: `✅ You received order for Product with Product Id : ${mySellerData.ProductId}`,
             html: `
-            <h1>Hello dear ${mySellerData.SellerName},</h1>
-            <p>Greetings of the day. This email is to inform you that you have received an order for ${mySellerData.ProductName}(s) with a quantity requirement of ${req.query.quant}. <br>Payment for the order has been processed. You can find more details in this email or you can visit our Fruitful app to know more.</p>
-            <h3>Customer Name   : ${req.user.userName} </h3>
-            <h3>Customer email  : ${req.user.emailId} </h3>
-            <h3>Customer mobile : ${req.user.mobileNo} </h3>
-            <a href=${process.env.SERVER_URL}><button>Visit FruitFul Now</button></a>
-            <p>This is system generated email by FruitFul.<p>
+                <div style="display: flex; justify-content: center;">
+                    <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%"
+                        cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="background-color: #00a033; text-align: center;">
+                                <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: center; font-size: 24px; font-weight: bold; color: #015f11;">
+                                You received an order for your product.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                <h4>Hello dear ${mySellerData.SellerName},</h4>
+                                <p>Greetings of the day,
+                                    <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This email is to inform you that you have received
+                                    an order for ${mySellerData.ProductName}(s) with a quantity
+                                    requirement of ${req.query.quant} Kg(s). <br>Payment for the same has been processed. You can find
+                                    more details in this email
+                                    or you can visit our Fruitful app to know more.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                Here are the details for your order. To know more please visit our portal.
+                                <table style="margin: 10px; margin-left: 20px;">
+                                    <tr>
+                                        <td>
+                                            Customer Name
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.userName}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Customer Email
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.emailId}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Customer Mobile.no
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.mobileNo}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: center;">
+                                <a href=${process.env.SERVER_URL}
+                                    style="display: inline-block; background-color: #66cc33; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Visit
+                                    Now</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                &copy; 2023 FruitFul Technologies. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             `,
         });
         // console.log(info.messageId);
@@ -427,7 +499,89 @@ app.get("/admin/:passKeyHash", isLoggedIn, function (req, res) {
         }
     }
     else {
-        console.log(`Intruder trying to access admin portal with \n\tkeyHash used = ${req.params.passKeyHash} \n\tName = ${req.user.userName} \n\tUser id = ${(req.user.usersId)}`);
+        async function notifyAdmin() {
+            let info = await transporter.sendMail({
+                from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+                to: process.env.EMAIL_ID,
+                subject: `🛑🛑 Someone trying to get into the Admin portal.`,
+                html: `
+                        <div style="display: flex; justify-content: center;">
+                            <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%"
+                                cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="background-color: #00ff08; text-align: center;">
+                                        <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: center; font-size: 24px; font-weight: bold;background-color: red; color: #ffffff;">
+                                        Someone tried accessing Admin portal</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                        <h4>Hello dear Admin,</h4>
+                                        <p>Greetings of the day,
+                                            <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; There is an alert for you. An Intruder tried accessing accessing admin portal.
+                                            Credentials used are:
+                                        <table style="margin-left: 20px;">
+                                            <tr>
+                                                <td>
+                                                    Hash Key used
+                                                </td>
+                                                <td>
+                                                    :
+                                                </td>
+                                                <td>
+                                                    ${req.params.passKeyHash}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Name of user
+                                                </td>
+                                                <td>
+                                                    :
+                                                </td>
+                                                <td>
+                                                    ${req.user.userName}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    User id
+                                                </td>
+                                                <td>
+                                                    :
+                                                </td>
+                                                <td>
+                                                    ${(req.user.usersId)}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: center;">
+                                        <a href=${process.env.SERVER_URL}
+                                            style="display: inline-block; background-color: red; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Visit
+                                            Now</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                        &copy; 2023 FruitFul Technologies. All rights reserved.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        `,
+            });
+            // console.log(info.messageId);
+        }
+        notifyAdmin();
+        // console.log(`Intruder trying to access admin portal with \n\tkeyHash used = ${req.params.passKeyHash} \n\tName = ${req.user.userName} \n\tUser id = ${(req.user.usersId)}`);
         res.send(`Cannot GET /admin/:${req.params.passKeyHash}`);
     }
 });
@@ -644,12 +798,43 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
                 let info = await transporter.sendMail({
                     from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
                     to: userInfo.emailId,
-                    subject: `New Device added to your account.`,
+                    subject: `✅ New Device added to your account.`,
                     html: `
-                        <h1>Hello dear ${userInfo.userName},</h1>
-                        <p>Greetings of the day. This email is to inform you that a new IOT device is linked to your account. You can access it in our protal also from now on. Please visit the portal for more details.</p>
-                        <a href=${process.env.SERVER_URL}><button>Visit FruitFul Now</button></a>
-                        <p>This is system generated email by FruitFul.<p>
+                        <div style="display: flex; justify-content: center;">
+                            <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="background-color: #00a033; text-align: center;">
+                                        <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: center; font-size: 24px; font-weight: bold; color: #015f11;">
+                                        A new IOT device is added to your account</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                        <h4>Hello dear ${userInfo.userName},</h4>
+                                        <p>Greetings of the day,
+                                            <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This email is to inform you that a new IOT device is linked
+                                            to your account. You can access it in
+                                            our protal also from now on. Please visit the portal for more details.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: center;">
+                                        <a href=${process.env.SERVER_URL}
+                                            style="display: inline-block; background-color: #66cc33; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Visit
+                                            Now</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                        &copy; 2023 FruitFul Technologies. All rights reserved.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         `,
                 });
                 // console.log(info.messageId);
