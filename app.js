@@ -103,17 +103,6 @@ const PaymentSchema = new mongoose.Schema({
 });
 const Payment = mongoose.model("Payment", PaymentSchema);
 
-// const Product = {
-//     ProductId: 225,
-//     ProductName: "String",
-//     Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj",
-//     cost: 500,
-//     imageURL: "String",
-//     SellerName: "String",
-//     SellerAddress: "String",
-//     Mobile: 9515306769
-// }
-
 // var newEntry = new NewProduct({
 //     ProductId: 225, ProductName: "String", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769, emailId:"sanjaykumarkonakandla@gmail.com", Quantity:25
 // });
@@ -189,7 +178,7 @@ passport.use(new localStrategy({
                 // if (err) return done(err);
                 if (!user) return done(null, false, { message: "Incorrect username" });
                 if (user.status == "Blocked") {
-                    done(null, false, { message: "User Blocked." });
+                    return done(null, false, { message: "User Blocked." });
                 }
                 bcrypt.compare(password, user.password, function (err, res) {
                     if (err) return done(err);
@@ -438,7 +427,7 @@ app.get("/admin/:passKeyHash", isLoggedIn, function (req, res) {
         }
     }
     else {
-        console.log(`Intruder trying to access admin portal with \n\tkeyHash = ${req.params.passKeyHash} \n\tName = ${req.user.userName} \n\tUser id = ${(req.user.usersId)}`);
+        console.log(`Intruder trying to access admin portal with \n\tkeyHash used = ${req.params.passKeyHash} \n\tName = ${req.user.userName} \n\tUser id = ${(req.user.usersId)}`);
         res.send(`Cannot GET /admin/:${req.params.passKeyHash}`);
     }
 });
@@ -455,8 +444,12 @@ app.get(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
     res.render("linkIOT", { passKeyHash: adminPassKeyHash });
 });
 
-app.get(`/admin/${adminPassKeyHash}/BlockUsers`, isLoggedIn, function (req, res) {
-    res.send("Working on this Feature");
+app.get(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, function (req, res) {
+    res.render("blockUnBlockUser", { work: "Un Block", nextRoute: "UnBlockUser", passKeyHash: adminPassKeyHash });
+});
+
+app.get(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, function (req, res) {
+    res.render("blockUnBlockUser", { work: "Block", nextRoute: "BlockUser", passKeyHash: adminPassKeyHash });
 });
 
 app.get(`/admin/${adminPassKeyHash}/BlockedUsers`, isLoggedIn, function (req, res) {
@@ -644,6 +637,51 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
     });
     newDevice.save();
     res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "IOT device Linked" });
+});
+
+app.post(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, function (req, res) {
+    // console.log(req.body.userId);
+    async function blockGivenUser() {
+        let existance = await User.exists({ usersId: req.body.userId });
+        let user = await User.findOne({ usersId: req.body.userId });
+        // console.log(user);
+        if (!existance) {
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "User does not exist." });
+        }
+        else if (user.status == "Blocked") {
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "User is already blocked." });
+        }
+        else if (user.usersId == req.user.usersId) {
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "😁 You cannot block yourself." });
+        }
+        else {
+            await User.updateOne({ usersId: req.body.userId }, { status: "Blocked" });
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "User blocked successfully." });
+        }
+    }
+
+    blockGivenUser();
+});
+
+app.post(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, function (req, res) {
+    // console.log(req.body.userId);
+    async function unBlockGivenUser() {
+        let existance = await User.exists({ usersId: req.body.userId });
+        let user = await User.findOne({ usersId: req.body.userId });
+        // console.log(user);
+        if (!existance) {
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "User does not exist." });
+        }
+        else if (user.status == "Active") {
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "User is already active." });
+        }
+        else {
+            await User.updateOne({ usersId: req.body.userId }, { status: "Active" });
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "Unblocked user successfully." });
+        }
+    }
+
+    unBlockGivenUser();
 });
 
 app.listen(PORT, function () {

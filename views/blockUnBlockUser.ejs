@@ -165,25 +165,19 @@
     <!-- Box for inputs start -->
     <div id="container">
 
-        <form action="/admin/<%= passKeyHash %>/LinkIOT" method="post">
-            <h1>Link IOT device <span style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
+        <form action="/admin/<%= passKeyHash %>/<%= nextRoute %>" method="post">
+            <h1>
+                <%=work%> user<span style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span>
+            </h1>
             <div class="input-wrapper">
                 <label for="userId">User ID : </label><br>
                 <input name="userId" type="number" required autofocus spellcheck="false" autocomplete="off">
             </div>
-            <div class="input-wrapper">
-                <label for="userName">Name of user : </label><br>
-                <input name="userName" type="text" required spellcheck="false" autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Location">Location : </label><br>
-                <input name="Location" type="text" required spellcheck="false" autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Link">Link : </label><br>
-                <input name="Link" type="url" required spellcheck="false" autocomplete="off">
-            </div>
-            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Link</strong></button>
+            <br>
+            <br>
+            <button class="btn btn-outline-danger" type="submit" id="SubmitButton"><strong>
+                    <%=work%>
+                </strong></button>
         </form>
 
         <!-- Box for inputs end -->
