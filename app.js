@@ -628,15 +628,41 @@ app.post("/ordersReceived", isLoggedIn, function (req, res) {
 });
 
 app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
-    console.log(req.body);
-    var newDevice = new Device({
-        userId: req.body.userId,
-        userName: req.body.userName,
-        Location: req.body.Location,
-        Link: req.body.Link
-    });
-    newDevice.save();
-    res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "IOT device Linked" });
+    // console.log(req.body);
+    async function linkExecuter() {
+        let presence = await User.exists({ usersId: req.body.userId });
+        let userInfo = await User.findOne({ usersId: req.body.userId });
+        if (presence) {
+            var newDevice = new Device({
+                userId: req.body.userId,
+                userName: req.body.userName,
+                Location: req.body.Location,
+                Link: req.body.Link
+            });
+            newDevice.save();
+            async function notifyCustomer() {
+                let info = await transporter.sendMail({
+                    from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+                    to: userInfo.emailId,
+                    subject: `New Device added to your account.`,
+                    html: `
+                        <h1>Hello dear ${userInfo.userName},</h1>
+                        <p>Greetings of the day. This email is to inform you that a new IOT device is linked to your account. You can access it in our protal also from now on. Please visit the portal for more details.</p>
+                        <a href=${process.env.SERVER_URL}><button>Visit FruitFul Now</button></a>
+                        <p>This is system generated email by FruitFul.<p>
+                        `,
+                });
+                // console.log(info.messageId);
+            }
+            notifyCustomer();
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "IOT device Linked" });
+
+        }
+        else {
+            res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "User id is not matching with any user." });
+        }
+    }
+    linkExecuter();
 });
 
 app.post(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, function (req, res) {
