@@ -103,6 +103,8 @@ const PaymentSchema = new mongoose.Schema({
 });
 const Payment = mongoose.model("Payment", PaymentSchema);
 
+// Structures for adding new elements as per their Schemas
+
 // var newEntry = new NewProduct({
 //     ProductId: 225, ProductName: "String", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769, emailId:"sanjaykumarkonakandla@gmail.com", Quantity:25
 // });
@@ -135,6 +137,7 @@ const Payment = mongoose.model("Payment", PaymentSchema);
 // });
 // SampleTransaction.save();
 
+// Updating Ids with the last ID's so that Id's will not get repeated even if the server is restarted.
 async function updateIds() {
     let LastProduct = await NewProduct.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
     let LastUser = await User.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
@@ -151,11 +154,12 @@ updateIds();
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Passport working
+//Serialising user
 passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
 
+//Deserialising user
 passport.deserializeUser(async (id, done) => {
     const USER = await User.findById(id);
     done(null, USER);
@@ -192,18 +196,19 @@ passport.use(new localStrategy({
     }
 ));
 
-
+// Checking whether the user is logged in or not
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
     res.redirect('/login');
 }
 
+// Checking whether the user is logged out or not
 function isLoggedOut(req, res, next) {
     if (!req.isAuthenticated()) return next();
     res.redirect('/market');
 }
 
-//Get routes
+//Get routes Start
 app.get("/", function (req, res) {
     // res.sendFile(__dirname + "/index.html");
     let temp = "Login👤";
@@ -621,8 +626,9 @@ app.get(`/admin/${adminPassKeyHash}/BlockedUsers`, isLoggedIn, function (req, re
     }
     sendBlockedUsers();
 });
+//Get routes end
 
-//Post routes
+//Post routes start
 app.post("/userRegister", function (req, res) {
     // console.log(req.body);
     async function verifyEmail() {
@@ -902,7 +908,9 @@ app.post(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, function (req, re
 
     unBlockGivenUser();
 });
+//Post routes end
 
+// App listening to port 80 or port specified in ENV variables
 app.listen(PORT, function () {
     console.log("App is running on port : " + PORT);
 });
