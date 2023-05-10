@@ -329,7 +329,7 @@ span {
 }
 
 .internalWordsDiv:hover img {
-    border: 4px solid rgb(9, 255, 0);
+    border: 4px solid rgb(3, 101, 0);
     transition: all 0.2s;
 }
 

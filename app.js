@@ -498,7 +498,7 @@ app.get("/admin/:passKeyHash", isLoggedIn, function (req, res) {
         // console.log(req.params.passKeyHash);
         if (req.params.passKeyHash == adminPassKeyHash) {
             // console.log(req.params.passKeyHash);
-            console.log("Admin accessed - Now");
+            // console.log("Admin accessed - Now");
             res.render("adminMainPage", { passKeyHash: adminPassKeyHash });
         }
         else {

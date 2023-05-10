@@ -23,7 +23,37 @@
 
     <!-- Favicon Link  -->
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <style>
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 0.5s;
+        }
 
+        .hiddenR2L {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(+100%);
+            transition: all 0.5s;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+            transition: all 0.5s;
+        }
+
+
+        .hidden:nth-child(2) {
+            transition-delay: 100ms;
+        }
+
+        .hidden:nth-child(3) {
+            transition-delay: 200ms;
+        }
+    </style>
     <title>🍒Fruitful🍊</title>
 </head>
 
@@ -171,7 +201,7 @@
 
     <!-- Our Services section start  -->
     <div class="row featurette" id="aboutUs" style="background-color: #fdff96; padding-top: 0;">
-        <h2 class="OurMission">Our <span style="color: green;">Services</span></h2>
+        <h2 class="OurMission hidden">Our <span style="color: green;" class="hidden">Services</span></h2>
 
         <hr class="featurette-divider">
         <div class="row featurette">
@@ -179,7 +209,7 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="myFeaturetteImage" draggable="false" style="border-radius: 25%;"
+                            <img class="myFeaturetteImage hiddenR2L" draggable="false" style="border-radius: 25%;"
                                 src="/images/logo.png" />
                         </td>
                     </tr>
@@ -189,9 +219,9 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <h2 class="featurette-heading">Breaking the chains. <span class="text-muted">Serving
+                            <h2 class="featurette-heading hiddenR2L">Breaking the chains. <span class="text-muted hidden">Serving
                                     Jawans.</span></h2>
-                            <p class="lead">
+                            <p class="lead hiddenR2L">
                                 Our platform is user-friendly and easy to navigate, allowing farmers to list their
                                 products for sale and provide detailed information about their farming practices and the
                                 quality of their products.
@@ -215,8 +245,8 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <h2 class="featurette-heading">Smart Crop. <span class="text-muted">Smart work.</span></h2>
-                            <p class="lead">
+                            <h2 class="featurette-heading hidden">Smart Crop. <span class="text-muted hidden">Smart work.</span></h2>
+                            <p class="lead hidden">
                                 Smart IOT is used to increase the yielding and also helps the farmers by providing
                                 services like, remote operation of motors, crop moisture analysis and we can also record
                                 the periodic sensory data to improve yielding and profits for the farmers.
@@ -233,7 +263,7 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt myFeaturetteImage" draggable="false" style="border-radius: 50%;"
+                            <img class="tilt myFeaturetteImage hidden" draggable="false" style="border-radius: 50%;"
                                 src="/images/Feature2.jpg" />
                         </td>
                     </tr>
@@ -249,7 +279,7 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <img class="tilt myFeaturetteImage" draggable="false" style="border-radius: 50%;"
+                            <img class="tilt myFeaturetteImage hiddenR2L" draggable="false" style="border-radius: 50%;"
                                 src="/images/Feature3.jpg" />
                         </td>
                     </tr>
@@ -259,10 +289,10 @@
                 <table style="width: 100%;height: 100%;">
                     <tr>
                         <td>
-                            <h2 class="featurette-heading" id="experiencedAdvisors">Experience is the <span
-                                    class="text-muted">key for
+                            <h2 class="featurette-heading hiddenR2L" id="experiencedAdvisors">Experience is the <span
+                                    class="text-muted hiddenR2L">key for
                                     growth.</span></h2>
-                            <p class="lead">
+                            <p class="lead hiddenR2L">
                                 Our team of experts and highly experienced professionals in the agriculture field are
                                 dedicated to providing personalized advice to individual farmers. We work closely with
                                 farmers to understand their specific needs and goals, and develop customized solutions
@@ -285,15 +315,15 @@
 
     <hr class="featurette-divider" style="margin-top: 0;">
     <!-- Customer words -->
-    <div class="row">
-        <div class="col-lg-4 CustomerWordsDiv" style="text-align: center; padding-left: 50px;">
+    <div class="row hidden">
+        <div class="col-lg-4 CustomerWordsDiv hidden" style="text-align: center; padding-left: 50px;">
             <div class="internalWordsDiv">
                 <img class="bd-placeholder-img rounded-circle" draggable="false" width="140" height="140"
                     src="/images/people/person1.jpg" role="img" aria-label="Placeholder: 140x140"
                     preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
-                <h2 class="fw-normal">Amelia Yu</h2>
+                <h2 class="fw-normal" style="color: rgb(14, 194, 86); padding-top: 10px;">Amelia Yu</h2>
                 <p>"Organic products are an excellent choice for those who prioritize health, sustainability, and
                     environmental responsibility. I'm satisfied with the products sold by FruitFul.Choosing organic
                     products can also
@@ -304,14 +334,14 @@
                 </p>
             </div>
         </div><!-- /.col-lg-4 CustomerWordsDiv -->
-        <div class="col-lg-4 CustomerWordsDiv" style="text-align: center;">
+        <div class="col-lg-4 CustomerWordsDiv hidden" style="text-align: center;">
             <div class="internalWordsDiv">
                 <img class="bd-placeholder-img rounded-circle" draggable="false" width="140" height="140"
                     src="/images/people/person2.jpg" role="img" aria-label="Placeholder: 140x140"
                     preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
-                <h2 class="fw-normal">Dr. Gourav Seth</h2>
+                <h2 class="fw-normal" style="color: rgb(14, 194, 86); padding-top: 10px;">Dr. Gourav Seth</h2>
                 <p>Organic farming practices avoid the use of synthetic pesticides and
                     fertilizers, promoting soil health and biodiversity.
                     I have been consistently satisfied with the quality and variety of produce you offer, and the
@@ -321,14 +351,14 @@
             </div>
 
         </div><!-- /.col-lg-4 CustomerWordsDiv -->
-        <div class="col-lg-4 CustomerWordsDiv" style="text-align: center; padding-right: 50px;">
+        <div class="col-lg-4 CustomerWordsDiv hidden" style="text-align: center; padding-right: 50px;">
             <div class="internalWordsDiv">
                 <img draggable="false" class="bd-placeholder-img rounded-circle" width="140" height="140"
                     src="/images/people/person3.jpg" role="img" aria-label="Placeholder: 140x140"
                     preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777"></rect></img>
-                <h2 class="fw-normal">Ayush Saxena</h2>
+                <h2 class="fw-normal" style="color: rgb(14, 194, 86); padding-top: 10px;">Jason Smith</h2>
                 <p>While organic products may be more expensive than conventionally grown products, the benefits to our
                     health and the environment make them well worth the investment.
 
@@ -360,6 +390,24 @@
 
         <!-- JavaScript link -->
         <script src="/index.js"></script>
+        <script>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    }
+                    else {
+                        entry.target.classList.remove("show");
+                    }
+                })
+            });
+
+            const hiddenElements = document.querySelectorAll(".hidden");
+            const reverseHiddenElements = document.querySelectorAll(".hiddenR2L")
+            hiddenElements.forEach((el) => observer.observe(el));
+            reverseHiddenElements.forEach((el) => observer.observe(el));
+
+        </script>
 </body>
 
 </html>
