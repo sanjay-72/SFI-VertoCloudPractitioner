@@ -324,7 +324,11 @@ app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, r
 
 app.get("/messageRoute", function (req, res) {
     res.render("message", { redirectTo: "/market", myMessage: req.query.Message });
-})
+});
+
+app.get("/i-Smart", isLoggedIn, function (req, res) {
+    res.render("i-smart", { name: req.user.userName });
+});
 
 app.get("/IOT", isLoggedIn, function (req, res) {
     async function getDeviceData() {
