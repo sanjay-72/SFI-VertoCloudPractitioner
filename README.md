@@ -1,5 +1,5 @@
 
-# <p align="right">🚀<a  target = "_blank" href = "http://34.131.246.237/">Visit now</a></p> FruitFul
+# <p align="right">🚀<a  target = "_blank" href = "https://fruitful.social/">Visit now</a></p> FruitFul
 
 ### A direct sell trading platform connecting the farmers and traders
 This is solution developed by Verto Cloud Practitioner team in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google 
