@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- J Query CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- font awesome fonts  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- My CSS link -->
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Loader CSS link -->
+    <link rel="stylesheet" href="/loaderStyle.css">
+
+    <!-- Favicon Link  -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <title>Fruitful-Market</title>
+    <style>
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 0.5s;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+            transition: all 0.5s;
+        }
+
+        h4 {
+            color: forestgreen;
+        }
+
+        .hidden:nth-child(2) {
+            transition-delay: 100ms;
+        }
+
+        .hidden:nth-child(3) {
+            transition-delay: 200ms;
+        }
+
+        .hidden:nth-child(4) {
+            transition-delay: 300ms;
+        }
+
+        @media(max-width:380px) {
+            .myProductBox {
+                height: auto;
+                margin-left: 30px;
+            }
+
+            .myProductBox img {
+                width: 100%;
+                height: auto;
+            }
+
+            .narrow {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            h2 {
+                font-size: 100%;
+            }
+
+            .btn {
+                font-size: 75%;
+            }
+        }
+    </style>
+</head>
+
+<body style="overflow-y: hidden;">
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <!-- Page Starting -->
+    <div class="MyNavDiv" id="MyNavTitle">
+        <h2 style="margin: 0;">Fruit<span>Ful</span></h2>
+    </div>
+    <!-- Nav Bar start -->
+    <div class="MyNavDiv" id="NavBar">
+        <div class="container">
+            <a href="/"><button>Home</button></a>
+            <a href="/IOT"><button>Agri-IOT</button></a>
+            <a href="/market"><button disabled style="background-color: green;color: white;">Sell/Buy</button></a>
+            <a href="/newProduct"><button>Sell Online</button></a>
+            <a href="/myProducts"><button>My Products</button></a>
+        </div>
+    </div>
+    <!-- Nav Bar End  -->
+
+    <div style="margin: 15px; margin-left: -15px;" id="productsContainer" class="mainMarketDiv">
+
+        <div class="myProductBox hidden">
+            <img src="images/Products/Apple.jpg" alt="Apple Image">
+            <h2>Apple</h2>
+            <p class="breakAll narrow">Crisp, juicy and naturally sweet, apples are a nutritious fruit packed with
+                fiber, antioxidants and essential vitamins.</p>
+            <h4>
+                From: ₹<%= bestDeals.Apple %>/-
+            </h4>
+            <a href="/market/Apple?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Banana.jpg" alt="Banana Image">
+            <h2>Banana</h2>
+            <p class="breakAll narrow">Sweet and creamy, bananas are a nutritious fruit packed with vitamins,
+                minerals,
+                and fiber. Perfect as a snack or in recipes.</p>
+            <h4>
+                From: ₹<%= bestDeals.Banana %>/-
+            </h4>
+            <a href="/market/Banana?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Corn.jpg" alt="Corn Image">
+            <h2>Corn</h2>
+            <p class="breakAll narrow">Golden, crunchy, and versatile, corn is a staple crop enjoyed around the
+                world.
+                Perfect on the cob, in salads, soups, or as a snack.</p>
+            <h4>
+                From: ₹<%= bestDeals.Corn %>/-
+            </h4>
+            <a href="/market/Corn?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Cotton.jpg" alt="Cotton Image">
+            <h2>Cotton</h2>
+            <p class="breakAll narrow">Soft, breathable, and versatile, cotton is a natural fiber used in clothing,
+                bedding, and more. Sustainable and comfortable. </p>
+            <h4>
+                From: ₹<%= bestDeals.Cotton %>/-
+            </h4>
+            <a href="/market/Cotton?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+
+        <div class="myProductBox hidden">
+            <img src="images/Products/Grapes.jpg" alt="Grapes Image">
+            <h2>Grapes</h2>
+            <p class="breakAll narrow">Juicy and flavorful, grapes are a delicious fruit that are perfect for
+                snacking
+                or adding to salads, desserts, and drinks. </p>
+            <h4>
+                From: ₹<%= bestDeals.Grapes %>/-
+            </h4>
+            <a href="/market/Grapes?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Groundnut.jpg" alt="Groundnut Image">
+            <h2>Groundnut</h2>
+            <p class="breakAll narrow">Groundnuts, also known as peanuts, are a crunchy and tasty snack packed with
+                protein, fiber, and healthy fats.</p>
+            <h4>
+                From: ₹<%= bestDeals.Groundnut %>/-
+            </h4>
+            <a href="/market/Groundnut?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Guava.jpg" alt="Guava Image">
+            <h2>Guava</h2>
+            <p class="breakAll narrow">Tropical and tangy, guava is a superfruit loaded with antioxidants, vitamins,
+                and
+                fiber. Perfect for snacking, smoothies, or desserts.</p>
+            <h4>
+                From: ₹<%= bestDeals.Guava %>/-
+            </h4>
+            <a href="/market/Guava?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Mango.jpg" alt="Mango Image">
+            <h2>Mango</h2>
+            <p class="breakAll narrow">Juicy and tropical, with a sweet and tangy flavor. Packed with vitamins,
+                fiber, and antioxidants. Perfect for snacking or in recipes.</p>
+            <h4>
+                From: ₹<%= bestDeals.Mango %>/-
+            </h4>
+            <a href="/market/Mango?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+
+        <div class="myProductBox hidden">
+            <img src="images/Products/Mirchi.jpg" alt="Mirchi Image">
+            <h2>Mirchi</h2>
+            <p class="breakAll narrow">Spicy and flavorful, Mirchi is a popular chili pepper used in many Indian
+                dishes.
+                Adds a bold kick of heat to any meal.</p>
+            <h4>
+                From: ₹<%= bestDeals.Mirchi %>/-
+            </h4>
+            <a href="/market/Mirchi?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Paddy.jpg" alt="Paddy Image">
+            <h2>Paddy</h2>
+            <p class="breakAll narrow">Paddy, also known as rice, is a staple food in many cultures. Nutritious and
+                versatile, it can be used in a variety of dishes.</p>
+            <h4>
+                From: ₹<%= bestDeals.Paddy %>/-
+            </h4>
+            <a href="/market/Paddy?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Potato.jpg" alt="Potato Image">
+            <h2>Potato</h2>
+            <p class="breakAll narrow">Versatile and nutritious, potatoes are a staple in many cuisines. Rich in
+                fiber,
+                vitamins, and minerals, they can be boiled or fried.</p>
+            <h4>
+                From: ₹<%= bestDeals.Potato %>/-
+            </h4>
+            <a href="/market/Potato?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Tea.jpg" alt="Tea Image">
+            <h2>Tea</h2>
+            <p class="breakAll narrow">Enjoy the warmth and comfort of a cup of tea. Our selection of high-quality
+                teas
+                offer a variety of flavors and health benefits. </p>
+            <h4>
+                From: ₹<%= bestDeals.Tea %>/-
+            </h4>
+            <a href="/market/Tea?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+
+        <div class="myProductBox hidden">
+            <img src="images/Products/Tomato.jpg" alt="Tomato Image">
+            <h2>Tomato</h2>
+            <p class="breakAll narrow">Juicy and versatile, tomatoes are a staple ingredient in many dishes. Packed
+                with
+                vitamins and antioxidants.</p>
+            <h4>
+                From: ₹<%= bestDeals.Tomato %>/-
+            </h4>
+            <a href="/market/Tomato?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Wheat.jpg" alt="Wheat Image">
+            <h2>Wheat</h2>
+            <p class="breakAll narrow">Versatile and nutritious, wheat is a staple grain used to make bread,
+                pasta, and more. Packed with fiber, protein, and vitamins.</p>
+            <h4>
+                From: ₹<%= bestDeals.Wheat %>/-
+            </h4>
+            <a href="/market/Wheat?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+        <div class="myProductBox hidden">
+            <img src="images/Products/Other.jpg" alt="Other Image">
+            <h2>Other</h2>
+            <p class="breakAll narrow">View our range of other products listed other than above from our trusted and
+                partnering farmers.</p>
+            <h4>
+                From: ₹<%= bestDeals.Other %>/-
+            </h4>
+            <a href="/market/Other?sort=Relevant"><button class="btn btn-outline-success">View
+                    Deals</button></a>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer begin -->
+    <footer class="text-center footer">
+        <section class="footerSection">
+            <div class="container p-4 footerContainer" style="padding-top: 0;">
+                <div class="row  text-md-start mt-5">
+                    <!--Brand name start-->
+                    <div class="col-md-4 ">
+                        <h2 style="margin: 0;">Fruit<span>Ful</span></h2>
+                        <p class="copy-right"> Copyright © 2023<br>FruitFul Technologies. All Rights Reserved.</p>
+                    </div>
+                    <!--Brand name end-->
+
+                    <!--Services Start-->
+                    <div class="col-md-3">
+                        <h3>Services </h3>
+                        <ul class="list-style ps-0 ">
+                            <li class="pb-2"><a class="footerLinks" href="/market">Direct Sell Marketplace</a></li>
+                            <li class="pb-2"><a class="footerLinks" href="/IOT">Agri-IOT</a></li>
+                        </ul>
+                    </div>
+                    <!--Services end-->
+
+                    <!--Quick links Start-->
+                    <div class="col-md-3 ">
+                        <h3> Quick links </h3>
+                        <ul class="list-style ps-0">
+                            <li class="pb-2"><a class="footerLinks" href="/#OurMissionID">Our Mission</a></li>
+                            <li class="pb-2"><a class="footerLinks" href="/#aboutUs">Our Services</a></li>
+                            <li class="pb-2"><a class="footerLinks" href="/#OurClientsID">Our Clients</a></li>
+                        </ul>
+                    </div>
+                    <!--QUick links end-->
+
+                    <!--Creators Start-->
+                    <div class="col-md-2 ">
+                        <h3> Connect with us </h3>
+                        <ul class="list-style ps-0">
+                            <li class="pb-2"><a target="_blank" class="footerLinks"
+                                    href="https://www.linkedin.com/in/sanjay-kumar-konakandla/">Sanjay Kumar
+                                    Konakandla</a></li>
+                            <li class="pb-2"><a target="_blank" class="footerLinks"
+                                    href="https://www.linkedin.com/in/durga-prasad-akurathi/">Akurathi Durga Prasad</a>
+                            </li>
+                            <li class="pb-2"><a target="_blank" class="footerLinks"
+                                    href="https://www.linkedin.com/in/satwik-ch-5890bb152/">Satwik Chandaluri</a></li>
+                        </ul>
+                    </div>
+                    <!--Other end-->
+                </div>
+
+            </div>
+        </section>
+    </footer>
+    <!-- Footer ends -->
+
+    <!-- Bootstrap JS CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <!-- JQuery Link  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- LoaderJs file Link  -->
+    <script src="/loaderAnimation.js"></script>
+
+    <!-- My JavaScript file -->
+    <script src="/marketIntro.js"></script>
+</body>
+
+</html>

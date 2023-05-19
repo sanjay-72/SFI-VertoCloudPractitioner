@@ -229,7 +229,23 @@ app.get("/userRegister", function (req, res) {
 });
 
 app.get("/market", isLoggedIn, function (req, res) {
-    res.sendFile(__dirname + "/marketIntro.html")
+    async function getCheapCosts() {
+        let data = await NewProduct.aggregate([
+            {
+                $group: {
+                    _id: "$ProductName",
+                    minPrice: { $min: '$cost' }
+                }
+            }
+        ]).sort({ _id: 1 });
+        const myData = data.reduce((acc, item) => {
+            acc[item._id] = item.minPrice;
+            return acc;
+        }, {});
+        // console.log(myData.Apple);
+        res.render("marketIntro", { bestDeals: myData });
+    }
+    getCheapCosts();
 });
 
 app.get("/market/:productName", isLoggedIn, function (req, res) {
