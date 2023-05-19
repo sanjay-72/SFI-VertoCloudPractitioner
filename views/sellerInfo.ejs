@@ -24,9 +24,16 @@
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 
     <style>
+        h4{
+            color: rgb(0, 150, 50);
+        }
         .details {
             text-align: left;
             padding-right: 6px;
+            color: rgb(0, 143, 143);
+        }
+        .Values{
+            color: rgb(70, 70, 70);
         }
     </style>
     <!-- My CSS link -->
@@ -64,11 +71,11 @@
         </div>
     </div>
     <!-- Nav Bar End  -->
-    <div style="margin: 15px;">
-        <p>These are the details of the seller you searched for:</p>
+    <div style="margin: 36px; text-align: center;">
+        <h4 style="margin-bottom: 20px;">These are the details of the seller for the product you selected</h4>
 
-        <div>
-            <table>
+        <div style="margin-left: auto; margin-right: auto; width: 80%; text-align: left;">
+            <table style="margin-left: auto; margin-right: auto;">
                 <tr>
                     <td class="details">
                         <h6>Product Name </h6>
@@ -77,7 +84,7 @@
                         <h6>:</h6>
                     </td>
                     <td>
-                        <h6>
+                        <h6 class="Values">
                             <%= sellerData.ProductName %>
                         </h6>
                     </td>
@@ -90,7 +97,7 @@
                         <h6>:</h6>
                     </td>
                     <td>
-                        <h6>
+                        <h6 class="Values">
                             <%= sellerData.Description %>
                         </h6>
                     </td>
@@ -103,7 +110,7 @@
                         <h6>:</h6>
                     </td>
                     <td>
-                        <h6>
+                        <h6 class="Values">
                             ₹ <%= sellerData.cost %>/-
                         </h6>
                     </td>
@@ -116,7 +123,7 @@
                         <h6>:</h6>
                     </td>
                     <td>
-                        <h6>
+                        <h6 class="Values">
                             <%= sellerData.SellerName %>
                         </h6>
                     </td>
@@ -129,7 +136,7 @@
                         <h6>:</h6>
                     </td>
                     <td>
-                        <h6>
+                        <h6 class="Values">
                             <%= sellerData.SellerAddress %>
                         </h6>
                     </td>
@@ -142,7 +149,7 @@
                         <h6>:</h6>
                     </td>
                     <td>
-                        <h6>
+                        <h6 class="Values">
                             <%= sellerData.Mobile %>
                         </h6>
                     </td>
