@@ -12,6 +12,7 @@ const { Console } = require('console');
 const { verify } = require('crypto');
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
 const nodemailer = require("nodemailer");
+const needle = require('needle');
 const app = express();
 
 //middleware
@@ -324,10 +325,6 @@ app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, r
 
 app.get("/messageRoute", function (req, res) {
     res.render("message", { redirectTo: "/market", myMessage: req.query.Message });
-});
-
-app.get("/i-Smart", isLoggedIn, function (req, res) {
-    res.render("i-smart", { name: req.user.userName });
 });
 
 app.get("/IOT", isLoggedIn, function (req, res) {
@@ -646,6 +643,14 @@ app.get(`/admin/${adminPassKeyHash}/BlockedUsers`, isLoggedIn, function (req, re
     }
     sendBlockedUsers();
 });
+
+app.get("/i-Smart", isLoggedIn, function (req, res) {
+    res.render("i-smart", { name: req.user.userName });
+});
+
+app.get("/weatherData", isLoggedIn, function (req, res) {
+    res.render("weatherForm", {});
+});
 //Get routes end
 
 //Post routes start
@@ -927,6 +932,18 @@ app.post(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, function (req, re
     }
 
     unBlockGivenUser();
+});
+
+app.post("/weatherData", isLoggedIn, function (req, res) {
+    needle.get(`api.openweathermap.org/data/2.5/weather?q=${req.body.city}&units=metric&APPID=${process.env.WEATHER_API_KEY}`, function (error, response) {
+        if (!error && response.statusCode == 200) {
+            // console.log(response.body);
+            res.render("weatherStatus", { name: req.user.userName, myWeatherData: response.body });
+        }
+        else
+            res.render("message", { redirectTo: `/i-smart`, myMessage: "Sorry, City not found." });
+    });
+    // console.log(req.body.city);
 });
 //Post routes end
 
