@@ -651,6 +651,10 @@ app.get("/i-Smart", isLoggedIn, function (req, res) {
 app.get("/weatherData", isLoggedIn, function (req, res) {
     res.render("weatherForm", {});
 });
+
+app.get("/seeComponents", isLoggedIn, function (req, res) {
+    res.render("iotComponents", { name: req.user.userName });
+});
 //Get routes end
 
 //Post routes start
