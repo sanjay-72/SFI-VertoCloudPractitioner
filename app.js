@@ -414,6 +414,11 @@ app.get("/success", isLoggedIn, function (req, res) {
                                 <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
                             </td>
                         </tr>
+                        <tr style="text-align: center;">
+                            <td>
+                                <img style="height: 50px;margin-top:30px;" src="https://s11.gifyu.com/images/croppedTitle.gif">
+                            </td>
+                        </tr>
                         <tr>
                             <td style="padding: 20px; text-align: center; font-size: 24px; font-weight: bold; color: #015f11;">
                                 You received an order for your product.</td>
@@ -561,6 +566,11 @@ app.get("/admin/:passKeyHash", isLoggedIn, function (req, res) {
                         <div style="display: flex; justify-content: center;">
                             <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%"
                                 cellpadding="0" cellspacing="0">
+                                <tr style="text-align: center;">
+                                    <td>
+                                        <img style="height: 60px; border-radius: 12px; margin-top: 4px;" src="https://s12.gifyu.com/images/croppedAlert.gif">
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td style="background-color: #00ff08; text-align: center;">
                                         <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
@@ -893,6 +903,11 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
                                 <tr>
                                     <td style="background-color: #00a033; text-align: center;">
                                         <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                                    </td>
+                                </tr>
+                                <tr style="text-align: center;">
+                                    <td>
+                                        <img style="height: 50px;margin-top:30px;" src="https://s11.gifyu.com/images/croppedTitle.gif">
                                     </td>
                                 </tr>
                                 <tr>
