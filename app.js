@@ -104,6 +104,16 @@ const PaymentSchema = new mongoose.Schema({
 });
 const Payment = mongoose.model("Payment", PaymentSchema);
 
+const costOfComponentSchema = new mongoose.Schema({
+    esp32: Number,
+    esp8266: Number,
+    moisture: Number,
+    temperature: Number,
+    solar: Number,
+    jumpers: Number
+});
+const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema);
+
 // Structures for adding new elements as per their Schemas
 
 // var newEntry = new NewProduct({
@@ -137,6 +147,16 @@ const Payment = mongoose.model("Payment", PaymentSchema);
 //     Quantity: 5
 // });
 // SampleTransaction.save();
+
+// var costEntry = new costOfComponent({
+//     esp32: 450,
+//     esp8266: 320,
+//     moisture: 90,
+//     temperature: 70,
+//     solar: 210,
+//     jumpers: 2
+// });
+// costEntry.save();
 
 // Updating Ids with the last ID's so that Id's will not get repeated even if the server is restarted.
 async function updateIds() {
