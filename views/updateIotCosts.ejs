@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <title>Admin portal.</title>
+    <title>Update IOT costs 🍒Fruitful🍊.</title>
 
     <!-- Favicon Link  -->
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
@@ -138,15 +138,15 @@
             border: 1px solid rgb(0, 255, 0);
         }
 
-        .input-wrapper input::-webkit-outer-spin-button,
+        /* .input-wrapper input::-webkit-outer-spin-button,
         ::-webkit-inner-spin-button {
             display: none;
-        }
+        } */
 
-        .myButton {
-            margin-top: 15px;
+        #SubmitButton {
+            margin-top: 60px;
             font-size: 200%;
-            width: 300px;
+
         }
 
 
@@ -163,33 +163,47 @@
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
     <!-- Box for inputs start -->
-    <div id="container" style="padding-bottom: 65px;">
-        <h1 style="margin-bottom: 45px;"><strong>🍒Fruitful🍊</strong></h1>
-        <h1><strong>Welcome Admin,</strong></h1>
-        <a href="/admin/<%= passKeyHash %>/SeeUserData">
-            <button class="btn btn-outline-success myButton"><strong>All users details</strong></button>
-        </a>
-        <br>
-        <a href="/admin/<%= passKeyHash %>/LinkIOT">
-            <button class="btn btn-outline-success myButton"><strong>Link IOT device</strong></button>
-        </a>
-        <br>
-        <a href="/admin/<%= passKeyHash %>/updateIotCosts">
-            <button class="btn btn-outline-success myButton"><strong>Update IOT costs</strong></button>
-        </a>
-        <br>
-        <a href="/admin/<%= passKeyHash %>/UnBlockUser">
-            <button class="btn btn-outline-warning myButton"><strong>Unblock Users</strong></button>
-        </a>
-        <br>
-        <a href="/admin/<%= passKeyHash %>/BlockedUsers">
-            <button class="btn btn-outline-secondary myButton"><strong>Blocked Users</strong></button>
-        </a>
-        <br>
-        <a href="/admin/<%= passKeyHash %>/BlockUser">
-            <button class="btn btn-outline-danger myButton"><strong>Block Users</strong></button>
-        </a>
-        <br>
+    <div id="container">
+
+        <form action="/admin/<%= passKeyHash %>/updateIotCosts" method="post">
+            <h1>Update IOT costs</h1>
+            <div class="input-wrapper">
+                <label for="esp32">ESP32 : </label><br>
+                <input name="esp32" type="number" value="<%=oldData.esp32 %>" required spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="esp8266">ESP8266 : </label><br>
+                <input name="esp8266" type="number" value="<%=oldData.esp8266 %>" required spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="moisture">Moisture sensor : </label><br>
+                <input name="moisture" type="number" value="<%=oldData.moisture %>" required spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="temperature">Temperature sensor : </label><br>
+                <input name="temperature" type="number" value="<%=oldData.temperature %>" required spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="solar">Solar Cell : </label><br>
+                <input name="solar" type="number" value="<%=oldData.solar %>" required spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="jumpers">Jumpers : </label><br>
+                <input name="jumpers" type="number" value="<%=oldData.jumpers %>" required spellcheck="false"
+                    autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="serviceCharge">Service Charge (Regular) : </label><br>
+                <input name="serviceCharge" type="number" value="<%=oldData.serviceCharge %>" required
+                    spellcheck="false" autocomplete="off">
+            </div>
+            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Update</strong></button>
+        </form>
 
         <!-- Box for inputs end -->
     </div>
@@ -202,9 +216,7 @@
 
     <!-- LoaderJs file Link  -->
     <script src="/loaderAnimation.js"></script>
-    <script>
-        document.getElementById("mobileField").innerHTML = parseInt(document.getElementById("mobileField").placeholder);
-    </script>
+
 </body>
 
 </html>

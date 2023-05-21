@@ -13,6 +13,7 @@ const { verify } = require('crypto');
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
 const nodemailer = require("nodemailer");
 const needle = require('needle');
+const { get } = require('http');
 const app = express();
 
 //middleware
@@ -650,6 +651,15 @@ app.get(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
     res.render("linkIOT", { passKeyHash: adminPassKeyHash });
 });
 
+app.get(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, function (req, res) {
+    async function getOldData() {
+        let data = await costOfComponent.findOne({});
+        // console.log(data);
+        res.render("updateIotCosts", { passKeyHash: adminPassKeyHash, oldData: data });
+    }
+    getOldData();
+});
+
 app.get(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, function (req, res) {
     res.render("blockUnBlockUser", { work: "Un Block", nextRoute: "UnBlockUser", passKeyHash: adminPassKeyHash });
 });
@@ -926,6 +936,25 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
         }
     }
     linkExecuter();
+});
+
+app.post(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, function (req, res) {
+    async function updateCosts() {
+        await costOfComponent.deleteMany({});
+        var costEntry = new costOfComponent({
+            esp32: req.body.esp32,
+            esp8266: req.body.esp8266,
+            moisture: req.body.moisture,
+            temperature: req.body.temperature,
+            solar: req.body.solar,
+            jumpers: req.body.jumpers,
+            serviceCharge: req.body.serviceCharge
+        });
+        costEntry.save();
+        // console.log(req.body);
+        res.render("message", { redirectTo: `/admin/${adminPassKeyHash}/`, myMessage: "IOT components prices updated successfully." });
+    }
+    updateCosts();
 });
 
 app.post(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, function (req, res) {
