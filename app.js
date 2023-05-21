@@ -110,7 +110,8 @@ const costOfComponentSchema = new mongoose.Schema({
     moisture: Number,
     temperature: Number,
     solar: Number,
-    jumpers: Number
+    jumpers: Number,
+    serviceCharge: Number
 });
 const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema);
 
@@ -154,7 +155,8 @@ const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema)
 //     moisture: 90,
 //     temperature: 70,
 //     solar: 210,
-//     jumpers: 2
+//     jumpers: 2,
+//     serviceCharge: 200
 // });
 // costEntry.save();
 
@@ -674,6 +676,19 @@ app.get("/weatherData", isLoggedIn, function (req, res) {
 
 app.get("/seeComponents", isLoggedIn, function (req, res) {
     res.render("iotComponents", { name: req.user.userName });
+});
+
+app.get("/caluclatePrice", isLoggedIn, function (req, res) {
+    async function getServicePrices() {
+        let data = await costOfComponent.findOne({});
+        // console.log(data);
+        res.render("iotCostCaluclator", {
+            name: req.user.userName,
+            costList: data
+        });
+    }
+    getServicePrices();
+
 });
 //Get routes end
 

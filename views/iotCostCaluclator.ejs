@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- font awesome fonts  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- Bootstrap JS CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <!-- Favicon Link  -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <style>
+        h4 {
+            color: rgb(91, 91, 91);
+        }
+
+        .myButtonContainer {
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .myBtns {
+            width: 350px;
+            font-size: 1.6rem;
+        }
+
+        @media screen and (max-width:640px) {
+            .myBtns {
+                width: 80%;
+            }
+        }
+    </style>
+    <!-- My CSS link -->
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Loader CSS link -->
+    <link rel="stylesheet" href="/loaderStyle.css">
+
+    <title>🍒Fruitful🍊</title>
+</head>
+
+<body style="overflow-y: hidden; text-align: left;">
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div class="MyNavDiv" id="MyNavTitle">
+        <h2 style="margin: 0;">Fruit<span>Ful</span></h2>
+        <div style="background-color: rgb(44, 185, 44);">
+            <h3 style="margin:0">Welcome dear <span style="color: rgb(168, 255, 165);"> <strong>
+                        <%=name%>
+                    </strong>
+                </span>
+            </h3>
+        </div>
+    </div>
+    <!-- Nav Bar start -->
+    <div class="MyNavDiv" id="NavBar">
+        <div class="container">
+            <a href="/"><button>Home</button></a>
+            <a href="/i-Smart"><button style="background-color: green;color: white;">i-Smart</button></a>
+            <a href="/market"><button>Sell/Buy</button></a>
+            <a href="/newProduct"><button>Sell Online</button></a>
+            <a href="/myProducts"><button>My Products</button></a>
+
+        </div>
+    </div>
+    <!-- Nav Bar End  -->
+    <div style="margin: 36px; text-align: center;">
+        <h4 style="margin-bottom: 36px;">Approximate cost estimator for our IOT services.</h4>
+
+        <div class="myButtonContainer container">
+
+            <label for="ServiceType">Select Service Type : </label>
+            <select name="ServiceType" onchange=updateCost() id="serviceType">
+                <option value="Regular">Regular</option>
+                <option value="Premium">Premium</option>
+            </select>
+            <br>
+            <label for="BoardType">Choose your board : </label>
+            <select name="BoardType" onchange=updateCost() id="BoardType">
+                <option value="ESP8266">ESP8266</option>
+                <option value="ESP32">ESP32</option>
+            </select>
+            <br>
+            <label for="SoilMoistureSensors">Soil Moisture Sensors : </label>
+            <input type="number" step="1" min="1" max="12" value="1" onchange="updateCost()" id="moisture">
+            <br>
+            <label for="TemperatureSensors">Temperature Sensors : </label>
+            <input type="number" step="1" min="1" max="12" value="1" onchange="updateCost()" id="temperature">
+            <br>
+            <label for="SolarFacility">Solar Facility : </label>
+            <select name="SolarFacility" onchange=updateCost() id="SolarFacility">
+                <option value="NotRequired">Not Required</option>
+                <option value="Required">Required</option>
+            </select>
+            <br>
+            <label for="EstimatedCost">Estimated Cost : </label>
+            <h2 style="display: inline-block;" id="FinalCost">₹(Final)/-</h2>
+        </div>
+    </div>
+    <div style="display: none;">
+        <input type="number" value="<%= costList.esp8266 %>" id="esp8266Cost">
+        <input type="number" value="<%= costList.esp32 %>" id="esp32Cost">
+        <input type="number" value="<%= costList.moisture %>" id="moistureCost">
+        <input type="number" value="<%= costList.temperature %>" id="temperatureCost">
+        <input type="number" value="<%= costList.solar %>" id="solarCost">
+        <input type="number" value="<%= costList.jumpers %>" id="jumpersCost">
+        <input type="number" value="<%= costList.serviceCharge %>" id="serviceCost">
+    </div>
+    <!-- Vanilla tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
+        integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JQuery Link  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- LoaderJs file Link  -->
+    <script src="/loaderAnimation.js"></script>
+
+    <!-- JavaScript link -->
+    <script src="/sellerInfo.js"></script>
+
+    <script>
+        var esp8266Cost = parseInt(document.getElementById("esp8266Cost").value);
+        var esp32Cost = parseInt(document.getElementById("esp32Cost").value);
+        var moistureCost = parseInt(document.getElementById("moistureCost").value);
+        var temperatureCost = parseInt(document.getElementById("temperatureCost").value);
+        var solarCost = parseInt(document.getElementById("solarCost").value);
+        var jumpersCost = parseInt(document.getElementById("jumpersCost").value);
+        var serviceCost = parseInt(document.getElementById("serviceCost").value);
+
+        function updateCost() {
+            var caluclatedCost = 0;
+            var serviceType = document.getElementById("serviceType").value;
+            var BoardType = document.getElementById("BoardType").value;
+            var moisture = parseInt(document.getElementById("moisture").value);
+            var temperature = parseInt(document.getElementById("temperature").value);
+            var solar = document.getElementById("SolarFacility").value;
+            const FinalCost = document.getElementById("FinalCost");
+
+            if (serviceType == "Regular")
+                caluclatedCost += serviceCost;
+            else if (serviceType == "Premium")
+                caluclatedCost += (serviceCost * 2);
+
+            if (BoardType == "ESP8266")
+                caluclatedCost += esp8266Cost;
+            else if (BoardType == "ESP32")
+                caluclatedCost += esp32Cost;
+
+            if (solar == "Required")
+                caluclatedCost += solarCost;
+
+            caluclatedCost += moisture * moistureCost;
+            caluclatedCost += temperature * temperatureCost;
+            caluclatedCost += ((jumpersCost * moisture * 4) + (jumpersCost * temperature * 4) + (jumpersCost * 4));
+            caluclatedCost = Math.ceil(caluclatedCost / 10) * 10;
+            FinalCost.innerText = `₹ ${caluclatedCost} /-`;
+        }
+
+        updateCost();
+    </script>
+</body>
+
+</html>
