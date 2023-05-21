@@ -28,21 +28,92 @@
             color: rgb(91, 91, 91);
         }
 
-        .myButtonContainer {
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
+        h2 {
+            color: rgb(0, 105, 10);
+        }
+
+        .mainDiv {
+            margin: 36px;
             text-align: center;
         }
 
-        .myBtns {
-            width: 350px;
-            font-size: 1.6rem;
+        .myButtonContainer {
+            margin-left: auto;
+            margin-right: auto;
+            width: 360px;
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 15px;
+            padding: 16px;
+            padding-top: 26px;
+            background: linear-gradient(to bottom right, rgba(0, 255, 0, 0.8), rgba(255, 247, 0, 0.8));
         }
 
-        @media screen and (max-width:640px) {
-            .myBtns {
-                width: 80%;
+        #FinalCost {
+            display: inline-block;
+            margin-top: 36px;
+        }
+
+        label {
+            font-size: 125%;
+            color: green;
+        }
+
+        input,
+        select,
+        option {
+            width: 200px;
+            margin-bottom: 6px;
+            text-align: center;
+            font-size: 125%;
+            color: green;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid gray;
+            border-radius: 6px;
+        }
+
+        input:focus,
+        select:focus {
+            border-bottom: 2px rgb(0, 200, 0) solid;
+        }
+
+        input:active,
+        select:active{
+            border-bottom: 2px rgb(0, 150, 0) solid;
+        }
+
+        @media screen and (max-width:700px) {
+            .myButtonContainer {
+                width: 60%;
+            }
+        }
+
+        @media screen and (max-width:540px) {
+            label {
+                font-size: 100%;
+            }
+
+            input,
+            select,
+            option {
+                font-size: 100%;
+            }
+
+            h4 {
+                font-size: 100%;
+            }
+        }
+
+        @media screen and (max-width:465px) {
+            .mainDiv {
+                margin: 0;
+            }
+
+            input,
+            select,
+            option {
+                width: 100%;
             }
         }
     </style>
@@ -81,37 +152,42 @@
         </div>
     </div>
     <!-- Nav Bar End  -->
-    <div style="margin: 36px; text-align: center;">
+    <div class="mainDiv">
         <h4 style="margin-bottom: 36px;">Approximate cost estimator for our IOT services.</h4>
 
         <div class="myButtonContainer container">
 
             <label for="ServiceType">Select Service Type : </label>
+            <br>
             <select name="ServiceType" onchange=updateCost() id="serviceType">
                 <option value="Regular">Regular</option>
                 <option value="Premium">Premium</option>
             </select>
             <br>
             <label for="BoardType">Choose your board : </label>
+            <br>
             <select name="BoardType" onchange=updateCost() id="BoardType">
                 <option value="ESP8266">ESP8266</option>
                 <option value="ESP32">ESP32</option>
             </select>
             <br>
             <label for="SoilMoistureSensors">Soil Moisture Sensors : </label>
+            <br>
             <input type="number" step="1" min="1" max="12" value="1" onchange="updateCost()" id="moisture">
             <br>
             <label for="TemperatureSensors">Temperature Sensors : </label>
+            <br>
             <input type="number" step="1" min="1" max="12" value="1" onchange="updateCost()" id="temperature">
             <br>
             <label for="SolarFacility">Solar Facility : </label>
+            <br>
             <select name="SolarFacility" onchange=updateCost() id="SolarFacility">
                 <option value="NotRequired">Not Required</option>
                 <option value="Required">Required</option>
             </select>
             <br>
             <label for="EstimatedCost">Estimated Cost : </label>
-            <h2 style="display: inline-block;" id="FinalCost">₹(Final)/-</h2>
+            <h2 id="FinalCost">₹(Final)/-</h2>
         </div>
     </div>
     <div style="display: none;">
