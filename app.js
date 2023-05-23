@@ -226,6 +226,12 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login');
 }
 
+//Checking whether the user is Admin or Not
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.usersId == process.env.ADMIN_ID) return next();
+    res.redirect('/market');
+}
+
 // Checking whether the user is logged out or not
 function isLoggedOut(req, res, next) {
     if (!req.isAuthenticated()) return next();
@@ -649,7 +655,7 @@ app.get("/admin/:passKeyHash", isLoggedIn, function (req, res) {
     }
 });
 
-app.get(`/admin/${adminPassKeyHash}/SeeUserData`, isLoggedIn, function (req, res) {
+app.get(`/admin/${adminPassKeyHash}/SeeUserData`, isLoggedIn, isAdmin, function (req, res) {
     async function sendAllUsers() {
         let data = await User.find({});
         res.render("allUserData", { type: "All our users", userData: data });
@@ -657,11 +663,11 @@ app.get(`/admin/${adminPassKeyHash}/SeeUserData`, isLoggedIn, function (req, res
     sendAllUsers();
 });
 
-app.get(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
+app.get(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, isAdmin, function (req, res) {
     res.render("linkIOT", { passKeyHash: adminPassKeyHash });
 });
 
-app.get(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, function (req, res) {
+app.get(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, isAdmin, function (req, res) {
     async function getOldData() {
         let data = await costOfComponent.findOne({});
         // console.log(data);
@@ -670,15 +676,15 @@ app.get(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, function (req, 
     getOldData();
 });
 
-app.get(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, function (req, res) {
+app.get(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, isAdmin, function (req, res) {
     res.render("blockUnBlockUser", { work: "Un Block", nextRoute: "UnBlockUser", passKeyHash: adminPassKeyHash });
 });
 
-app.get(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, function (req, res) {
+app.get(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, isAdmin, function (req, res) {
     res.render("blockUnBlockUser", { work: "Block", nextRoute: "BlockUser", passKeyHash: adminPassKeyHash });
 });
 
-app.get(`/admin/${adminPassKeyHash}/BlockedUsers`, isLoggedIn, function (req, res) {
+app.get(`/admin/${adminPassKeyHash}/BlockedUsers`, isLoggedIn, isAdmin, function (req, res) {
     async function sendBlockedUsers() {
         let data = await User.find({ status: "Blocked" });
         res.render("allUserData", { type: "Blocked Users", userData: data });
@@ -879,7 +885,7 @@ app.post("/ordersReceived", isLoggedIn, function (req, res) {
     updateReceivedOrders();
 });
 
-app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
+app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, isAdmin, function (req, res) {
     // console.log(req.body);
     async function linkExecuter() {
         let presence = await User.exists({ usersId: req.body.userId });
@@ -953,7 +959,7 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, function (req, res) {
     linkExecuter();
 });
 
-app.post(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, function (req, res) {
+app.post(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, isAdmin, function (req, res) {
     async function updateCosts() {
         await costOfComponent.deleteMany({});
         var costEntry = new costOfComponent({
@@ -972,7 +978,7 @@ app.post(`/admin/${adminPassKeyHash}/updateIotCosts`, isLoggedIn, function (req,
     updateCosts();
 });
 
-app.post(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, function (req, res) {
+app.post(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, isAdmin, function (req, res) {
     // console.log(req.body.userId);
     async function blockGivenUser() {
         let existance = await User.exists({ usersId: req.body.userId });
@@ -996,7 +1002,7 @@ app.post(`/admin/${adminPassKeyHash}/BlockUser`, isLoggedIn, function (req, res)
     blockGivenUser();
 });
 
-app.post(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, function (req, res) {
+app.post(`/admin/${adminPassKeyHash}/UnBlockUser`, isLoggedIn, isAdmin, function (req, res) {
     // console.log(req.body.userId);
     async function unBlockGivenUser() {
         let existance = await User.exists({ usersId: req.body.userId });
