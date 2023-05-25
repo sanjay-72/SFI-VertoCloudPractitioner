@@ -28,7 +28,7 @@
             color: rgb(91, 91, 91);
         }
 
-        h2 {
+        h3 {
             color: rgb(0, 105, 10);
         }
 
@@ -51,7 +51,8 @@
 
         #FinalCost {
             display: inline-block;
-            margin-top: 36px;
+            margin-top: 16px;
+            margin-bottom: 16px;
         }
 
         label {
@@ -153,7 +154,7 @@
     </div>
     <!-- Nav Bar End  -->
     <div class="mainDiv">
-        <h4 style="margin-bottom: 36px;">Approximate cost estimator for our IOT services.</h4>
+        <h4 style="margin-bottom: 36px; margin-top: -20px;">Approximate cost estimator for our IOT services.</h4>
 
         <div class="myButtonContainer container">
 
@@ -187,7 +188,11 @@
             </select>
             <br>
             <label for="EstimatedCost">Estimated Cost : </label>
-            <h2 id="FinalCost">₹(Final)/-</h2>
+            <h3 id="FinalCost">₹(Final)/-</h3>
+            <form action="/checkout-for-iot" method="post">
+                <input type="number" name="cost" id="cost" style="display: none;">
+                <button class="btn btn-outline-success">Order Now</button>
+            </form>
         </div>
     </div>
     <div style="display: none;">
@@ -230,6 +235,7 @@
             var temperature = parseInt(document.getElementById("temperature").value);
             var solar = document.getElementById("SolarFacility").value;
             const FinalCost = document.getElementById("FinalCost");
+            const cost = document.getElementById("cost");
 
             if (serviceType == "Regular")
                 caluclatedCost += serviceCost;
@@ -249,6 +255,7 @@
             caluclatedCost += ((jumpersCost * moisture * 4) + (jumpersCost * temperature * 4) + (jumpersCost * 4));
             caluclatedCost = Math.ceil(caluclatedCost / 10) * 10;
             FinalCost.innerText = `₹ ${caluclatedCost} /-`;
+            cost.value = caluclatedCost;
         }
 
         updateCost();

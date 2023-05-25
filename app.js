@@ -500,15 +500,201 @@ app.get("/success", isLoggedIn, function (req, res) {
         });
         // console.log(info.messageId);
     }
+    async function notifyUser() {
+        mySellerData = await NewProduct.findOne({ ProductId: req.query.Pid });
+        let info = await transporter.sendMail({
+            from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+            to: req.user.emailId,
+            subject: `✅ Your order for Product ${mySellerData.ProductName} is successful`,
+            html: `<div style="display: flex; justify-content: center;">
+                    <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%" cellpadding="0"
+                        cellspacing="0">
+                        <tr>
+                            <td style="background-color: #00a033; text-align: center;">
+                                <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                            </td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>
+                                <img style="height: 50px;margin-top:30px;" src="https://s11.gifyu.com/images/croppedTitle.gif" draggable="false">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; text-align: center; font-size: 24px; font-weight: bold; color: #015f11;">
+                                Thanks for ordering ${mySellerData.ProductName}.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px;padding-top: 0; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                <h4>Hello dear ${req.user.userName},</h4>
+                                <p>Greetings of the day,
+                                    <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We have received your order for ${mySellerData.ProductName}. Payment for the same is successful. 
+                                    You will get the delivery details by the seller soon.
+                                    <br>
+                                    <br>
+                                    With Regards,<br>
+                                    Fruitful.
+                                </p>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                &copy; 2023 FruitFul Technologies. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                `,
+        });
+        // console.log(info.messageId);
+    }
     reduceStock();
     insertPayment();
     notifySeller();
+    notifyUser();
 
     res.render("message", { redirectTo: "/market", myMessage: "Your payment is successful." });
 });
 
 app.get("/cancel", isLoggedIn, function (req, res) {
     res.render("message", { redirectTo: "/market", myMessage: "Your payment is cancelled." });
+});
+
+app.get("/success-iot", isLoggedIn, function (req, res) {
+    async function notifyAdmin() {
+        let info = await transporter.sendMail({
+            from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+            to: process.env.EMAIL_ID,
+            subject: `${req.user.userName} is requesting for IOT kit.`,
+            html: `<div style="display: flex; justify-content: center;">
+                    <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%" cellpadding="0"
+                        cellspacing="0">
+                        <tr>
+                            <td style="background-color: #00a033; text-align: center;">
+                                <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                            </td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>
+                                <img style="height: 50px;margin-top:30px;" src="https://s11.gifyu.com/images/croppedTitle.gif" draggable="false">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; text-align: center; font-size: 24px; font-weight: bold; color: #015f11;">
+                                IOT kit request has been generated.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px;padding-top: 0; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                <h4>Hello dear admin,</h4>
+                                <p>Greetings of the day,
+                                    <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We received an order from ${req.user.userName} for
+                                    IOT kit for his farm. He has paid an amount of total ₹${req.query.amount}/-. Please contact the customer and
+                                    follow up the procedure as quickly as possible. Below are the details of the payment for your reference.
+                                    <br>Payment for the same has been successfully processed.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px;padding-top: 0; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                Here are the details for the order.
+                                <table style="margin: 10px; margin-left: 20px;">
+                                    <tr>
+                                        <td>
+                                            Customer Name
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.userName}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Customer Mobile.no
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.mobileNo}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Amount paid
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ₹${req.query.amount}/-
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                &copy; 2023 FruitFul Technologies. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                `,
+        });
+        // console.log(info.messageId);
+    }
+    async function notifyUser() {
+        let info = await transporter.sendMail({
+            from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+            to: req.user.emailId,
+            subject: `✅Your request for IOT kit is successful.`,
+            html: `<div style="display: flex; justify-content: center;">
+                    <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%" cellpadding="0"
+                        cellspacing="0">
+                        <tr>
+                            <td style="background-color: #00a033; text-align: center;">
+                                <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                            </td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>
+                                <img style="height: 50px;margin-top:30px;" src="https://s11.gifyu.com/images/croppedTitle.gif" draggable="false">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; text-align: center; font-size: 24px; font-weight: bold; color: #015f11;">
+                                Thanks for your IOT-kit order.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px;padding-top: 0; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                <h4>Hello dear ${req.user.userName},</h4>
+                                <p>Greetings of the day,
+                                    <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We have received your order for
+                                    IOT kit. Payment for ₹${req.query.amount}/- is successful. Our execution team will contact you soon.
+                                    <br>
+                                    <br>
+                                    With Regards,<br>
+                                    Fruitful.
+                                </p>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                &copy; 2023 FruitFul Technologies. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                `,
+        });
+        // console.log(info.messageId);
+    }
+    notifyAdmin();
+    notifyUser();
+    res.render("message", { redirectTo: "/market", myMessage: "Your payment is successful and our admin will contact you soon." });
 });
 
 app.get("/ordersReceived", isLoggedIn, function (req, res) {
@@ -1033,6 +1219,36 @@ app.post("/weatherData", isLoggedIn, function (req, res) {
             res.render("message", { redirectTo: `/i-smart`, myMessage: "Sorry, City not found." });
     });
     // console.log(req.body.city);
+});
+
+
+app.post("/checkout-for-iot", isLoggedIn, async (req, res) => {
+    async function startPayment() {
+        try {
+            let amount = parseInt(req.body.cost);
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ["card"],
+                mode: "payment",
+                line_items: [{
+                    price_data: {
+                        currency: "inr",
+                        product_data: {
+                            name: "IOT kit for Agriculture",
+                        },
+                        unit_amount: amount * 100,
+                    },
+                    quantity: 1,
+                }],
+                success_url: `${process.env.SERVER_URL}/success-iot?amount=${amount}`,
+                cancel_url: `${process.env.SERVER_URL}/cancel`,
+            })
+            // console.log(session);
+            res.redirect(session.url);
+        } catch (e) {
+            res.status(500).json({ error: e.message })
+        }
+    }
+    startPayment();
 });
 //Post routes end
 
