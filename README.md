@@ -2,7 +2,7 @@
 # <p align="right">🚀<a  target = "_blank" href = "https://fruitful.social/">Visit now</a></p> FruitFul
 
 ### All in one solution for Indian Agriculture industry - 2023
-This is solution developed by our team Verto Cloud Practitioners in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google Cloud Platform and AMD. We kept on updating the app for all the rounds. We won the Instutional Round in April '23, the Regional Round(North-India) in May '23 and looking for our place in National Round in June '23.
+This is the solution developed by our team Verto Cloud Practitioners in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google Cloud Platform and AMD. We kept on updating the app for all the rounds. We won the Instutional Round in April '23, the Regional Round(North-India) in May '23 and looking for our place in National Round in June '23.
 
 
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
@@ -20,11 +20,41 @@ In addition to this, there is no unified IOT platform for the farmers to monitor
 
 We are presenting FruitFul, a MERN-based full-stack web application which acts as a platform that connects farmers, traders, and common people. In addition to this, we also have customized IOT features for registered farmers to help them monitor their farm to increase the yielding by following the best practices.
 
-This application is not a biased solution to a particular problem in agro tech. This is made to solve most of the problems that can be solved in one go. So that 
+This application is not a biased solution to a particular problem in agro tech. This is made to solve most of the problems which can be solved in one go. So that 
 farmers can find this helpful because they can do many things in one app like they can see the market status, and sell their products and even IOT is embedded 
-in it making this an all-rounder solution for many of the problems that are faced by many people right now in agro tech.
+in it is making this an all-rounder solution for many of the problems that are faced by many people right now in agro tech.
 
-### Technologies, frameworks and libraries used
+# High level Architecture (Market)
+![Market Architecture](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/e19a2fcb-37a0-47ec-a92d-a986c4704044)
+
+# High level Architecture (i-Smart)
+![i-Smart Architecture](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/8a4fb38f-3e9f-4691-b626-ea4964ce5c42)
+
+# Features
+1. Secured HTTPS protocal is used with domain name.
+2. OTP verification for new users.
+3. IOT integration in i-Smart portal.
+4. Live weather data.
+5. Farmers can create accounts and sell their products directly.
+6. They can remove and update their list of products.
+7. Payment gateway integration.
+8. Stylish email delivery system for implemented for market and iot.
+9. Secret and highly secured admin portal (Not accessible to normal users).
+10. IOT caluclator for cost estimation and direct request.
+
+# Network Model
+![Network Model](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/8d006a90-e185-462c-8f53-39c8be423df8)
+
+# User Authentication
+![User Authentication](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/b3883978-0eba-47ca-95ab-c796f176ecdb)
+
+# Accessing secret admin portal
+![Accessing admin portal](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/5c9c5f78-9517-48e7-b31f-3d99b5c94c35)
+
+# Admin Privileges
+![Admin Privileges](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/7a3d006a-5cd6-4dbf-bcd5-a2a3c9681a35)
+
+# Technologies, frameworks and libraries used
 1. NodeJS - for creating server-side web application.
 2. ExpressJS - it is a framework of NodeJS used for running the application.
 3. MongoDB - as a data storage.
@@ -35,41 +65,18 @@ in it making this an all-rounder solution for many of the problems that are face
 8. CSS - for styling the html content.
 9. ThingSpeak - Used as IOT tool for collecting data for monitoring the farm.
 
-
-# High level Architecture
-
-![FruitFul High level Architecture](https://user-images.githubusercontent.com/94420508/229657895-0a7a6111-f802-4668-9a53-e20b041eaf94.jpeg)
-
-1. Firstly, any user can access the home page without logging in but, when they need to access market page or IOT page then they must login.
-2. Any user can firstly register in the FruitFul and then can login.
-3. There are simple validation techniques used for email, age and password to maintain data integrity and security. ![Login Difference](https://user-images.githubusercontent.com/94420508/229661705-51506c3e-c829-4ca7-a55b-c41ca506ebbf.jpeg)
-4. Once they are logged in, the main page shows the user's name and they can access market. 
-5. In Sell/Buy page they can see the list of products that are available for trade by farmers.
-6. In same page if the user want to sell any product they can directly click sell online button provided on the navigation bar.
-7. Products entered in that page will be directly shown in market place.
-8. After lisiting the product online if the user want to remove products then he can go to "my products" page and can directly remove the product.
-9. Once the user is authenticated then they can access IOT page but, they don't have any devices registered because the devices has to be manually entered to database.
-10. For demonstration purpose we entered few sensory data to IOT page for our own account which is shown in video page.
-
-# Internal Architecture
-
-![Internal Architecture](https://user-images.githubusercontent.com/94420508/229662738-f091086f-cec3-4030-893e-eea576ae7b2e.jpeg)
-
-# Features
-1. Secured and responsive design.
-2. Simple in architecture.
-3. Easy to understand and use.
-4. Farmers can create accounts and sell their products.
-5. Farmers can add products directly.
-6. They can remove and update their list of products.
-7. Buyers can buy products directly after the creation of the account.
-8. All the crucial info like database urls and secrets are stored safely.
-9. Customized IOT can be implemented for the farmers.
-10. Buyers can contact farmers easily.
+# Services involved
+1. Name.com - Name.com is our domain name provider for <a  target = "_blank" href = "https://fruitful.social/">fruitful.social</a> domain.
+2. Cloud DNS - DNS zone is created for our domain in GCP to direct request to instance group.
+3. SSL - We took a google managed SSL certificate to make our requests secured.
+4. Load Balancers - For balancing load among all the servers.
+5. Stripe - Handles all the payment related tasks.
+6. ThingSpeak - IOT cloud data storage and visualisations.
+7. Twilio - Used for mobile verification of new customers.
+8. NodeMailer - For sending acknowledgements to customers and notifying admin for any actions.
+9. OpenWeather - For getting location specific weather details.
 
 
 ## <p align="center">Everything is explained in depth in video and document please take a look at them.</p>
 
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
-
-Video Demo link : <a href="https://youtu.be/qQHeBLEP7Ck">Video Demo</a>
