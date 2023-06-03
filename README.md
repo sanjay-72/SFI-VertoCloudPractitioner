@@ -1,14 +1,11 @@
 
 # <p align="right">🚀<a  target = "_blank" href = "https://fruitful.social/">Visit now</a></p> FruitFul
 
-### A direct sell trading platform connecting the farmers and traders
-This is solution developed by Verto Cloud Practitioner team in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google 
-Cloud Platform and AMD.
+### All in one solution for Indian Agriculture industry - 2023
+This is solution developed by our team Verto Cloud Practitioners in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google Cloud Platform and AMD. We kept on updating the app for all the rounds. We won the Instutional Round in April '23, the Regional Round(North-India) in May '23 and looking for our place in National Round in June '23.
 
 
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
-
-Video Demo link : <a href="https://youtu.be/qQHeBLEP7Ck">Video Demo</a>
 
 ![end devices](https://user-images.githubusercontent.com/94420508/229655286-cca22d3c-75dd-469d-a581-bbed0687e9c7.jpg)
 
