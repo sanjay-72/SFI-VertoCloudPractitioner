@@ -7,7 +7,8 @@ This is the solution developed by our team Verto Cloud Practitioners in Solving 
 
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
 
-![end devices](https://user-images.githubusercontent.com/94420508/229655286-cca22d3c-75dd-469d-a581-bbed0687e9c7.jpg)
+![end devices](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/4b317486-5792-440a-9931-0fc324d94481)
+
 
 ## Problem
 Farmers in India realize only about 8-10% of their final harvest, compared to upwards of 30% in developed markets. This depreciation is due to complexities in the 
