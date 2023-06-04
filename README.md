@@ -2,7 +2,7 @@
 # <p align="right">🚀<a  target = "_blank" href = "https://fruitful.social/">Visit now</a></p> FruitFul
 
 ### All in one solution for Indian Agriculture industry - 2023
-This is the solution developed by our team Verto Cloud Practitioners in Solving for India Hackathon - 2023 held by Geeks For Geeks in corporation with Google Cloud Platform and AMD. We kept on updating the app for all the rounds. We won the Instutional Round in April '23, the Regional Round(North-India) in May '23 and looking for our place in National Round in June '23.
+This is the solution developed by our team Verto Cloud Practitioners in Solving for India - 2023 Hackathon conducted by Geeks For Geeks in corporation with Google Cloud and AMD. We kept on updating the app for all the rounds. We won the Instutional Round in April '23, the Regional Round(North-India) in May '23 and looking for our place in National Round in June '23.
 
 
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
@@ -32,14 +32,14 @@ in it is making this an all-rounder solution for many of the problems that are f
 ![i-Smart Architecture](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/8a4fb38f-3e9f-4691-b626-ea4964ce5c42)
 
 # Features
-1. Secured HTTPS protocal is used with domain name.
+1. Secured HTTPs protocal is used with domain name.
 2. OTP verification for new users.
 3. IOT integration in i-Smart portal.
-4. Live weather data.
+4. Live weather data in i-Smart portal.
 5. Farmers can create accounts and sell their products directly.
 6. They can remove and update their list of products.
 7. Payment gateway integration.
-8. Stylish email delivery system for implemented for market and iot.
+8. Stylish email delivery system is implemented for market and iot.
 9. Secret and highly secured admin portal (Not accessible to normal users).
 10. IOT caluclator for cost estimation and direct request.
 
