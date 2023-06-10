@@ -16,6 +16,13 @@ const needle = require('needle');
 const { get } = require('http');
 const app = express();
 
+//OpenAI setup
+const { Configuration, OpenAIApi } = require("openai");
+const configuration = new Configuration({
+    apiKey: process.env.GPT_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
 //middleware
 app.use(session({
     secret: toString(process.env.MYSECRET),
@@ -27,6 +34,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 80;
+const GPTkey = process.env.GPT_KEY;
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
@@ -902,6 +910,12 @@ app.get("/caluclatePrice", isLoggedIn, function (req, res) {
     getServicePrices();
 
 });
+
+app.get("/CropAdvisory", isLoggedIn, function (req, res) {
+    let location = req.user.Location;
+    // console.log(location);
+    res.render("CropAdvisoryForm", { userLocation: location });
+});
 //Get routes end
 
 //Post routes start
@@ -1250,6 +1264,27 @@ app.post("/checkout-for-iot", isLoggedIn, async (req, res) => {
     }
     startPayment();
 });
+
+app.post("/CropAdvisory", function (req, res) {
+    let location = req.body.city;
+    async function getCompletion() {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: `Write an essay about 5 profitable crops that I can grow for next season if I'm Staying in ${location}.  60 words only.`,
+            max_tokens: 250,
+            temperature: 0,
+        });
+
+        // console.log(response.data.choices[0].text);
+        res.render("CropAdvisory", {
+            crops: response.data.choices[0].text,
+            name: req.user.userName
+        });
+    }
+    getCompletion();
+
+});
+
 //Post routes end
 
 // App listening to port 80 or port specified in ENV variables

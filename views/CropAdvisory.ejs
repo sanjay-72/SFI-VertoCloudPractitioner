@@ -24,25 +24,51 @@
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 
     <style>
-        h4 {
-            color: rgb(91, 91, 91);
+        h2 {
+            color: rgb(0, 150, 50);
+            font-size: 200%;
         }
 
-        .myButtonContainer {
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
+        h6 {
+            font-size: 200%;
+        }
+
+        .details {
+            text-align: left;
+            padding-right: 26px;
+            color: rgb(0, 143, 143);
+        }
+
+        .Values {
+            padding-left: 20px;
+            font-size: 200%;
+            color: rgb(70, 70, 70);
+        }
+
+        .myDiv {
+            margin: 36px;
             text-align: center;
         }
 
-        .myBtns {
-            width: 350px;
-            font-size: 1.6rem;
-        }
+        @media screen and (max-width:460px) {
+            .details {
+                font-size: 6vw;
+            }
 
-        @media screen and (max-width:640px) {
-            .myBtns {
-                width: 80%;
+            .Values {
+                font-size: 6vw;
+            }
+
+            h6 {
+                font-size: 6vw;
+            }
+
+            h2 {
+                font-size: 6vw;
+            }
+
+            .myDiv {
+                margin: 5%;
             }
         }
     </style>
@@ -52,7 +78,7 @@
     <!-- Loader CSS link -->
     <link rel="stylesheet" href="/loaderStyle.css">
 
-    <title>🍒Fruitful🍊(i-Smart)</title>
+    <title>🍒Fruitful🍊-AI Suggestion</title>
 </head>
 
 <body style="overflow-y: hidden; text-align: left;">
@@ -73,7 +99,7 @@
     <div class="MyNavDiv" id="NavBar">
         <div class="container">
             <a href="/"><button>Home</button></a>
-            <a href="/i-Smart"><button disabled style="background-color: green;color: white;">i-Smart</button></a>
+            <a href="/i-Smart"><button style="background-color: green;color: white;">i-Smart</button></a>
             <a href="/market"><button>Sell/Buy</button></a>
             <a href="/newProduct"><button>Sell Online</button></a>
             <a href="/myProducts"><button>My Products</button></a>
@@ -81,23 +107,21 @@
         </div>
     </div>
     <!-- Nav Bar End  -->
-    <div style="margin: 36px; text-align: center;">
-        <h4 style="margin-bottom: 60px;">We offer some smart services for farmers to improve their yielding.</h4>
-
-        <div class="myButtonContainer container">
-            <a href="/IOT"><button class="btn btn-success mb-4 myBtns">My Farm Sensors Data</button></a>
-            <br>
-            <a href="/CropAdvisory"><button class="btn btn-outline-success mb-4 myBtns">Suggestion for crop</button></a>
-            <br>
-            <a href="/weatherData"><button class="btn btn-outline-success mb-4 myBtns">Get local weather
-                    status</button></a>
-            <br>
-            <a href="/caluclatePrice"><button class="btn btn-outline-success mb-4 myBtns">Order IOT kit</button></a>
-            <br>
-            <a href="/seeComponents"><button class="btn btn-outline-success mb-4 myBtns" myBtns>See IOT
-                    components</button></a>
+    <div class="myDiv">
+        <h2 style="margin-bottom: 20px;">Best crop suggestion for increased profitability.</h2>
+        <div style="margin-left: auto; margin-right: auto; width: 80%; text-align: left;">
+            <h4>
+                <%= crops %>
+            </h4>
+            <div style="text-align: right;">
+                <p style="color: rgba(128, 128, 128, 0.6);">- Powered by OpenAI</p>
+            </div>
         </div>
     </div>
+    <div class="myDiv">
+        <a href="/CropAdvisory"><button class="btn btn-success">Check Other Location</button></a>
+    </div>
+
 
     <!-- Vanilla tilt -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
