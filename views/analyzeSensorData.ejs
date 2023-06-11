@@ -118,7 +118,7 @@
                                     <option value="48">48</option>
                                     <option value="32">32</option>
                                     <option value="24">24</option>
-                                    <option value="16">16</option>
+                                    <option value="16" selected="selected">16</option>
                                     <option value="4">4</option>
                                 </select>
                             </td>
@@ -162,15 +162,19 @@
                                 :
                             </td>
                             <td>
-                                <input type="color" name="fgcolor" id="fgcolor" value="#617A55"
-                                    onchange=updateFrames()>
+                                <input type="color" name="fgcolor" id="fgcolor" value="#617A55" onchange=updateFrames()>
                             </td>
-
                         </tr>
                     </table>
                     <p style="margin-top: 6px; margin-bottom: 12px;">
                         Sensor Count = <%= trendlineDevices.length %>
                     </p>
+                    <form action="/analyzeSensorData" method="post">
+                        <% for(var i=0; i<trendlineDevices.length; i++) { %>
+                            <input type="text" class="outputLinkFields" name="links" style="display: none;">
+                            <% } %>
+                                <button type="submit" class="btn btn-success">Save Configuration</button>
+                    </form>
                 </div>
             </div>
             <br>
@@ -213,7 +217,9 @@
             let foreground = document.getElementById("fgcolor");
 
             let allFrames = document.querySelectorAll("iframe");
+            let myOutputLinks = document.getElementsByClassName("outputLinkFields");
             let myObjList = [];
+
             for (var i = 0; i < allFrames.length; i++) {
                 let temp = new URL(allFrames[i].src);
                 myObjList.push(temp);
@@ -228,6 +234,7 @@
                 for (var i = 0; i < allFrames.length; i++) {
                     let FinalUrl = myObjList[i].origin + myObjList[i].pathname + compulsary + newBg + plotColor + totalResults + TypeOfPlot;
                     allFrames[i].src = FinalUrl;
+                    myOutputLinks[i].value = FinalUrl;
                 }
             }
             updateFrames();

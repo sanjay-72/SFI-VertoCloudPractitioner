@@ -1302,6 +1302,27 @@ app.post("/CropAdvisory", function (req, res) {
 
 });
 
+app.post("/analyzeSensorData", function (req, res) {
+    async function executeMyCode() {
+        await Device.deleteMany({ userId: req.user.usersId, deviceType: "Trendline" });
+        for (var i = 0; i < req.body.links.length; i++) {
+            var newDevice = new Device({
+                userId: req.user.usersId,
+                userName: req.user.userName,
+                Location: req.user.Location,
+                deviceType: "Trendline",
+                Link: req.body.links[i]
+            });
+            newDevice.save();
+            res.render("message", { redirectTo: "/IOT", myMessage: "Your configuration updated successfully." });
+        }
+
+    }
+    executeMyCode();
+
+    // console.log(req.body.links[0]);
+});
+
 //Post routes end
 
 // App listening to port 80 or port specified in ENV variables
