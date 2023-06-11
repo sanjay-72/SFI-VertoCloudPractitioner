@@ -381,7 +381,6 @@ app.get("/IOT", isLoggedIn, function (req, res) {
             res.render("agriIOT", { realtimeDevices: [], trendlineDevices: [] });
     }
     getDeviceData();
-
 });
 
 app.get("/success", isLoggedIn, function (req, res) {
@@ -922,6 +921,16 @@ app.get("/CropAdvisory", isLoggedIn, function (req, res) {
     let location = req.user.Location;
     // console.log(location);
     res.render("CropAdvisoryForm", { userLocation: location });
+});
+
+app.get("/AnalyzeSensorData", isLoggedIn, function (req, res) {
+    async function getDeviceData() {
+        let trendLine = await Device.find({ userId: req.user.usersId, deviceType: "Trendline" });
+        // console.log(devicesInfo);
+        res.render("analyzeSensorData", { trendlineDevices: trendLine });
+    }
+    getDeviceData();
+
 });
 //Get routes end
 

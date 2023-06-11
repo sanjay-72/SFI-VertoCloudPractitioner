@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- J Query CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- font awesome fonts  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- My CSS link -->
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Favicon Link  -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <!-- Loader CSS link -->
+    <link rel="stylesheet" href="/loaderStyle.css">
+
+    <style>
+        h6 {
+            text-align: left;
+            margin: 15px;
+        }
+
+        .deviceGraph {
+            display: inline-block;
+            width: 468px;
+            height: 260px;
+            border: 1px solid rgba(174, 174, 174, 0.65);
+            border-radius: 12px;
+            margin: 15px;
+        }
+
+        .GraphFrame {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        td {
+            text-align: left;
+            margin-right: 4px;
+            padding: 6px;
+        }
+
+        @media(max-width:380px) {
+
+            h2,
+            h6 {
+                font-size: 100%;
+                margin: 0;
+                margin-bottom: 5px;
+            }
+        }
+
+        @media(max-width:560px) {
+            .deviceGraph {
+                width: 90%;
+            }
+
+            .GraphFrame {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    </style>
+    <title>Fruitful-Smart</title>
+</head>
+
+<body>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <!-- Page Starting -->
+    <div class="MyNavDiv" id="MyNavTitle">
+        <h2 style="margin: 0;">Fruit<span>Ful</span></h2>
+    </div>
+    <!-- Nav Bar start -->
+    <div class="MyNavDiv" id="NavBar">
+        <div class="container">
+            <a href="/"><button>Home</button></a>
+            <a href="/i-Smart"><button style="background-color: green;color: white;">i-Smart</button></a>
+            <a href="/market"><button>Sell/Buy</button></a>
+            <a href="/newProduct"><button>Sell Online</button></a>
+            <a href="/myProducts"><button>My Products</button></a>
+        </div>
+    </div>
+    <!-- Nav Bar End  -->
+
+    <div style="margin: 26px;" class="mainMarketDiv">
+        <% if(trendlineDevices.length>0){ %>
+            <div style="text-align: center;">
+
+                <div
+                    style="text-align: center; background-color: #f4ffef;border: 1px solid rgba(174, 174, 174, 0.65);border-radius: 12px; padding: 16px; width: 580px; margin: 0 auto 0 auto;">
+                    <h2>Control Panel</h2>
+                    <table style="margin-left: auto; margin-right: auto;">
+                        <tr>
+                            <td>
+                                <label for="Readings">Total Readings </label>
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <select name="Readings" id="readings" onchange=updateFrames()>
+                                    <option value="60">60</option>
+                                    <option value="48">48</option>
+                                    <option value="32">32</option>
+                                    <option value="24">24</option>
+                                    <option value="16">16</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <label for="typeOfPlot">Plot Type </label>
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <select name="typeOfPlot" id="typeOfPlot" onchange=updateFrames()>
+                                    <option value="line">Line</option>
+                                    <option value="column">Column</option>
+                                    <option value="spline">Spline</option>
+                                    <option value="bar">Bar</option>
+                                    <option value="step">Step</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="bgcolor">Background colour </label>
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <input type="color" name="bgcolor" id="bgcolor" value="#f4ffef" onchange=updateFrames()>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <label for="fgcolor">Plot colour </label>
+                            </td>
+                            <td>
+                                :
+                            </td>
+                            <td>
+                                <input type="color" name="fgcolor" id="fgcolor" value="#617A55"
+                                    onchange=updateFrames()>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <p style="margin-top: 6px; margin-bottom: 12px;">
+                        Sensor Count = <%= trendlineDevices.length %>
+                    </p>
+                </div>
+            </div>
+            <br>
+            <% for(var i=0; i<trendlineDevices.length; i++) { %>
+                <div class="deviceGraph">
+                    <iframe src="<%= trendlineDevices[i].Link %>" class="GraphFrame" frameborder="0"></iframe>
+                </div>
+                <% } %>
+                    <% } %>
+    </div>
+    <br>
+
+
+    <h3>Please contact us for any changes.</h3>
+    <br>
+    <%- include("footer") -%>
+
+        <!-- Bootstrap JS CDN link -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+
+        <!-- Vanilla tilt -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
+            integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- JQuery Link  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- LoaderJs file Link  -->
+        <script src="/loaderAnimation.js"></script>
+
+        <!-- JavaScript link -->
+        <script src="/index.js"></script>
+        <script>
+            let dataPoints = document.getElementById("readings");
+            let plotType = document.getElementById("typeOfPlot");
+            let background = document.getElementById("bgcolor");
+            let foreground = document.getElementById("fgcolor");
+
+            let allFrames = document.querySelectorAll("iframe");
+            let myObjList = [];
+            for (var i = 0; i < allFrames.length; i++) {
+                let temp = new URL(allFrames[i].src);
+                myObjList.push(temp);
+            }
+
+            function updateFrames() {
+                let compulsary = "?dynamic=true";
+                let newBg = `&bgcolor=%23${background.value.slice(1)}`;
+                let plotColor = `&color=%23${foreground.value.slice(1)}`;
+                let totalResults = `&results=${dataPoints.value}`;
+                let TypeOfPlot = `&type=${plotType.value}`;
+                for (var i = 0; i < allFrames.length; i++) {
+                    let FinalUrl = myObjList[i].origin + myObjList[i].pathname + compulsary + newBg + plotColor + totalResults + TypeOfPlot;
+                    allFrames[i].src = FinalUrl;
+                }
+            }
+            updateFrames();
+        </script>
+</body>
+
+</html>

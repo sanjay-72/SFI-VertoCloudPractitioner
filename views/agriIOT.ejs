@@ -60,7 +60,6 @@
         @media(max-width:560px) {
             .deviceGraph {
                 width: 90%;
-                height: auto;
             }
 
             .GraphFrame {
@@ -107,7 +106,7 @@
                     <hr />
                     <div style="margin: 15px;" class="mainMarketDiv">
                         <h2 style="margin-bottom: 12px ;">
-                            Trend Line of sensor readings (Count = <%= trendlineDevices.length %>)
+                            Trend Line representation of sensor readings (Count = <%= trendlineDevices.length %>)
                         </h2>
                         <% for(var i=0; i<trendlineDevices.length; i++) {%>
                             <div class="deviceGraph">
@@ -119,7 +118,8 @@
                                     <% } %>
                     </div>
                     <% if(trendlineDevices.length> 0) {%>
-                        <a href="#"><button class="btn btn-success" style="margin-bottom: 36px;">Analyse Sensor data</button></a>
+                        <a href="/AnalyzeSensorData"><button class="btn btn-success" style="margin-bottom: 36px;">Analyse Sensor
+                                data</button></a>
                         <% } %>
             
             <h3>Please contact us for any changes.</h3>
