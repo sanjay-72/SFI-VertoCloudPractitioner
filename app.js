@@ -94,6 +94,7 @@ const DeviceSchema = new mongoose.Schema({
     userId: Number,
     userName: String,
     Location: String,
+    deviceType: String,
     Link: String
 });
 const Device = mongoose.model('Device', DeviceSchema);
@@ -135,6 +136,7 @@ const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema)
 //     userId: req.user.usersId,
 //     userName: req.user.userName,
 //     Location: req.user.Location,
+//     deviceType: req.user.deviceType,
 //     Link: "https://thingspeak.com/channels/2065077/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
 // });
 // newDevice.save();
@@ -366,12 +368,17 @@ app.get("/messageRoute", function (req, res) {
 
 app.get("/IOT", isLoggedIn, function (req, res) {
     async function getDeviceData() {
-        let devicesInfo = await Device.find({ userId: req.user.usersId });
+        let realTime = await Device.find({ userId: req.user.usersId, deviceType: "Realtime" });
+        let trendLine = await Device.find({ userId: req.user.usersId, deviceType: "Trendline" });
         // console.log(devicesInfo);
-        if (devicesInfo != null)
-            res.render("agriIOT", { deviceList: devicesInfo });
+        if (realTime != null && trendLine != null)
+            res.render("agriIOT", { realtimeDevices: realTime, trendlineDevices: trendLine });
+        else if (trendLine == null)
+            res.render("agriIOT", { realtimeDevices: realTime, trendlineDevices: [] });
+        else if (realTime == null)
+            res.render("agriIOT", { realtimeDevices: [], trendlineDevices: trendLine });
         else
-            res.render("agriIOT", { deviceList: [] });
+            res.render("agriIOT", { realtimeDevices: [], trendlineDevices: [] });
     }
     getDeviceData();
 
@@ -1095,6 +1102,7 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, isAdmin, function (re
                 userId: req.body.userId,
                 userName: req.body.userName,
                 Location: req.body.Location,
+                deviceType: req.body.deviceType,
                 Link: req.body.Link
             });
             newDevice.save();
@@ -1102,7 +1110,7 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, isAdmin, function (re
                 let info = await transporter.sendMail({
                     from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
                     to: userInfo.emailId,
-                    subject: `✅ New Device added to your account.`,
+                    subject: `✅ New ${req.body.deviceType} Device added to your account.`,
                     html: `
                         <div style="display: flex; justify-content: center;">
                             <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%" cellpadding="0" cellspacing="0">

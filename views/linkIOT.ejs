@@ -119,7 +119,8 @@
             color: rgb(255, 153, 0);
         }
 
-        .input-wrapper input {
+        .input-wrapper input,
+        .input-wrapper select {
             padding: 1.2rem;
             font-size: 2rem;
             width: 100%;
@@ -134,7 +135,9 @@
         }
 
         .input-wrapper input:focus,
-        .input-wrapper input:valid {
+        .input-wrapper input:valid,
+        .input-wrapper select:focus,
+        .input-wrapper select:valid {
             border: 1px solid rgb(0, 255, 0);
         }
 
@@ -179,6 +182,14 @@
                 <label for="Location">Location : </label><br>
                 <input name="Location" type="text" required spellcheck="false" autocomplete="off">
             </div>
+            <div class="input-wrapper">
+                <label for="deviceType">Device Type : </label><br>
+                <select name="deviceType">
+                    <option value="Trendline">Trend Line</option>
+                    <option value="Realtime">Realtime</option>
+                </select>
+            </div>
+
             <div class="input-wrapper">
                 <label for="Link">Link : </label><br>
                 <input name="Link" type="url" required spellcheck="false" autocomplete="off">
