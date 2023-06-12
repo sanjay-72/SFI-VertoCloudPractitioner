@@ -34,7 +34,7 @@
 
         .costPrice {
             font-size: 1.4rem;
-            color: blue;
+            color: rgba(82, 0, 121, 0.9);
         }
 
         .hidden {
@@ -49,6 +49,13 @@
             filter: blur(0);
             transform: translateX(0);
             transition: all 0.5s;
+        }
+
+        select {
+            border-color: rgba(0, 128, 0, 0.6);
+            color: rgba(0, 128, 0, 0.85);
+            border-radius: 4px;
+            text-align: center;
         }
 
 
@@ -83,10 +90,11 @@
                 margin: 0;
             }
 
-            h2{
+            h2 {
                 margin: 0;
                 margin-bottom: 5px;
             }
+
             h6 {
                 font-size: 100%;
                 margin: 0;
@@ -116,11 +124,11 @@
     <!-- Nav Bar start -->
     <div class="MyNavDiv" id="NavBar">
         <div class="container">
-            <a href="/"><button>Home</button></a>
-            <a href="/i-Smart"><button>i-Smart</button></a>
-            <a href="/market"><button style="background-color: green;color: white;">Sell/Buy</button></a>
-            <a href="/newProduct"><button>Sell Online</button></a>
-            <a href="/myProducts"><button>My Products</button></a>
+            <a href="/" class="navDivBtns"><button>Home</button></a>
+            <a href="/i-Smart" class="navDivBtns"><button>i-Smart</button></a>
+            <a href="/market" class="navDivBtns"><button style="background-color: green;color: white;">Sell/Buy</button></a>
+            <a href="/newProduct" class="navDivBtns"><button>Sell Online</button></a>
+            <a href="/myProducts" class="navDivBtns"><button>My Products</button></a>
         </div>
     </div>
     <!-- Nav Bar End  -->
@@ -150,9 +158,9 @@
         <% for(var i=0; i<productList.length; i++) {%>
             <div class="myProductBox hidden">
                 <p
-                    style="margin-top: -10px; margin-bottom: 4px;margin-left: -10px; margin-right: -10px; background-color: rgb(255, 10, 10);color: rgb(255, 255, 255); border-top-left-radius: 11px;border-top-right-radius: 11px; padding: 2px 0 2px 0;">
+                    style="margin-top: -10px; margin-bottom: 4px;margin-left: -10px; margin-right: -10px; background-color: rgba(255, 10, 10, 0.8);color: rgb(255, 255, 255); border-top-left-radius: 11px;border-top-right-radius: 11px; padding: 2px 0 2px 0;">
                     Stock available : <%= productList[i].Quantity %>Kg(s) only</p>
-                        <img src="./../images/<%= myPictures[Math.floor(Math.random() * myPictures.length)] %>/<%= productList[i].ProductName %>.jpg"
+                <img src="./../images/<%= myPictures[Math.floor(Math.random() * myPictures.length)] %>/<%= productList[i].ProductName %>.jpg"
                     alt="<%= productList[i].ProductName %> Image" style="margin-top: 5px;">
                 <% if(productList[i].ProductName=="Other" ){ %>
                     <h2>
@@ -163,38 +171,41 @@
                             <%= productList[i].ProductName %>
                         </h2>
                         <% } %>
-                <h4><span class="costPrice" id="<%= productList[i].ProductId %>priceId">(₹<%= productList[i].cost %>/Kg)<span></h4>
-                <p class="breakAll narrow">
-                    <%= productList[i].Description %>
-                </p>
-                <form action="/create-checkout-session" method="post">
-                    <input type="number" name="ProductId" value="<%= productList[i].ProductId %>" style="display: none;">
-                    <input type="number" name="cost" value="<%= productList[i].cost %>" style="display: none;">
-                    <input type="text" name="ProductName" value="<%= productList[i].ProductName %>" style="display: none;">
-                    <button style="margin-bottom: 5px;" class="btn btn-outline-success BuyNowBtn"
-                        value="<%= productList[i].ProductId %>">Buy Now</button>
-                    <select name="quantity" id="<%= productList[i].ProductId %>quantId"
-                        onchange="updatePrice('<%= productList[i].ProductId %>priceId','<%= productList[i].ProductId %>quantId','<%= productList[i].cost %>')">
-                        <% if (productList[i].Quantity>= 1) { %>
-                        <option value="1">1Kg</option>
-                        <% } %>
-                            <% if (productList[i].Quantity>= 3) { %>
-                                <option value="3">3Kg</option>
-                                <% } %>
-                                    <% if (productList[i].Quantity>= 5) { %>
-                                        <option value="5">5Kg</option>
-                                        <% } %>
-                                            <% if (productList[i].Quantity>= 7) { %>
-                                                <option value="7">7Kg</option>
-                                                <% } %>
-                                                    <% if (productList[i].Quantity>= 10) { %>
-                                                        <option value="10">10Kg</option>
-                                                        <% } %>
-                    </select>
-                </form>
-                <a href="contactSeller/<%= productList[i].Mobile %>/<%= productList[i].ProductId %>">
-                    <button style="margin-bottom: 5px;" class="btn btn-outline-primary">Contact Seller</button>
-                </a>
+                            <h4><span class="costPrice" id="<%= productList[i].ProductId %>priceId">(₹<%= productList[i].cost %>/Kg)</span></h4>
+                            <p class="breakAll narrow">
+                                <%= productList[i].Description %>
+                            </p>
+                            <a href="contactSeller/<%= productList[i].Mobile %>/<%= productList[i].ProductId %>">
+                                <button style="margin-bottom: 5px;padding: 2px 5px 2px 5px; width: 154px;" class="btn btn-outline-success">Contact
+                                    Seller</button>
+                            </a>
+                            <form action="/create-checkout-session" method="post" style="padding: 6px 0 14px;">
+                                <input type="number" name="ProductId" value="<%= productList[i].ProductId %>" style="display: none;">
+                                <input type="number" name="cost" value="<%= productList[i].cost %>" style="display: none;">
+                                <input type="text" name="ProductName" value="<%= productList[i].ProductName %>" style="display: none;">
+                                <button style="margin: 0; margin-right: 6px;" class="btn btn-success BuyNowBtn"
+                                    value="<%= productList[i].ProductId %>">Buy Now</button>
+                                <select name="quantity" id="<%= productList[i].ProductId %>quantId"
+                                    onchange="updatePrice('<%= productList[i].ProductId %>priceId','<%= productList[i].ProductId %>quantId',
+                                            '<%=productList[i].cost %>')"
+                                                style="height: 38px;">
+                                                <% if (productList[i].Quantity>= 1) { %>
+                                                    <option value="1">1Kg</option>
+                                                    <% } %>
+                                                        <% if (productList[i].Quantity>= 3) { %>
+                                                            <option value="3">3Kg</option>
+                                                            <% } %>
+                                                                <% if (productList[i].Quantity>= 5) { %>
+                                                                    <option value="5">5Kg</option>
+                                                                    <% } %>
+                                                                        <% if (productList[i].Quantity>= 7) { %>
+                                                                            <option value="7">7Kg</option>
+                                                                            <% } %>
+                                                                                <% if (productList[i].Quantity>= 10) { %>
+                                                                                    <option value="10">10Kg</option>
+                                                                                    <% } %>
+                                                                                        </select>
+                                                                                        </form>
             </div>
             <% } %>
     </div>

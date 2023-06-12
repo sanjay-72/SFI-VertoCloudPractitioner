@@ -6,7 +6,7 @@ html {
 
 body {
     font-family: 'Alkatra', cursive;
-    color: #444444;
+    color: rgba(72, 72, 72, 0.85);
 }
 
 html::-webkit-scrollbar {
@@ -63,10 +63,12 @@ html::-webkit-scrollbar-thumb:active {
     z-index: 5;
 }
 
-.MyNavDiv {
+.MyNavDiv,
+.myNavDiv .container {
     text-align: center;
-    padding: 1.2vh 0 0.6vh 0;
-    background: linear-gradient(to bottom right, rgba(0, 255, 0, 0.75), rgba(255, 217, 0, 0.75));
+    /* padding: 1.2vw 0 0.6vw 0; */
+        background-color: rgba(44, 185, 44, 0.6);
+        /* background: linear-gradient(to bottom right, rgba(0, 255, 0, 0.75), rgba(255, 217, 0, 0.75)); */
     backdrop-filter: blur(4px);
     /* position: fixed; */
     width: 100%;
@@ -74,8 +76,10 @@ html::-webkit-scrollbar-thumb:active {
     z-index: 5;
 }
 
-.navDivBtns {
+.navDivBtns button,
+.navDivBtns .container button {
     -webkit-animation: fadeIn 1s;
+    padding: 4px 16px 4px 16px;
     animation: fadeIn 1s;
 }
 
@@ -267,7 +271,8 @@ span {
 }
 
 .myProductBox {
-    border: 1px solid;
+    color: rgba(72, 72, 72, 0.75);
+        border: 1px solid rgba(128, 128, 128, 0.3);
     text-align: center;
     padding: 10px;
     border-radius: 12px;
@@ -275,10 +280,11 @@ span {
     display: inline-block;
 }
 
+.myProductBox {
+    box-shadow: 2px 2px 16px 1px rgba(128, 128, 128, 0.3);
+}
 .myProductBox:hover {
-    background-color: rgb(242, 255, 240);
-    color: rgb(17, 89, 10);
-    transition: all 0.5s;
+    box-shadow: 3px 3px 26px 1px rgba(128, 128, 128, 0.5);
 }
 
 .myProductBox img {
@@ -288,6 +294,14 @@ span {
     margin-bottom: 5px;
 }
 
+.btn-outline-success {
+    border: 1px solid rgba(25, 135, 84, 0.3);
+    color: rgba(0, 128, 0, 0.8);
+}
+
+.btn-outline-success:hover {
+    box-shadow: 2px 2px 6px 0 rgba(80, 80, 80, 0.4);
+}
 .myProductBox button {
     margin-bottom: 15px;
     margin-top: 5px;
@@ -364,6 +378,7 @@ span {
     color: rgb(255, 242, 0);
     font-size: 1.01rem;
 }
+
 .copy-right {
     font-size: .75rem;
     opacity: .8;

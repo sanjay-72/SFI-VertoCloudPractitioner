@@ -1314,9 +1314,8 @@ app.post("/analyzeSensorData", function (req, res) {
                 Link: req.body.links[i]
             });
             newDevice.save();
-            res.render("message", { redirectTo: "/IOT", myMessage: "Your configuration updated successfully." });
         }
-
+        res.render("message", { redirectTo: "/IOT", myMessage: "Your configuration updated successfully." });
     }
     executeMyCode();
 
