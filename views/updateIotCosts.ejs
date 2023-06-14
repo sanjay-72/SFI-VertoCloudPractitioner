@@ -19,11 +19,13 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@500&family=Dancing+Script:wght@700&family=Great+Vibes&family=Gruppo&family=Satisfy&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .btn:hover,
@@ -63,12 +65,18 @@
             background: #ffffff;
         }
 
+        ::placeholder {
+            color: white;
+        }
+
         body {
-            background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
+            margin-top: -40px;
+            background: linear-gradient(to bottom right, rgba(66, 200, 255, 0.7), rgba(27, 160, 0, 0.8));
+            background-color: rgba(0, 0, 0, 0);
+            color: rgba(3, 54, 0, 0.6);
             background-attachment: fixed;
             min-height: 100vh;
             overflow-y: hidden;
-            font-family: 'Alkatra', cursive;
         }
 
         .errorMSG {
@@ -83,25 +91,27 @@
         #nameTextEng {
             margin: 1rem;
             text-align: center;
-            color: rgb(0, 0, 0);
+            color: rgba(0, 69, 2, 0.7);
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             text-align: center;
-            color: rgb(52, 156, 0);
+            color: rgb(255, 255, 255);
+            font-weight: 800;
         }
 
         #container {
+            position: relative;
+            top: 10%;
             text-align: center;
-            background-color: rgb(255, 255, 255);
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
             padding: 3rem;
-            border-radius: .7rem;
+            border-radius: 36px;
             width: 45rem;
             margin: 4rem auto;
             outline: none;
-            border: 1px solid rgb(0, 255, 64);
-            border-radius: 1rem;
             border-width: 1px;
             transition: .3s;
         }
@@ -116,7 +126,8 @@
         .input-wrapper label {
             font-size: 1.8rem;
             text-align: left;
-            color: rgb(255, 153, 0);
+            color: rgb(240, 240, 240);
+            font-weight: 600;
         }
 
         .input-wrapper input {
@@ -127,15 +138,15 @@
             font-weight: bold;
             text-align: center;
             outline: none;
-            background-color: rgba(0, 0, 0, 0);
-            border: 1px solid gray;
-            color: rgb(0, 124, 0);
-            border-radius: .5rem;
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(128, 128, 128, 0);
+            color: rgba(0, 100, 0, 0.7);
+            border-radius: 2rem;
         }
 
         .input-wrapper input:focus,
         .input-wrapper input:valid {
-            border: 1px solid rgb(0, 255, 0);
+            border: 1px solid rgb(0, 150, 0);
         }
 
         /* .input-wrapper input::-webkit-outer-spin-button,
@@ -149,11 +160,42 @@
 
         }
 
+        .btn {
+            padding: 4px 36px 4px 36px;
+            border-radius: 12px;
+        }
+
 
         @media screen and (max-width:460px) {
             html {
                 font-size: 52%;
             }
+        }
+
+        /* Animation purpose only */
+        .hiddenContainer {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 0.5s;
+        }
+
+        .hiddenInput {
+            filter: blur(2px);
+            opacity: 0;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+            transition: all 0.5s;
+        }
+
+        .shownInput {
+            opacity: 1;
+            filter: blur(0);
+            transition: all 0.5s;
         }
     </style>
 </head>
@@ -163,53 +205,50 @@
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
     <!-- Box for inputs start -->
-    <div id="container">
+    <div id="container" class="hiddenContainer">
 
         <form action="/admin/<%= passKeyHash %>/updateIotCosts" method="post">
-            <h1>Update IOT costs</h1>
+            <h1 class="hiddenInput">Update IOT costs</h1>
             <div class="input-wrapper">
-                <label for="esp32">ESP32 : </label><br>
-                <input name="esp32" type="number" value="<%=oldData.esp32 %>" required spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="esp8266">ESP8266 : </label><br>
-                <input name="esp8266" type="number" value="<%=oldData.esp8266 %>" required spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="moisture">Moisture sensor : </label><br>
-                <input name="moisture" type="number" value="<%=oldData.moisture %>" required spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="temperature">Temperature sensor : </label><br>
-                <input name="temperature" type="number" value="<%=oldData.temperature %>" required spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="solar">Solar Cell : </label><br>
-                <input name="solar" type="number" value="<%=oldData.solar %>" required spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="jumpers">Jumpers : </label><br>
-                <input name="jumpers" type="number" value="<%=oldData.jumpers %>" required spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="serviceCharge">Service Charge (Regular) : </label><br>
-                <input name="serviceCharge" type="number" value="<%=oldData.serviceCharge %>" required
+                <label for="esp32" class="hiddenInput">ESP32 : </label><br>
+                <input name="esp32" class="hiddenInput" type="number" value="<%=oldData.esp32 %>" required
                     spellcheck="false" autocomplete="off">
             </div>
-            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Update</strong></button>
+            <div class="input-wrapper">
+                <label for="esp8266" class="hiddenInput">ESP8266 : </label><br>
+                <input name="esp8266" class="hiddenInput" type="number" value="<%=oldData.esp8266 %>" required
+                    spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="moisture" class="hiddenInput">Moisture sensor : </label><br>
+                <input name="moisture" class="hiddenInput" type="number" value="<%=oldData.moisture %>" required
+                    spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="temperature" class="hiddenInput">Temperature sensor : </label><br>
+                <input name="temperature" class="hiddenInput" type="number" value="<%=oldData.temperature %>" required
+                    spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="solar" class="hiddenInput">Solar Cell : </label><br>
+                <input name="solar" class="hiddenInput" type="number" value="<%=oldData.solar %>" required
+                    spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="jumpers" class="hiddenInput">Jumpers : </label><br>
+                <input name="jumpers" class="hiddenInput" type="number" value="<%=oldData.jumpers %>" required
+                    spellcheck="false" autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <label for="serviceCharge" class="hiddenInput">Service Charge (Regular) : </label><br>
+                <input name="serviceCharge" class="hiddenInput" type="number" value="<%=oldData.serviceCharge %>"
+                    required spellcheck="false" autocomplete="off">
+            </div>
+            <button class="btn btn-success hiddenInput" type="submit" id="SubmitButton"><strong>Update</strong></button>
         </form>
 
         <!-- Box for inputs end -->
     </div>
-    <!-- Footer text start -->
-    <h3 id="nameTextEng">©️ Fruitful technologies.</h3>
-    <!-- Footer text end -->
 
     <!-- JQuery Link  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -217,6 +256,35 @@
     <!-- LoaderJs file Link  -->
     <script src="/loaderAnimation.js"></script>
 
+    <script>
+        $(window).on("load", function () {
+            setTimeout(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                        }
+                    })
+                });
+                const hiddenElements = document.querySelectorAll(".hiddenContainer");
+                const reverseHiddenElements = document.querySelectorAll(".hiddenR2L")
+                hiddenElements.forEach((el) => observer.observe(el));
+                reverseHiddenElements.forEach((el) => observer.observe(el));
+            }, 200);
+        });
+        $(window).on("load", function () {
+            setTimeout(() => {
+                let myInputs = document.getElementsByClassName("hiddenInput");
+                let timer = 100;
+                for (let i = 0; i < myInputs.length; i++) {
+                    setTimeout(() => {
+                        myInputs[i].classList.add("shownInput");
+                    }, 100 + timer);
+                    timer += 100;
+                }
+            }, 400);
+        });
+    </script>
 </body>
 
 </html>

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/loaderStyle.css">
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@500&family=Dancing+Script:wght@700&family=Great+Vibes&family=Gruppo&family=Satisfy&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
     :root {
         --headingSize: 4rem;
@@ -28,6 +29,16 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    html {
+        background-image: url(./formBG.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
     }
 
     body {
@@ -95,7 +106,8 @@
     }
 
     body {
-        background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
+        background: linear-gradient(to bottom right, rgba(66, 200, 255, 0.7), rgba(27, 160, 0, 0.8));
+        background-color: rgba(0, 0, 0, 0);
         background-attachment: fixed;
         min-height: 100vh;
         overflow-y: hidden;
@@ -105,25 +117,26 @@
     #nameTextEng {
         margin: 1rem;
         text-align: center;
-        color: rgb(69, 69, 69);
+        color: rgba(0, 69, 2, 0.7);
     }
 
     h1 {
-        font-size: 3rem;
+        font-size: 4rem;
         text-align: center;
-        color: rgb(52, 156, 0);
+        color: rgb(255, 255, 255);
+        font-weight: 800;
     }
 
     .container {
         text-align: center;
-        background-color: rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(6px);
         padding: 3rem;
         border-radius: .7rem;
         width: 45rem;
         margin: 4rem auto;
         outline: none;
-        border: 1px solid rgb(0, 255, 64);
-        border-radius: 1rem;
+        border-radius: 20px;
         border-width: 1px;
         transition: .3s;
     }
@@ -160,7 +173,7 @@
     </div>
     <!-- Box for message start -->
     <div class="container">
-        <h1 class="swift-up-text" style="color: rgb(42, 42, 42);"><%= myMessage %></h1>
+        <h1 class="swift-up-text" style="color: rgb(255, 255, 255);"><%= myMessage %></h1>
         <!-- Footer text start -->
         <h3 id="nameTextEng">©️ Fruitful technologies.</h3>
         <!-- Footer text end -->

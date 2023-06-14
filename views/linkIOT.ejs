@@ -19,11 +19,13 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@500&family=Dancing+Script:wght@700&family=Great+Vibes&family=Gruppo&family=Satisfy&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .btn:hover,
@@ -63,45 +65,44 @@
             background: #ffffff;
         }
 
+        ::placeholder {
+            color: white;
+        }
+
         body {
-            background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
+            margin-top: -40px;
+            background: linear-gradient(to bottom right, rgba(66, 200, 255, 0.7), rgba(27, 160, 0, 0.8));
+            background-color: rgba(0, 0, 0, 0);
+            color: rgba(3, 54, 0, 0.6);
             background-attachment: fixed;
             min-height: 100vh;
             overflow-y: hidden;
-            font-family: 'Roboto Flex', serif;
-        }
-
-        .errorMSG {
-            font-size: 1.6rem;
-            background-color: rgb(255, 210, 210);
-            border-radius: 15px;
-            color: rgb(179, 0, 0);
-            border: 1px solid rgb(179, 0, 0);
-            transition: 0.3s;
         }
 
         #nameTextEng {
             margin: 1rem;
             text-align: center;
-            color: rgb(0, 0, 0);
+            color: rgba(0, 69, 2, 0.7);
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             text-align: center;
-            color: rgb(52, 156, 0);
+            color: rgb(255, 255, 255);
+            font-weight: 800;
         }
 
         #container {
+            position: relative;
+            top: 2%;
             text-align: center;
-            background-color: rgb(255, 255, 255);
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
             padding: 3rem;
-            border-radius: .7rem;
+            border-radius: 36px;
             width: 45rem;
             margin: 4rem auto;
             outline: none;
-            border: 1px solid rgb(0, 255, 64);
-            border-radius: 1rem;
             border-width: 1px;
             transition: .3s;
         }
@@ -116,11 +117,11 @@
         .input-wrapper label {
             font-size: 1.8rem;
             text-align: left;
-            color: rgb(255, 153, 0);
+            color: rgb(240, 240, 240);
+            font-weight: 600;
         }
 
-        .input-wrapper input,
-        .input-wrapper select {
+        .input-wrapper input {
             padding: 1.2rem;
             font-size: 2rem;
             width: 100%;
@@ -128,17 +129,31 @@
             font-weight: bold;
             text-align: center;
             outline: none;
-            background-color: rgba(0, 0, 0, 0);
-            border: 1px solid gray;
-            color: rgb(0, 124, 0);
-            border-radius: .5rem;
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(128, 128, 128, 0);
+            color: rgba(0, 100, 0, 0.7);
+            border-radius: 2rem;
+        }
+
+        select {
+            padding: 1.2rem;
+            font-size: 2rem;
+            width: 100%;
+            margin-top: -1rem;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(128, 128, 128, 0);
+            color: rgba(0, 100, 0, 0.7);
+            border-radius: 2rem;
         }
 
         .input-wrapper input:focus,
         .input-wrapper input:valid,
         .input-wrapper select:focus,
         .input-wrapper select:valid {
-            border: 1px solid rgb(0, 255, 0);
+            border: 1px solid rgb(0, 150, 0);
         }
 
         .input-wrapper input::-webkit-outer-spin-button,
@@ -152,11 +167,42 @@
 
         }
 
+        .btn-success,
+        .btn-outline-success {
+            padding: 4px 36px 4px 36px;
+            border-radius: 12px;
+        }
 
         @media screen and (max-width:460px) {
             html {
                 font-size: 52%;
             }
+        }
+
+        /* Animation purpose only */
+        .hiddenContainer {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 0.5s;
+        }
+
+        .hiddenInput {
+            filter: blur(2px);
+            opacity: 0;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+            transition: all 0.5s;
+        }
+
+        .shownInput {
+            opacity: 1;
+            filter: blur(0);
+            transition: all 0.5s;
         }
     </style>
 </head>
@@ -166,49 +212,75 @@
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
     <!-- Box for inputs start -->
-    <div id="container">
+    <div id="container" class="hiddenContainer">
 
         <form action="/admin/<%= passKeyHash %>/LinkIOT" method="post">
-            <h1>Link IOT device <span style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
+            <h1 class="hiddenInput">Link IOT device</h1>
             <div class="input-wrapper">
-                <label for="userId">User ID : </label><br>
-                <input name="userId" type="number" required autofocus spellcheck="false" autocomplete="off">
+                <label for="userId" class="hiddenInput">User ID : </label><br>
+                <input name="userId" class="hiddenInput" type="number" required autofocus spellcheck="false"
+                    autocomplete="off">
             </div>
             <div class="input-wrapper">
-                <label for="userName">Name of user : </label><br>
-                <input name="userName" type="text" required spellcheck="false" autocomplete="off">
+                <label for="userName" class="hiddenInput">Name of user : </label><br>
+                <input name="userName" class="hiddenInput" type="text" required spellcheck="false" autocomplete="off">
             </div>
             <div class="input-wrapper">
-                <label for="Location">Location : </label><br>
-                <input name="Location" type="text" required spellcheck="false" autocomplete="off">
+                <label for="Location" class="hiddenInput">Location : </label><br>
+                <input name="Location" class="hiddenInput" type="text" required spellcheck="false" autocomplete="off">
             </div>
             <div class="input-wrapper">
-                <label for="deviceType">Device Type : </label><br>
-                <select name="deviceType">
+                <label for="deviceType" class="hiddenInput">Device Type : </label><br>
+                <select name="deviceType" class="hiddenInput">
                     <option value="Trendline">Trend Line</option>
                     <option value="Realtime">Realtime</option>
                 </select>
             </div>
 
             <div class="input-wrapper">
-                <label for="Link">Link : </label><br>
-                <input name="Link" type="url" required spellcheck="false" autocomplete="off">
+                <label for="Link" class="hiddenInput">Link : </label><br>
+                <input name="Link" class="hiddenInput" type="url" required spellcheck="false" autocomplete="off">
             </div>
-            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Link</strong></button>
+            <button class="btn btn-success" type="submit" id="SubmitButton"><strong>Link</strong></button>
         </form>
 
         <!-- Box for inputs end -->
     </div>
-    <!-- Footer text start -->
-    <h3 id="nameTextEng">©️ Fruitful technologies.</h3>
-    <!-- Footer text end -->
 
     <!-- JQuery Link  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- LoaderJs file Link  -->
     <script src="/loaderAnimation.js"></script>
-
+    <script>
+        $(window).on("load", function () {
+            setTimeout(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                        }
+                    })
+                });
+                const hiddenElements = document.querySelectorAll(".hiddenContainer");
+                const reverseHiddenElements = document.querySelectorAll(".hiddenR2L")
+                hiddenElements.forEach((el) => observer.observe(el));
+                reverseHiddenElements.forEach((el) => observer.observe(el));
+            }, 200);
+        });
+        $(window).on("load", function () {
+            setTimeout(() => {
+                let myInputs = document.getElementsByClassName("hiddenInput");
+                let timer = 100;
+                for (let i = 0; i < myInputs.length; i++) {
+                    setTimeout(() => {
+                        myInputs[i].classList.add("shownInput");
+                    }, 100 + timer);
+                    timer += 100;
+                }
+            }, 400);
+        });
+    </script>
 </body>
 
 </html>

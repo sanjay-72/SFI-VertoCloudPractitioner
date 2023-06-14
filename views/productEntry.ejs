@@ -19,11 +19,13 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@500&family=Dancing+Script:wght@700&family=Great+Vibes&family=Gruppo&family=Satisfy&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
 
         html {
@@ -58,24 +60,47 @@
             background: #ffffff;
         }
 
+        html {
+            background-image: url(./formBG.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+
         body {
-            background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
+            margin-top: -40px;
+            min-height: 100vh;
+            background-color: rgba(3, 82, 0, 0);
+        }
+
+        .myGradientBG {
+            margin-top: -40px;
+            background: linear-gradient(to bottom right, rgba(66, 200, 255, 0.7), rgba(27, 160, 0, 0.8));
+            color: rgba(3, 54, 0, 0.6);
+            background-repeat: no-repeat;
+            background-size: cover;
             background-attachment: fixed;
             min-height: 100vh;
-            font-family: 'Roboto Flex', serif;
+            padding: 5% 0 5% 0;
         }
 
 
         #nameTextEng {
             margin: 1rem;
             text-align: center;
-            color: rgb(0, 0, 0);
+            color: rgba(0, 69, 2, 0.7);
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             text-align: center;
-            color: rgb(52, 156, 0);
+            color: rgb(255, 255, 255);
+            font-weight: 800;
         }
 
         .hide {
@@ -89,15 +114,16 @@
         }
 
         #container {
+            position: relative;
+            top: 10%;
             text-align: center;
-            background-color: rgb(255, 255, 255);
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
             padding: 3rem;
-            border-radius: .7rem;
+            border-radius: 36px;
             width: 45rem;
             margin: 4rem auto;
             outline: none;
-            border: 1px solid rgb(0, 255, 64);
-            border-radius: 1rem;
             border-width: 1px;
             transition: .3s;
         }
@@ -112,7 +138,8 @@
         .input-wrapper label {
             font-size: 1.8rem;
             text-align: left;
-            color: rgb(255, 153, 0);
+            color: rgb(240, 240, 240);
+            font-weight: 600;
         }
 
         .input-wrapper input {
@@ -123,10 +150,10 @@
             font-weight: bold;
             text-align: center;
             outline: none;
-            background-color: rgba(0, 0, 0, 0);
-            border: 1px solid gray;
-            color: rgb(0, 110, 0);
-            border-radius: .5rem;
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(128, 128, 128, 0);
+            color: rgba(0, 100, 0, 0.7);
+            border-radius: 2rem;
         }
 
         .input-wrapper textarea {
@@ -158,14 +185,14 @@
         }
 
         .input-wrapper select:focus {
-            border: 1px solid rgb(0, 255, 0);
+            border: 1px solid rgb(0, 150, 0);
         }
 
         .input-wrapper input:focus,
         .input-wrapper input:valid,
         .input-wrapper textarea:valid,
         .input-wrapper select:valid {
-            border: 1px solid rgb(0, 255, 0);
+            border: 1px solid rgb(0, 150, 0);
         }
 
         #SubmitButton {
@@ -174,10 +201,41 @@
 
         }
 
+        .btn-success {
+            padding: 4px 36px 4px 36px;
+            border-radius: 12px;
+        }
+
         @media screen and (max-width:460px) {
             html {
                 font-size: 52%;
             }
+        }
+
+        /* Animation purpose only */
+        .hiddenContainer {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 0.5s;
+        }
+
+        .hiddenInput {
+            filter: blur(2px);
+            opacity: 0;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+            transition: all 0.5s;
+        }
+
+        .shownInput {
+            opacity: 1;
+            filter: blur(0);
+            transition: all 0.5s;
         }
     </style>
     <script>
@@ -196,71 +254,76 @@
     </script>
 </head>
 
-<body style="overflow-y: hidden;">
+<body>
     <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
-    <!-- Box for inputs start -->
-    <div id="container">
+    <div class="myGradientBG">
+        <!-- Box for inputs start -->
+        <div id="container" class="hiddenContainer">
 
-        <form action="/newProduct" method="post">
-            <h1>Sell on <span style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
-            <div class="input-wrapper">
-                <label for="CropName">Crop name: *</label><br>
-                <select name="CropName" id="cropNameField" onchange="checkOther()">
-                    <option value="Apple">Apple</option>
-                    <option value="Banana">Banana</option>
-                    <option value="Corn">Corn</option>
-                    <option value="Cotton">Cotton</option>
-                    <option value="Grapes">Grapes</option>
-                    <option value="Groundnut">Ground nuts</option>
-                    <option value="Guava">Guava</option>
-                    <option value="Mango">Mango</option>
-                    <option value="Mirchi">Mirchi</option>
-                    <option value="Paddy">Paddy</option>
-                    <option value="Potato">Potatoes</option>
-                    <option value="Tea">Tea leafs</option>
-                    <option value="Tomato">Tomatoes</option>
-                    <option value="Wheat">Wheat</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="input-wrapper hide">
-                <label for="OtherName" class="hide" id="otherLabel">Other Name: *</label><br>
-                <input name="OtherName" class="hide" type="text" id="otherField" value="Something"
-                    placeholder="Name of your product" required spellcheck="false" autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Description">Description (max 150 characters): *</label><br>
-                <textarea name="Description" id="DescriptionField" cols="30" rows="4" autocomplete="off"
-                    spellcheck="false" autocomplete="off" maxlength="150" required
-                    placeholder="Enter description of the crop" autofocus></textarea>
-            </div>
-            <div class="input-wrapper">
-                <label for="Cost">Cost (per Kg) ₹: *</label><br>
-                <input name="Cost" type="number" min="20" step="0.01" value="" id="CostField"
-                    placeholder="Please enter selling price" required spellcheck="false" autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Quantity">Quantity: *</label><br>
-                <input type="number" min="15" max="1000" name="Quantity" value="" required placeholder="Quantity in KGs"
-                    spellcheck="false" autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Location">Location: *</label><br>
-                <input name="Location" type="text" value="" id="locationField" placeholder="Please enter valid address"
-                    required spellcheck="false" autocomplete="off">
-            </div>
+            <form action="/newProduct" method="post">
+                <h1 class="hiddenInput">Sell on <span
+                        style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
+                <div class="input-wrapper">
+                    <label for="CropName" class="hiddenInput">Crop name: *</label><br>
+                    <select name="CropName" id="cropNameField" class="hiddenInput" onchange=checkOther()>
+                        <option value="Apple">Apple</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Corn">Corn</option>
+                        <option value="Cotton">Cotton</option>
+                        <option value="Grapes">Grapes</option>
+                        <option value="Groundnut">Ground nuts</option>
+                        <option value="Guava">Guava</option>
+                        <option value="Mango">Mango</option>
+                        <option value="Mirchi">Mirchi</option>
+                        <option value="Paddy">Paddy</option>
+                        <option value="Potato">Potatoes</option>
+                        <option value="Tea">Tea leafs</option>
+                        <option value="Tomato">Tomatoes</option>
+                        <option value="Wheat">Wheat</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-wrapper hide">
+                    <label for="OtherName" class="hide" id="otherLabel">Other Name: *</label><br>
+                    <input name="OtherName" class="hide" type="text" id="otherField" value="Something"
+                        placeholder="Name of your product" required spellcheck="false" autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <label for="Description" class="hiddenInput">Description (max 150 characters): *</label><br>
+                    <textarea name="Description" id="DescriptionField" cols="30" rows="4" autocomplete="off"
+                        spellcheck="false" autocomplete="off" maxlength="150" required
+                        placeholder="Enter description of the crop" class="hiddenInput" autofocus></textarea>
+                </div>
+                <div class="input-wrapper">
+                    <label for="Cost" class="hiddenInput">Cost (per Kg) ₹: *</label><br>
+                    <input name="Cost" class="hiddenInput" type="number" min="20" step="0.01" value="" id="CostField"
+                        placeholder="Please enter selling price" required spellcheck="false" autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <label for="Quantity" class="hiddenInput">Quantity: *</label><br>
+                    <input type="number" class="hiddenInput" min="15" max="1000" name="Quantity" value="" required
+                        placeholder="Quantity in KGs" spellcheck="false" autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <label for="Location" class="hiddenInput">Location: *</label><br>
+                    <input name="Location" class="hiddenInput" type="text" value="" id="locationField"
+                        placeholder="Please enter valid address" required spellcheck="false" autocomplete="off">
+                </div>
 
-            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Add to
-                    market</strong></button>
+                <button class="btn btn-success hiddenInput" type="submit" id="SubmitButton"><strong>Add to
+                        market</strong></button>
 
-        </form>
-        <!-- Box for inputs end -->
+            </form>
+
+            <!-- Box for inputs end -->
+        </div>
+        <!-- Footer text start -->
+        <h3 id="nameTextEng" class="hiddenInput">©️ Fruitful technologies.</h3>
+        <!-- Footer text end -->
     </div>
-    <!-- Footer text start -->
-    <h3 id="nameTextEng">©️ Fruitful technologies.</h3>
-    <!-- Footer text end -->
+
 
     <!-- JQuery Link  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -268,6 +331,35 @@
     <!-- LoaderJs file Link  -->
     <script src="/loaderAnimation.js"></script>
 
+    <script>
+        $(window).on("load", function () {
+            setTimeout(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                        }
+                    })
+                });
+                const hiddenElements = document.querySelectorAll(".hiddenContainer");
+                const reverseHiddenElements = document.querySelectorAll(".hiddenR2L")
+                hiddenElements.forEach((el) => observer.observe(el));
+                reverseHiddenElements.forEach((el) => observer.observe(el));
+            }, 200);
+        });
+        $(window).on("load", function () {
+            setTimeout(() => {
+                let myInputs = document.getElementsByClassName("hiddenInput");
+                let timer = 100;
+                for (let i = 0; i < myInputs.length; i++) {
+                    setTimeout(() => {
+                        myInputs[i].classList.add("shownInput");
+                    }, 100 + timer);
+                    timer += 100;
+                }
+            }, 400);
+        });
+    </script>
 </body>
 
 </html>

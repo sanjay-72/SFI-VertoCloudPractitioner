@@ -985,7 +985,8 @@ app.post("/newProduct", isLoggedIn, function (req, res) {
     });
     newEntry.save();
     // console.log(newEntry);
-    res.sendFile(__dirname + "/added.html");
+
+    res.render("message", { redirectTo: "/market", myMessage: "Product added successfully." });
 });
 
 
@@ -1001,7 +1002,7 @@ app.post("/myProducts", isLoggedIn, function (req, res) {
         }
     };
     deleteGivenProducts();
-    res.sendFile(__dirname + "/deleted.html");
+    res.render("message", { redirectTo: "/market", myMessage: "Successfully deleted from the market." });
 });
 
 app.post("/sendOtp", function (req, res) {
