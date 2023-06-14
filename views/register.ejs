@@ -18,10 +18,14 @@
     <link rel="stylesheet" href="/loaderStyle.css">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
         }
 
         .btn:hover,
@@ -61,36 +65,60 @@
             background: #ffffff;
         }
 
+        html {
+            background-image: url(./formBG.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
         body {
-            background: linear-gradient(to bottom right, rgb(0, 255, 0), rgb(255, 217, 0));
+            margin-top: -40px;
+            min-height: 100vh;
+            background-color: rgba(3, 82, 0, 0);
+        }
+
+        .myGradientBG {
+            margin-top: -40px;
+            background: linear-gradient(to bottom right, rgba(66, 200, 255, 0.7), rgba(27, 160, 0, 0.8));
+            color: rgba(3, 54, 0, 0.6);
+            background-repeat: no-repeat;
+            background-size: cover;
             background-attachment: fixed;
             min-height: 100vh;
-            font-family: 'Alkatra', cursive;
+            padding: 5% 0 5% 0;
         }
 
 
         #nameTextEng {
             margin: 1rem;
+            margin-top: 2rem;
             text-align: center;
             color: rgb(0, 0, 0);
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             text-align: center;
-            color: rgb(52, 156, 0);
+            color: rgb(255, 255, 255);
+            font-weight: 800;
         }
 
         #container {
+            position: relative;
+            top: 10%;
             text-align: center;
-            background-color: rgb(255, 255, 255);
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
             padding: 3rem;
-            border-radius: .7rem;
+            border-radius: 36px;
             width: 45rem;
             margin: 4rem auto;
             outline: none;
-            border: 1px solid rgb(0, 255, 64);
-            border-radius: 1rem;
             border-width: 1px;
             transition: .3s;
         }
@@ -105,7 +133,8 @@
         .input-wrapper label {
             font-size: 1.8rem;
             text-align: left;
-            color: rgb(255, 153, 0);
+            color: rgb(240, 240, 240);
+            font-weight: 600;
         }
 
         .input-wrapper input {
@@ -116,10 +145,10 @@
             font-weight: bold;
             text-align: center;
             outline: none;
-            background-color: rgba(0, 0, 0, 0);
-            border: 1px solid gray;
-            color: rgb(0, 110, 0);
-            border-radius: .5rem;
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgb(0, 150, 0);
+            color: rgba(0, 100, 0, 0.7);
+            border-radius: 2rem;
         }
 
         .input-wrapper select {
@@ -131,18 +160,18 @@
             text-align: center;
             outline: none;
             background-color: rgba(0, 0, 0, 0);
-            border: 1px solid gray;
+            border: 1px solid rgb(0, 150, 0);
             color: rgb(0, 110, 0);
-            border-radius: .5rem;
+            border-radius: 20px;
         }
 
         .input-wrapper select:focus {
-            border: 1px solid rgb(0, 255, 0);
+            border: 1px solid rgb(0, 150, 0);
         }
 
         .input-wrapper input:focus,
         .input-wrapper input:valid {
-            border: 1px solid rgb(0, 255, 0);
+            border: 1px solid rgb(0, 150, 0);
         }
 
         .input-wrapper input::-webkit-outer-spin-button,
@@ -163,7 +192,8 @@
 
         #message {
             display: none;
-            background: #f1f1f1;
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
             color: #000;
             position: relative;
             padding: 20px;
@@ -201,73 +231,76 @@
     </style>
 </head>
 
-<body style="overflow-y: hidden;">
+<body>
     <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
-    <!-- Box for inputs start -->
-    <div id="container">
+    <div class="myGradientBG">
+        <!-- Box for inputs start -->
+        <div id="container">
 
-        <form action="/userRegister" method="post">
-            <h1><strong>Register in 🍒Fruitful🍊</strong></h1>
-            <div class="input-wrapper">
-                <label for="userName">Full Name:</label><br>
-                <input name="userName" type="text" value="" id="userNameField" required autofocus spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Age">Age:</label><br>
-                <input name="age" type="number" value="" id="ageField" min="15" step="1" max="72" required autofocus
-                    spellcheck="false" autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Location">Location:</label><br>
-                <input name="Location" type="text" value="" id="locationField" required autofocus spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="Occupation">Occupation:</label><br>
-                <select name="Occupation" id="occupationField">
-                    <option value="Farmer">Farmer</option>
-                    <option value="Agriculture Officer">Agriculture Officer</option>
-                    <option value="Trader">Trader</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="input-wrapper">
-                <label for="mobileNo">Mobile No(+91):</label><br>
-                <input name="mobileNo" type="tel" value="<%=mobile %>" id="mobileNoField" required spellcheck="false"
-                    placeholder="<%=mobile %>" autocomplete="off" readonly>
-            </div>
-            <div class="input-wrapper">
-                <label for="emailId">Email id:</label><br>
-                <input name="emailId" type="email" value="" id="emailField" required autofocus spellcheck="false"
-                    autocomplete="off">
-            </div>
-            <div class="input-wrapper">
-                <label for="password">Password:</label><br>
-                <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" id="psw"
-                    required style="font-size: 1.7rem;">
-                <p style="text-align: left;font-size: 1.6rem;">if you already have account <a href="login">Click
-                        here</a>
-            </div>
-            <div id="message" style="text-align: left;">
-                <br>
-                <h3>Password must contain the following:</h3>
-                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-                <p id="number" class="invalid">A <b>number</b></p>
-                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-            </div>
+            <form action="/userRegister" method="post">
+                <h1><strong>Register</strong></h1>
+                <div class="input-wrapper">
+                    <label for="userName">Full Name:</label><br>
+                    <input name="userName" type="text" value="" id="userNameField" required autofocus spellcheck="false"
+                        autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <label for="Age">Age:</label><br>
+                    <input name="age" type="number" value="" id="ageField" min="15" step="1" max="72" required autofocus
+                        spellcheck="false" autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <label for="Location">Location:</label><br>
+                    <input name="Location" type="text" value="" id="locationField" required autofocus spellcheck="false"
+                        autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <label for="Occupation">Occupation:</label><br>
+                    <select name="Occupation" id="occupationField">
+                        <option value="Farmer">Farmer</option>
+                        <option value="Agriculture Officer">Agriculture Officer</option>
+                        <option value="Trader">Trader</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-wrapper">
+                    <label for="mobileNo">Mobile No(+91):</label><br>
+                    <input name="mobileNo" type="tel" value="<%=mobile %>" id="mobileNoField" required
+                        spellcheck="false" placeholder="<%=mobile %>" autocomplete="off" readonly>
+                </div>
+                <div class="input-wrapper">
+                    <label for="emailId">Email id:</label><br>
+                    <input name="emailId" type="email" value="" id="emailField" required autofocus spellcheck="false"
+                        autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <label for="password">Password:</label><br>
+                    <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value=""
+                        id="psw" required style="font-size: 1.7rem;">
+                    <p style="text-align: left;font-size: 1.6rem;">if you already have account <a href="login">Click
+                            here</a>
+                </div>
+                <div id="message" style="text-align: left;">
+                    <br>
+                    <h3>Password must contain the following:</h3>
+                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                    <p id="number" class="invalid">A <b>number</b></p>
+                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                </div>
 
-            <button class="btn btn-outline-warning" type="submit" id="SubmitButton"><strong>Register</strong></button>
+                <button class="btn btn-success" type="submit" id="SubmitButton"><strong>Register</strong></button>
 
-        </form>
-        <!-- Box for inputs end -->
+            </form>
+            <!-- Box for inputs end -->
+            <!-- Footer text start -->
+            <h3 id="nameTextEng">©️ Fruitful technologies.</h3>
+            <!-- Footer text end -->
+        </div>
     </div>
-    <!-- Footer text start -->
-    <h3 id="nameTextEng">©️ Fruitful technologies.</h3>
-    <!-- Footer text end -->
+
 
     <script>
         var myInput = document.getElementById("psw");

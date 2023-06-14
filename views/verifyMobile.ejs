@@ -89,6 +89,7 @@
 
         #nameTextEng {
             margin: 1rem;
+            margin-top: 1.5rem;
             text-align: center;
             color: rgba(0, 69, 2, 0.7);
         }
@@ -206,8 +207,7 @@
     <div id="container" class="hiddenContainer">
 
         <form action="/verifyOtp" method="post">
-            <h1 class="hiddenInput">Verification for <span
-                    style="font-family: 'Dancing Script', cursive;">🍒Fruitful🍊</span></h1>
+            <h1 class="hiddenInput">Verification</h1>
             <% if(error){ %>
                 <p class="errorMSG">Invalid OTP.</p>
                 <% } %>
@@ -224,7 +224,9 @@
                     <button class="btn btn-success hiddenInput" type="submit"
                         id="SubmitButton"><strong>Verify</strong></button>
         </form>
-
+        <!-- Footer text start -->
+        <h3 id="nameTextEng" class="hiddenInput">©️ Fruitful technologies.</h3>
+        <!-- Footer text end -->
         <!-- Box for inputs end -->
     </div>
 
