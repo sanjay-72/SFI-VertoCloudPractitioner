@@ -160,7 +160,7 @@
             font-weight: bold;
             text-align: center;
             outline: none;
-            background-color: rgba(0, 0, 0, 0);
+            background-color: rgba(255, 255, 255, 0.25);
             border: 1px solid rgb(0, 150, 0);
             color: rgb(0, 110, 0);
             border-radius: 20px;
@@ -186,9 +186,25 @@
 
         }
 
-        #message p {
-            padding: 10px 35px;
-            font-size: 18px;
+        .myLoginBtn {
+            background-color: rgba(255, 111, 0, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.55);
+            font-weight: 800;
+            padding: 4px 36px 4px 36px;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .myLoginBtn:hover {
+            background-color: rgba(242, 105, 0, 0.926);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgb(255, 255, 255);
+            padding: 4px 36px 4px 36px;
+            border-radius: 12px;
+        }
+
+        .myLoginBtn:active {
+            background-color: rgba(255, 150, 69, 0.926);
         }
 
         #message {
@@ -292,7 +308,8 @@
                     <p id="length" class="invalid">Minimum <b>8 characters</b></p>
                 </div>
 
-                <button class="btn btn-success" type="submit" id="SubmitButton"><strong>Register</strong></button>
+                <button class="btn btn-success myLoginBtn" type="submit"
+                    id="SubmitButton"><strong>Register</strong></button>
 
             </form>
             <!-- Box for inputs end -->

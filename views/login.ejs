@@ -168,9 +168,25 @@
 
         }
 
-        .btn-success {
+        .myLoginBtn {
+            background-color: rgba(255, 111, 0, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.55);
+            font-weight: 800;
             padding: 4px 36px 4px 36px;
             border-radius: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .myLoginBtn:hover {
+            background-color: rgba(242, 105, 0, 0.926);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgb(255, 255, 255);
+            padding: 4px 36px 4px 36px;
+            border-radius: 12px;
+        }
+
+        .myLoginBtn:active {
+            background-color: rgba(255, 150, 69, 0.926);
         }
 
 
@@ -235,7 +251,7 @@
                                 here</a>
                         </p>
                     </div>
-                    <button class="btn btn-success hiddenInput" type="submit"
+                    <button class="myLoginBtn hiddenInput" type="submit"
                         id="SubmitButton"><strong>Login</strong></button>
         </form>
 
