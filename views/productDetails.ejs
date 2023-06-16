@@ -37,6 +37,35 @@
         .Values {
             color: rgb(70, 70, 70);
         }
+
+        .deviceGraph {
+            display: inline-block;
+            width: 468px;
+            height: 260px;
+            border: 1px solid rgba(174, 174, 174, 0.65);
+            border-radius: 12px;
+            margin: 15px;
+        }
+
+        .GraphFrame {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        @media(max-width:560px) {
+            .deviceGraph {
+                width: 90%;
+            }
+
+            .GraphFrame,
+            .myControllPanel {
+                width: 100%;
+                height: 100%;
+                font-size: 70%;
+                transition: all 0.5s;
+            }
+        }
     </style>
     <!-- My CSS link -->
     <link rel="stylesheet" href="/styles.css">
@@ -77,8 +106,21 @@
     <div style="margin: 36px; text-align: center;">
         <h4 style="margin-bottom: 20px;">These are the details of the seller for the product you selected</h4>
 
-        <div style="margin-left: auto; margin-right: auto; width: 80%; text-align: left;">
-            <table style="margin-left: auto; margin-right: auto;">
+        <div style="margin-left: auto; margin-right: auto; width: 80%; text-align: center;">
+            <table style="margin-left: auto; margin-right: auto; text-align: left;">
+                <tr>
+                    <td class="details">
+                        <h6>Product Id </h6>
+                    </td>
+                    <td>
+                        <h6>:</h6>
+                    </td>
+                    <td>
+                        <h6 class="Values">
+                            <%= sellerData.ProductId %>
+                        </h6>
+                    </td>
+                </tr>
                 <tr>
                     <td class="details">
                         <h6>Product Name </h6>
@@ -89,6 +131,19 @@
                     <td>
                         <h6 class="Values">
                             <%= sellerData.ProductName %>
+                        </h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="details">
+                        <h6>Variety/Type </h6>
+                    </td>
+                    <td>
+                        <h6>:</h6>
+                    </td>
+                    <td>
+                        <h6 class="Values">
+                            <%= sellerData.Variety %>
                         </h6>
                     </td>
                 </tr>
@@ -144,36 +199,35 @@
                         </h6>
                     </td>
                 </tr>
-                <tr>
-                    <td class="details">
-                        <h6>Phone No. </h6>
-                    </td>
-                    <td>
-                        <h6>:</h6>
-                    </td>
-                    <td>
-                        <h6 class="Values">
-                            <%= sellerData.Mobile %>
-                        </h6>
-                    </td>
-                </tr>
             </table>
+            <br>
+            <% if(sellerData.link !="NA" ){ %>
+                <h2>Sensor graph where product is grown.</h2>
+                <div class="deviceGraph">
+                    <iframe src="<%= sellerData.link %>" class="GraphFrame" frameborder="0"></iframe>
+                </div>
+                <% } else {%>
+                    <br>
+                    <br>
+                    <% } %>
         </div>
     </div>
 
-    <!-- Vanilla tilt -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
-        integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <%- include("footer") -%>
 
-    <!-- JQuery Link  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Vanilla tilt -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"
+            integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- LoaderJs file Link  -->
-    <script src="/loaderAnimation.js"></script>
+        <!-- JQuery Link  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- JavaScript link -->
-    <script src="/sellerInfo.js"></script>
+        <!-- LoaderJs file Link  -->
+        <script src="/loaderAnimation.js"></script>
+
+        <!-- JavaScript link -->
+        <script src="/sellerInfo.js"></script>
 </body>
 
 </html>

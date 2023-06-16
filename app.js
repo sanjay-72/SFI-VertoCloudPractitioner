@@ -347,17 +347,17 @@ app.get("/myProducts", isLoggedIn, function (req, res) {
     getMyProducts();
 });
 
-app.get("/market/contactSeller/:SellerMobile/:pID", isLoggedIn, function (req, res) {
+app.get("/productDetail/:pID", isLoggedIn, function (req, res) {
     // console.log(req.params.SellerMobile);
     // console.log(req.params.pID);
     async function getSellerDetails() {
-        let mySellerData = await NewProduct.findOne({ Mobile: req.params.SellerMobile, ProductId: req.params.pID });
+        let mySellerData = await NewProduct.findOne({ ProductId: req.params.pID });
         // console.log(mySellerData);
         if (mySellerData.Mobile == req.user.mobileNo) {
             res.redirect("/messageRoute?Message=You are the seller of this product.");
         }
         else if (mySellerData != null) {
-            res.render("sellerInfo", {
+            res.render("productDetails", {
                 name: req.user.userName,
                 sellerData: mySellerData
             });
