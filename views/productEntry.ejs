@@ -259,20 +259,6 @@
             transition: all 0.5s;
         }
     </style>
-    <script>
-        function checkOther() {
-            if (document.getElementById("cropNameField").value == "Other") {
-                document.getElementById("otherLabel").classList.remove("hide");
-                document.getElementById("otherField").classList.remove("hide");
-                document.getElementById("otherField").value = "";
-            }
-            else {
-                document.getElementById("otherLabel").classList.add("hide");
-                document.getElementById("otherField").classList.add("hide");
-                document.getElementById("otherField").value = "Something";
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -303,6 +289,12 @@
                         <option value="Tomato">Tomatoes</option>
                         <option value="Wheat">Wheat</option>
                         <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-wrapper">
+                    <label for="Variety" class="hiddenInput">Variety: *</label><br>
+                    <select name="Variety" id="VarietyID" class="hiddenInput">
+                        <option value="Normal">Normal</option>
                     </select>
                 </div>
                 <div class="input-wrapper hide">
@@ -389,6 +381,171 @@
                 }
             }, 400);
         });
+    </script>
+    <script>
+        let VarietiesOptions = document.getElementById("VarietyID");
+        function checkOther() {
+            let CropName = document.getElementById("cropNameField").value;
+            if (CropName == "Other") {
+                document.getElementById("otherLabel").classList.remove("hide");
+                document.getElementById("otherField").classList.remove("hide");
+                document.getElementById("otherField").value = "";
+            }
+            else {
+                document.getElementById("otherLabel").classList.add("hide");
+                document.getElementById("otherField").classList.add("hide");
+                document.getElementById("otherField").value = "Something";
+            }
+            if (CropName == "Apple") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Kashmiri Apple">Kashmiri Apple</option>
+                <option value="McIntosh Apple">McIntosh Apple</option>
+                <option value="Granny Smith">Granny Smith</option>
+                <option value="Honey Crisp">Honey Crisp</option>
+                <option value="Golden Delicious">Golden Delicious</option>`
+            }
+
+            else if (CropName == "Banana") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Cavendish">Cavendish</option>
+                <option value="Plantain">Plantain</option>
+                <option value="Manzano">Manzano</option>
+                <option value="Burro">Burro</option>
+                <option value="Red Banana">Red Banana</option>`
+            }
+
+            else if (CropName == "Corn") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Ambrosia Hybrid">Ambrosia Hybrid</option>
+                <option value="Jubilee Hybrid">Jubilee Hybrid</option>
+                <option value="Honey Select Hybrid">Honey Select Hybrid</option>
+                <option value="Golden Bantam">Golden Bantam</option>
+                <option value="Cream Corn">Cream Corn</option>`
+            }
+
+            else if (CropName == "Cotton") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Cambric">Cambric</option>
+                <option value="Canvas">Canvas</option>
+                <option value="Corduroy">Corduroy</option>
+                <option value="Denim">Denim</option>
+                <option value="Flannel">Flannel</option>`
+            }
+
+            else if (CropName == "Grapes") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Sultana">Sultana</option>
+                <option value="Anab-e-Shahi">Anab-e-Shahi</option>
+                <option value="Dilkush">Dilkush</option>
+                <option value="Sharad Seedless">Sharad Seedless</option>
+                <option value="Perlette">Perlette</option>
+                <option value="Angoor">Angoor</option>`
+            }
+
+            else if (CropName == "Groundnut") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Kadiri">Kadiri</option>
+                <option value="BG">BG</option>
+                <option value="Kuber">Kuber</option>
+                <option value="Gaug">Gaug</option>
+                <option value="Chandra">Chandra</option>
+                <option value="Kaushal">Kaushal</option>`
+            }
+
+            else if (CropName == "Guava") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Lalit">Lalit</option>
+                <option value="Red Flesh">Red Flesh</option>
+                <option value="Allahabad Safeda">Allahabad Safeda</option>
+                <option value="Surkha">Surkha</option>
+                <option value="Pant Prabhat">Pant Prabhat</option>`
+            }
+
+            else if (CropName == "Mango") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Banganapalle">Banganapalle</option>
+                <option value="Payri">Payri</option>
+                <option value="Kesar">Kesar</option>
+                <option value="Alphonso">Alphonso</option>
+                <option value="Dasheri">Dasheri</option>`
+            }
+
+            else if (CropName == "Mirchi") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Green Jwala">Green Jwala</option>
+                <option value="Teja">Teja</option>
+                <option value="Lavangi">Lavangi</option>
+                <option value="Boot Jolokia">Boot Jolokia</option>
+                <option value="Dhani/Kanthari">Dhani/Kanthari</option>`
+            }
+
+            else if (CropName == "Paddy") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Aus Rice">Aus Rice</option>
+                <option value="Aman Rice">Aman Rice</option>
+                <option value="Boro Rice">Boro Rice</option>
+                <option value="Sona Masoori">Sona Masoori</option>`
+            }
+
+            else if (CropName == "Potato") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Kurfi Chandramukhi">Kurfi Chandramukhi</option>
+                <option value="Kurfi Jyothi">Kurfi Jyothi</option>
+                <option value="Kurfi Sindoori">Kurfi Sindoori</option>
+                <option value="Chipsona">Chipsona</option>
+                <option value="Kritika Pushkarna">Kritika Pushkarna</option>`
+            }
+
+            else if (CropName == "Tea") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Darjeeling First Flush">Darjeeling First Flush</option>
+                <option value="Darjeeling Second Flush">Darjeeling Second Flush</option>
+                <option value="Assam Leaf">Assam Leaf</option>
+                <option value="Tulsi Ritual">Tulsi Ritual</option>
+                <option value="Cardamom Classic">Cardamom Classic</option>
+                <option value="Lemongrass Classic">Lemongrass Classic</option>`
+            }
+
+            else if (CropName == "Tomato") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Early Girl">Early Girl</option>
+                <option value="San Marzano">San Marzano</option>
+                <option value="Better boy">Better boy</option>
+                <option value="Roma Tomato">Roma Tomato</option>
+                <option value="Cherry Tomato">Cherry Tomato</option>`
+            }
+
+            else if (CropName == "Wheat") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>
+                <option value="Durum">Durum</option>
+                <option value="Spelt">Spelt</option>
+                <option value="Emmer">Emmer</option>
+                <option value="Einkorn">Einkorn</option>
+                <option value="Khorasan">Khorasan</option>`
+            }
+
+            else if (CropName == "Other") {
+                VarietiesOptions.innerHTML =
+                    `<option value="Normal">Normal</option>`
+            }
+        }
+        checkOther();
+
+
     </script>
 </body>
 

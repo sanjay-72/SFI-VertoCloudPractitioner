@@ -64,6 +64,7 @@ const dbURL = process.env.DBURL;
 mongoose.connect(dbURL);
 const ProductSchema = new mongoose.Schema({
     ProductId: Number,
+    Variety: String,
     ProductName: String,
     Description: String,
     cost: Number,
@@ -129,7 +130,7 @@ const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema)
 // Structures for adding new elements as per their Schemas
 
 // var newEntry = new NewProduct({
-//     ProductId: 225, ProductName: "String", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769, emailId:"sanjaykumarkonakandla@gmail.com", Quantity:25
+//     ProductId: 225, ProductName: "String",Variety: "Normal", Description: "ajlfsdkj asodijf;masd lj aosdjf asdjf jjw oirj", cost: 500, imageURL: "String", SellerName: "String", SellerAddress: "String", Mobile: 9515306769, emailId:"sanjaykumarkonakandla@gmail.com", Quantity:25
 // });
 // newEntry.save();
 
@@ -985,7 +986,7 @@ app.post("/newProduct", isLoggedIn, function (req, res) {
     // console.log(req.body);
     productId = productId + 1;
     var newEntry = new NewProduct({
-        ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, link: req.body.deviceUsed, Mobile: req.user.mobileNo, emailId: req.user.emailId, Quantity: req.body.Quantity, OtherName: req.body.OtherName
+        ProductId: productId, ProductName: req.body.CropName, Variety: req.body.Variety, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, link: req.body.deviceUsed, Mobile: req.user.mobileNo, emailId: req.user.emailId, Quantity: req.body.Quantity, OtherName: req.body.OtherName
     });
     newEntry.save();
     // console.log(newEntry);
