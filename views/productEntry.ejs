@@ -331,7 +331,17 @@
                     <input name="Location" class="hiddenInput" type="text" value="" id="locationField"
                         placeholder="Please enter valid address" required spellcheck="false" autocomplete="off">
                 </div>
-
+                <div class="input-wrapper">
+                    <label for="deviceUsed" class="hiddenInput">Choose Sensor area: *</label><br>
+                    <select name="deviceUsed">
+                        <option value="NA">NA</option>
+                        <% for(let i=0;i<sensors.length;i++) { %>
+                            <option value="<%=sensors[i].Link%>">
+                                <%=sensors[i].deviceName%>
+                            </option>
+                            <% } %>
+                    </select>
+                </div>
                 <button class="myLoginBtn hiddenInput" type="submit" id="SubmitButton"><strong>Add to
                         market</strong></button>
 

@@ -70,6 +70,7 @@ const ProductSchema = new mongoose.Schema({
     imageURL: String,
     SellerName: String,
     SellerAddress: String,
+    link: String,
     Mobile: Number,
     emailId: String,
     Quantity: Number,
@@ -92,7 +93,7 @@ const User = mongoose.model('User', UserSchema);
 
 const DeviceSchema = new mongoose.Schema({
     userId: Number,
-    userName: String,
+    deviceName: String,
     Location: String,
     deviceType: String,
     Link: String
@@ -134,7 +135,7 @@ const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema)
 
 // var newDevice = new Device({
 //     userId: req.user.usersId,
-//     userName: req.user.userName,
+//     deviceName: req.user.userName,
 //     Location: req.user.Location,
 //     deviceType: req.user.deviceType,
 //     Link: "https://thingspeak.com/channels/2065077/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15",
@@ -323,7 +324,11 @@ app.get("/logout", isLoggedIn, function (req, res) {
 });
 
 app.get("/newProduct", isLoggedIn, function (req, res) {
-    res.render("productEntry", {});
+    async function sendResponse() {
+        let userSensors = await Device.find({ userId: req.user.usersId, deviceType: "Trendline" });
+        res.render("productEntry", { sensors: userSensors });
+    }
+    sendResponse();
 });
 
 app.get("/myProducts", isLoggedIn, function (req, res) {
@@ -930,7 +935,6 @@ app.get("/AnalyzeSensorData", isLoggedIn, function (req, res) {
         res.render("analyzeSensorData", { trendlineDevices: trendLine });
     }
     getDeviceData();
-
 });
 //Get routes end
 
@@ -981,7 +985,7 @@ app.post("/newProduct", isLoggedIn, function (req, res) {
     // console.log(req.body);
     productId = productId + 1;
     var newEntry = new NewProduct({
-        ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, Mobile: req.user.mobileNo, emailId: req.user.emailId, Quantity: req.body.Quantity, OtherName: req.body.OtherName
+        ProductId: productId, ProductName: req.body.CropName, Description: req.body.Description, cost: parseFloat(req.body.Cost), imageURL: "String", SellerName: req.user.userName, SellerAddress: req.body.Location, link: req.body.deviceUsed, Mobile: req.user.mobileNo, emailId: req.user.emailId, Quantity: req.body.Quantity, OtherName: req.body.OtherName
     });
     newEntry.save();
     // console.log(newEntry);
@@ -1110,7 +1114,7 @@ app.post(`/admin/${adminPassKeyHash}/LinkIOT`, isLoggedIn, isAdmin, function (re
         if (presence) {
             var newDevice = new Device({
                 userId: req.body.userId,
-                userName: req.body.userName,
+                deviceName: req.body.deviceName,
                 Location: req.body.Location,
                 deviceType: req.body.deviceType,
                 Link: req.body.Link
@@ -1309,7 +1313,7 @@ app.post("/analyzeSensorData", function (req, res) {
         for (var i = 0; i < req.body.links.length; i++) {
             var newDevice = new Device({
                 userId: req.user.usersId,
-                userName: req.user.userName,
+                deviceName: req.body.deviceNames[i],
                 Location: req.user.Location,
                 deviceType: "Trendline",
                 Link: req.body.links[i]

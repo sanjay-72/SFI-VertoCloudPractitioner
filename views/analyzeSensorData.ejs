@@ -185,6 +185,8 @@
                     <form action="/analyzeSensorData" method="post">
                         <% for(var i=0; i<trendlineDevices.length; i++) { %>
                             <input type="text" class="outputLinkFields" name="links" style="display: none;">
+                            <input type="text" value="<%=trendlineDevices[i].deviceName%>" name="deviceNames"
+                                style="display: none;">
                             <% } %>
                                 <button type="submit" class="btn btn-success">Save Configuration</button>
                     </form>
