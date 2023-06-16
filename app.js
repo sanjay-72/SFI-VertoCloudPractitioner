@@ -40,6 +40,7 @@ app.set('view engine', 'ejs');
 
 let usersId = 10000;
 let productId = 720000;
+let bulkOrderId = 10;
 let adminPassKeyHash = md5((process.env.ADMIN_PLAIN));
 
 //Twilio Client Initialisation
@@ -127,6 +128,17 @@ const costOfComponentSchema = new mongoose.Schema({
 });
 const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema);
 
+const BulkOrderSchema = new mongoose.Schema({
+    OrderId: Number,
+    SellerId: Number,
+    BuyerId: Number,
+    ProductId: Number,
+    BidAmount: Number,
+    MarketPrice: Number,
+    Quantity: Number
+});
+const BulkOrder = mongoose.model("BulkOrder", BulkOrderSchema);
+
 // Structures for adding new elements as per their Schemas
 
 // var newEntry = new NewProduct({
@@ -175,14 +187,22 @@ const costOfComponent = mongoose.model('costOfComponent', costOfComponentSchema)
 
 // Updating Ids with the last ID's so that Id's will not get repeated even if the server is restarted.
 async function updateIds() {
-    let LastProduct = await NewProduct.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
-    let LastUser = await User.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
-    // console.log(LastProduct.ProductId);
-    // console.log(LastUser.usersId);
-    if (LastProduct != null)
-        productId = LastProduct.ProductId;
-    if (LastUser != null)
-        usersId = LastUser.usersId;
+    try {
+        let LastProduct = await NewProduct.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
+        let LastUser = await User.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
+        let LastBulk = await BulkOrder.findOne({}).sort({ field: 'asc', _id: -1 }).limit(1);
+        // console.log(LastProduct.ProductId);
+        // console.log(LastUser.usersId);
+        if (LastProduct != null)
+            productId = LastProduct.ProductId;
+        if (LastUser != null)
+            usersId = LastUser.usersId;
+        if (LastBulk != null)
+            bulkOrderId = LastBulk.OrderId;
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 updateIds();
 
@@ -1092,6 +1112,16 @@ app.post("/create-checkout-session", isLoggedIn, async (req, res) => {
     checkMatch();
 });
 
+app.get("/bulkRequestForm/:pId", isLoggedIn, function (req, res) {
+    async function execute() {
+        let productData = await NewProduct.findOne({ ProductId: req.params.pId });
+        let sellerData = await User.findOne({ mobileNo: productData.Mobile });
+        // console.log(sellerData);
+        res.render("bulkOrderForm", { productData: productData, sellerData: sellerData });
+    }
+    execute();
+});
+
 app.post("/ordersReceived", isLoggedIn, function (req, res) {
     let completedProducts = Object.keys(req.body);
     // console.log(Object.keys(req.body));
@@ -1328,6 +1358,127 @@ app.post("/analyzeSensorData", function (req, res) {
     // console.log(req.body.links[0]);
 });
 
+app.post("/sendBulkRequest", function (req, res) {
+    // console.log(req.body);
+    async function notifySeller() {
+        let productData = await NewProduct.findOne({ ProductId: req.body.ProductId });
+        let mySellerData = await User.findOne({ mobileNo: productData.Mobile });
+        let info = await transporter.sendMail({
+            from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+            to: mySellerData.emailId,
+            subject: `✅ You received a BULK order for Product with Product Id : ${req.body.ProductId}`,
+            html: `
+                <div style="display: flex; justify-content: center;">
+                    <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%"
+                        cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="background-color: #00a033; text-align: center;">
+                                <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                            </td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td>
+                                <img style="height: 50px;margin-top:30px;" src="https://s11.gifyu.com/images/croppedTitle.gif">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: center; font-size: 24px; font-weight: bold; color: #015f11;">
+                                You received a bulk order for your product.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                <h4>Hello dear ${mySellerData.userName},</h4>
+                                <p>Greetings of the day,
+                                    <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This email is to inform you that you have received
+                                    a bulk order for ${productData.ProductName}(s) at ₹${req.body.BidAmount}/- for ${req.body.Quantity} KGs.You can visit our Fruitful app to know more.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                Here are the details for your order. To know more please visit our portal.
+                                <table style="margin: 10px; margin-left: 20px;">
+                                    <tr>
+                                        <td>
+                                            Customer Name
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.userName}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Customer Email
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.emailId}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Customer Mobile.no
+                                        </td>
+                                        <td>
+                                            :
+                                        </td>
+                                        <td>
+                                            ${req.user.mobileNo}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; text-align: center;">
+                                <a href=${process.env.SERVER_URL}
+                                    style="display: inline-block; background-color: #66cc33; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Visit
+                                    Now</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                &copy; 2023 FruitFul Technologies. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            `,
+        });
+    }
+
+
+    async function getDetails(req) {
+        let productData = await NewProduct.findOne({ ProductId: req.body.ProductId });
+        let sellerData = await User.findOne({ mobileNo: productData.Mobile });
+        // console.log("Req Data", req.body);
+        if (sellerData.usersId == req.user.usersId) {
+            res.render("message", { redirectTo: "/market", myMessage: "😅 You are the seller of this product." });
+        }
+        else {
+            bulkOrderId += 1;
+            var newBulkOrder = new BulkOrder({
+                OrderId: bulkOrderId,
+                SellerId: sellerData.usersId,
+                BuyerId: req.user.usersId,
+                ProductId: productData.ProductId,
+                BidAmount: req.body.BidAmount,
+                MarketPrice: productData.cost,
+                Quantity: req.body.Quantity
+            })
+            newBulkOrder.save();
+            notifySeller();
+            res.render("message", { redirectTo: "/market", myMessage: "Your bulk order request is successfully processed." });
+        }
+    }
+    getDetails(req);
+});
 //Post routes end
 
 // App listening to port 80 or port specified in ENV variables

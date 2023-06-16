@@ -178,14 +178,10 @@
                                         style="width: 20px; height: auto;margin-bottom: 2px;"></a>
                         </h5>
                         <% } %>
-                            <h4><span class="costPrice" id="<%= productList[i].ProductId %>priceId">(₹<%=
-                                        productList[i].cost %>/Kg)</span></h4>
-                            <a href="contactSeller/<%= productList[i].Mobile %>/<%= productList[i].ProductId %>">
-                                <button style="margin-bottom: 5px;padding: 2px 5px 2px 5px; width: 154px;"
-                                    class="btn btn-outline-success">Contact
-                                    Seller</button>
-                            </a>
-                            <form action="/create-checkout-session" method="post" style="padding: 6px 0 14px;">
+                            <h4><span class="costPrice" id="<%= productList[i].ProductId %>priceId">(₹
+                                    <%=productList[i].cost %>/Kg)
+                                </span></h4>
+                            <form action="/create-checkout-session" method="post" style="padding: 6px 0 2px;">
                                 <input type="number" name="ProductId" value="<%= productList[i].ProductId %>"
                                     style="display: none;">
                                 <input type="number" name="cost" value="<%= productList[i].cost %>"
@@ -213,6 +209,11 @@
                                                                         <% } %>
                                 </select>
                             </form>
+                            <a href="/bulkRequestForm/<%= productList[i].ProductId %>">
+                                <button style="margin-bottom: 5px;padding: 2px 5px 2px 5px; width: 154px;"
+                                    class="btn btn-outline-success">Bulk
+                                    Request</button>
+                            </a>
             </div>
             <% } %>
     </div>
