@@ -927,10 +927,6 @@ app.get("/weatherData", isLoggedIn, function (req, res) {
     res.render("weatherForm", {});
 });
 
-app.get("/seeComponents", isLoggedIn, function (req, res) {
-    res.render("iotComponents", { name: req.user.userName });
-});
-
 app.get("/caluclatePrice", isLoggedIn, function (req, res) {
     async function getServicePrices() {
         let data = await costOfComponent.findOne({});

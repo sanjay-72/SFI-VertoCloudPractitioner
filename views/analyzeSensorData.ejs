@@ -104,9 +104,9 @@
             <a href="/" class="navDivBtns"><button>Home</button></a>
             <a href="/i-Smart" class="navDivBtns"><button
                     style="background-color: green;color: white;">i-Smart</button></a>
-            <a href="/market" class="navDivBtns"><button>Sell/Buy</button></a>
+            <a href="/market" class="navDivBtns"><button>Market</button></a>
             <a href="/newProduct" class="navDivBtns"><button>Sell Online</button></a>
-            <a href="/myProducts" class="navDivBtns"><button>My Products</button></a>
+            <a href="/myProducts"><button id="myAccountBtn"><strong>My Account</strong></button></a>
         </div>
     </div>
     <!-- Nav Bar End  -->
@@ -193,6 +193,8 @@
                 </div>
             </div>
             <br>
+            <p style="color: rgba(223, 0, 0, 0.79);">*Moisture Content should be between 25 and 75 for better yielding.
+            </p>
             <% for(var i=0; i<trendlineDevices.length; i++) { %>
                 <div class="deviceGraph">
                     <iframe src="<%= trendlineDevices[i].Link %>" class="GraphFrame" frameborder="0"></iframe>

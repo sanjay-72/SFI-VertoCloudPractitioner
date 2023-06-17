@@ -229,6 +229,30 @@ span {
     color: white;
 }
 
+#myAccountBtn {
+    position: absolute;
+    padding: 2px 20px 2px 20px;
+    right: 2%;
+    font-size: 1.2rem;
+    background-color: rgb(0, 143, 0);
+    margin-top: 4px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+#myAccountBtn:hover {
+    background-color: rgb(0, 110, 0);
+    color: white;
+}
+
+@media(max-width:768px) {
+    #myAccountBtn {
+        position: static;
+        margin: 3px;
+    }
+}
+
 .QuoteDiv {
     text-align: center;
     background-color: #3d5d36;
