@@ -42,7 +42,7 @@ $(document).ready(function () {
     $('#checkBtn').click(function () {
         checked = $("input[type=checkbox]:checked").length;
         if (!checked) {
-            alert("You must select atleast one product to remove from market.");
+            alert("You must select atleast one product.");
             return false;
         }
     });

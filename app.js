@@ -132,6 +132,7 @@ const BulkOrderSchema = new mongoose.Schema({
     OrderId: Number,
     SellerId: Number,
     BuyerId: Number,
+    Status: String,
     ProductId: Number,
     BidAmount: Number,
     MarketPrice: Number,
@@ -957,6 +958,29 @@ app.get("/AnalyzeSensorData", isLoggedIn, function (req, res) {
     }
     getDeviceData();
 });
+
+app.get("/BulkRequests", isLoggedIn, function (req, res) {
+    async function processBulkOrders() {
+        let pictures = ["Products", "Products1", "Products2"];
+        let finalProductList = await BulkOrder.find({ SellerId: req.user.usersId });
+        finalProductList = JSON.stringify(finalProductList);
+        finalProductList = JSON.parse(finalProductList);
+        for (let i = 0; i < finalProductList.length; i++) {
+            let productDetails = await NewProduct.findOne({ ProductId: finalProductList[i].ProductId });
+            let buyerDetails = await User.findOne({ usersId: finalProductList[i].BuyerId });
+            finalProductList[i]["MarketQuantity"] = productDetails.Quantity;
+            finalProductList[i]["ProductName"] = productDetails.ProductName;
+            finalProductList[i]["OtherName"] = productDetails.OtherName;
+            finalProductList[i]["Variety"] = productDetails.Variety;
+            finalProductList[i]["BuyerName"] = buyerDetails.userName;
+            finalProductList[i]["BuyerEmail"] = buyerDetails.emailId;
+            finalProductList[i]["BuyerMobile"] = buyerDetails.mobileNo;
+        }
+        // console.log(finalProductList);
+        res.render("bulkRequests", { name: req.user.userName, productList: finalProductList, myPictures: pictures });
+    }
+    processBulkOrders();
+});
 //Get routes end
 
 //Post routes start
@@ -1467,6 +1491,7 @@ app.post("/sendBulkRequest", function (req, res) {
                 OrderId: bulkOrderId,
                 SellerId: sellerData.usersId,
                 BuyerId: req.user.usersId,
+                Status: "Pending",
                 ProductId: productData.ProductId,
                 BidAmount: req.body.BidAmount,
                 MarketPrice: productData.cost,
@@ -1474,10 +1499,30 @@ app.post("/sendBulkRequest", function (req, res) {
             })
             newBulkOrder.save();
             notifySeller();
-            res.render("message", { redirectTo: "/market", myMessage: "Your bulk order request is successfully processed." });
+            res.render("message", { redirectTo: "/market", myMessage: "Your bulk order request is successfully sent to seller." });
         }
     }
     getDetails(req);
+});
+app.post("/BulkRequests", isLoggedIn, function (req, res) {
+    // console.log(req.body);
+    // console.log(Object.keys(req.body));
+    let approvingProducts = Object.keys(req.body);
+
+    async function approveGivenProducts() {
+        for (var i = 0; i < approvingProducts.length; i++) {
+            await BulkOrder.updateOne({ OrderId: parseInt(approvingProducts[i]) }, { Status: "Approved" });
+        }
+    };
+    approveGivenProducts();
+    res.render("message", { redirectTo: "/BulkRequests", myMessage: "Successfully Approved the selected requests." });
+});
+app.post("/ClearBulkRequests", isLoggedIn, function (req, res) {
+    async function deletePendingRequests() {
+        await BulkOrder.deleteMany({ SellerId: req.user.usersId, Status: "Pending" });
+        res.render("message", { redirectTo: "/BulkRequests", myMessage: "Cleared all pending requests." });
+    }
+    deletePendingRequests();
 });
 //Post routes end
 
