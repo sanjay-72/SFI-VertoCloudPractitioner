@@ -966,15 +966,17 @@ app.get("/BulkRequests", isLoggedIn, function (req, res) {
         finalProductList = JSON.stringify(finalProductList);
         finalProductList = JSON.parse(finalProductList);
         for (let i = 0; i < finalProductList.length; i++) {
-            let productDetails = await NewProduct.findOne({ ProductId: finalProductList[i].ProductId });
-            let buyerDetails = await User.findOne({ usersId: finalProductList[i].BuyerId });
-            finalProductList[i]["MarketQuantity"] = productDetails.Quantity;
-            finalProductList[i]["ProductName"] = productDetails.ProductName;
-            finalProductList[i]["OtherName"] = productDetails.OtherName;
-            finalProductList[i]["Variety"] = productDetails.Variety;
-            finalProductList[i]["BuyerName"] = buyerDetails.userName;
-            finalProductList[i]["BuyerEmail"] = buyerDetails.emailId;
-            finalProductList[i]["BuyerMobile"] = buyerDetails.mobileNo;
+            if (finalProductList[i].Status == "Pending") {
+                let productDetails = await NewProduct.findOne({ ProductId: finalProductList[i].ProductId });
+                let buyerDetails = await User.findOne({ usersId: finalProductList[i].BuyerId });
+                finalProductList[i]["MarketQuantity"] = productDetails.Quantity;
+                finalProductList[i]["ProductName"] = productDetails.ProductName;
+                finalProductList[i]["OtherName"] = productDetails.OtherName;
+                finalProductList[i]["Variety"] = productDetails.Variety;
+                finalProductList[i]["BuyerName"] = buyerDetails.userName;
+                finalProductList[i]["BuyerEmail"] = buyerDetails.emailId;
+                finalProductList[i]["BuyerMobile"] = buyerDetails.mobileNo;
+            }
         }
         // console.log(finalProductList);
         res.render("bulkRequests", { name: req.user.userName, productList: finalProductList, myPictures: pictures });
