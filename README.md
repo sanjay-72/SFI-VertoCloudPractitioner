@@ -29,7 +29,8 @@ in it is making this an all-rounder solution for many of the problems that are f
 ![Market Architecture](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/e19a2fcb-37a0-47ec-a92d-a986c4704044)
 
 # High level Architecture (i-Smart)
-![i-Smart Architecture](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/8a4fb38f-3e9f-4691-b626-ea4964ce5c42)
+![i-Smart Architecture](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/834e08d5-f138-4278-b0c5-a2d657167bc3)
+
 
 # Features
 1. Secured HTTPs protocal is used with domain name.
