@@ -274,6 +274,11 @@ span {
     padding: 30px;
 }
 
+.featurette-heading span {
+    color: rgba(0, 128, 0, 0.7);
+    font-size: 3.6rem;
+}
+
 @media(max-width:768px) {
     .myFeaturetteImage {
         margin: 12px;
@@ -282,6 +287,10 @@ span {
 
     .MyNavDiv {
         padding: 0;
+    }
+
+    .featurette-heading span {
+        font-size: 2.6rem;
     }
 }
 
