@@ -183,10 +183,16 @@
                                         <%=productList[i].BuyerName%>
                                             <br>
                                             <%=productList[i].BuyerMobile%>
-                                                </p>
 
-                                                <input style="padding: 10px;" type="checkbox"
+                                                <br>
+                                                <input style="padding: 10px; padding-top: 0;" type="checkbox"
                                                     name=<%=productList[i].OrderId %> >
+                                                <br><br>
+                                                <p style="margin-bottom: 0;font-size: 0.9rem;"><a
+                                                        style="color: rgba(210, 0, 0, 0.775);"
+                                                        href="/ReportIssue?ItemId=<%= productList[i].OrderId %>">Report
+                                                        as fraud</a>
+                                                </p>
                         </div>
                         <% } %>
                             <% } %>

@@ -147,6 +147,19 @@ const CropAdviseSchema = new mongoose.Schema({
 });
 const CropAdvice = mongoose.model("CropAdvice", CropAdviseSchema);
 
+const FraudReportSchema = new mongoose.Schema({
+    ItemId: Number,
+    ReporterID: Number
+});
+const FraudReport = mongoose.model("FraudReport", FraudReportSchema);
+
+//Testing Purpose
+const DummySchema = new mongoose.Schema({
+    item: Number,
+    name: String
+});
+const Dummy = mongoose.model("Dummy", DummySchema);
+
 // Structures for adding new elements as per their Schemas
 
 // var newEntry = new NewProduct({
@@ -986,6 +999,84 @@ app.get("/BulkRequests", isLoggedIn, function (req, res) {
     }
     processBulkOrders();
 });
+
+app.get("/ReportIssue", isLoggedIn, function (req, res) {
+    // console.log(req.query);
+    async function notifyAdmin() {
+        let info = await transporter.sendMail({
+            from: `"Manager of Sales" <${process.env.EMAIL_ID}>`,
+            to: process.env.EMAIL_ID,
+            subject: `New fraud Report by ${req.user.userName}`,
+            html: `
+                        <div style="display: flex; justify-content: center;">
+                            <table style="max-width: 600px; background-color: rgb(244, 255, 241); margin: 0 auto;" width="100%"
+                                cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="background-color: #00ff08; text-align: center;">
+                                        <img style="max-width: 100%;" src="https://i.ibb.co/rZnQ8Hn/agri1.jpg" alt="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: justify; font-size: 16px; color: #3d5d36;">
+                                        <h4>Hello dear Admin,</h4>
+                                        <p>Greetings of the day, ${req.user.userName} is thinking that item with id ${req.query.ItemId} is a fraud. 
+                                        Kindly verify that item, its seller details and his activity in the website. If you feel it's really a fraud 
+                                        then <strong>Immediately block the fraudster</strong> and acknowledge the same to ${req.user.userName}.
+                                            <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                        <table style="margin-left: 20px;">
+                                            <tr>
+                                                <td>
+                                                    Fraud item Id
+                                                </td>
+                                                <td>
+                                                    :
+                                                </td>
+                                                <td>
+                                                    ${req.query.ItemId}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Reporter Id
+                                                </td>
+                                                <td>
+                                                    :
+                                                </td>
+                                                <td>
+                                                    ${req.user.usersId}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: center;">
+                                        <a href=${process.env.SERVER_URL}
+                                            style="display: inline-block; background-color: #66cc33; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Visit
+                                            Now</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="background-color: #3d5d36; text-align: center; padding: 6px; color: #ffffff; font-size: 14px;">
+                                        &copy; 2023 FruitFul Technologies. All rights reserved.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        `,
+        });
+        // console.log(info.messageId);
+    }
+    var myFraudReport = new FraudReport({
+        ItemId: req.query.ItemId,
+        ReporterID: req.user.usersId
+    });
+    myFraudReport.save();
+    notifyAdmin();
+    res.render("message", { redirectTo: "/market", myMessage: "Ticket has been Raised. Thank you" });
+})
 //Get routes end
 
 //Post routes start
