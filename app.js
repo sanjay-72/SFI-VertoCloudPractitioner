@@ -140,6 +140,13 @@ const BulkOrderSchema = new mongoose.Schema({
 });
 const BulkOrder = mongoose.model("BulkOrder", BulkOrderSchema);
 
+//For server side Caching of Advices by Open Ai
+const CropAdviseSchema = new mongoose.Schema({
+    location: String,
+    Advice: String
+});
+const CropAdvice = mongoose.model("CropAdvice", CropAdviseSchema);
+
 // Structures for adding new elements as per their Schemas
 
 // var newEntry = new NewProduct({
@@ -1340,8 +1347,15 @@ app.post("/checkout-for-iot", isLoggedIn, async (req, res) => {
     startPayment();
 });
 
-app.post("/CropAdvisory", function (req, res) {
+app.post("/CropAdvisory", isLoggedIn, function (req, res) {
+
+    //Standardising the user input
     let location = req.body.city;
+    location = location.toLowerCase();
+    location = location.charAt(0).toUpperCase() + location.slice(1);
+    // console.log(location);
+
+    // Ask OpenAI for the suggestion
     async function getCompletion() {
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -1350,17 +1364,38 @@ app.post("/CropAdvisory", function (req, res) {
             temperature: 0,
         });
 
+        var myNewCropAdvice = new CropAdvice({
+            location: location,
+            Advice: response.data.choices[0].text
+        });
+        myNewCropAdvice.save();
+
         // console.log(response.data.choices[0].text);
         res.render("CropAdvisory", {
             crops: response.data.choices[0].text,
             name: req.user.userName
         });
     }
-    getCompletion();
+
+    // Check Whether we already have data for that location
+    async function checkCachedData() {
+        let advice = await CropAdvice.findOne({ location: location });
+        if (advice == null) {
+            getCompletion();
+        }
+        else {
+            // console.log(advice);
+            res.render("CropAdvisory", {
+                crops: advice.Advice,
+                name: req.user.userName
+            });
+        }
+    }
+    checkCachedData();
 
 });
 
-app.post("/analyzeSensorData", function (req, res) {
+app.post("/analyzeSensorData", isLoggedIn, function (req, res) {
     async function executeMyCode() {
         await Device.deleteMany({ userId: req.user.usersId, deviceType: "Trendline" });
         for (var i = 0; i < req.body.links.length; i++) {
@@ -1380,7 +1415,7 @@ app.post("/analyzeSensorData", function (req, res) {
     // console.log(req.body.links[0]);
 });
 
-app.post("/sendBulkRequest", function (req, res) {
+app.post("/sendBulkRequest", isLoggedIn, function (req, res) {
     // console.log(req.body);
     async function notifySeller() {
         let productData = await NewProduct.findOne({ ProductId: req.body.ProductId });
