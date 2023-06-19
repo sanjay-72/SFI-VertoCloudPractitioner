@@ -393,18 +393,14 @@ app.get("/productDetail/:pID", isLoggedIn, function (req, res) {
     // console.log(req.params.pID);
     async function getSellerDetails() {
         let mySellerData = await NewProduct.findOne({ ProductId: req.params.pID });
-        // console.log(mySellerData);
-        if (mySellerData.Mobile == req.user.mobileNo) {
-            res.redirect("/messageRoute?Message=You are the seller of this product.");
-        }
-        else if (mySellerData != null) {
+        if (mySellerData != null) {
             res.render("productDetails", {
                 name: req.user.userName,
                 sellerData: mySellerData
             });
         }
         else
-            res.send("Sorry :( product already SOLD. Please refresh the market page.");
+            res.redirect("/messageRoute?Message=Sorry Product already SOLD out.");
     }
     getSellerDetails();
 });
