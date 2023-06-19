@@ -39,11 +39,13 @@ let btnState = 0;
 homeBtn = document.getElementById("homeBtn");
 iotBtn = document.getElementById("agriIOTBtn");
 marketBtn = document.getElementById("marketBtn");
+sellOnlineBtn = document.getElementById("sellOnlineBtn");
 loginBtn = document.getElementById("loginBtn");
 document.getElementById("toggle-button").addEventListener("click", () => {
     homeBtn.classList.toggle("hide");
     iotBtn.classList.toggle("hide");
     marketBtn.classList.toggle("hide");
+    sellOnlineBtn.classList.toggle("hide");
     if (loginBtn != undefined)
         loginBtn.classList.toggle("hide");
     if (btnState == 1) {

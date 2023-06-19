@@ -234,16 +234,15 @@ span {
     padding: 2px 20px 2px 20px;
     right: 2%;
     font-size: 1.2rem;
-    background-color: rgb(0, 143, 0);
     margin-top: 4px;
-    color: white;
+    color: green;
     border: none;
     border-radius: 20px;
 }
 
 #myAccountBtn:hover {
-    background-color: rgb(0, 110, 0);
-    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    text-decoration-line: underline;
 }
 
 @media(max-width:768px) {
