@@ -38,7 +38,7 @@ in it is making this an all-rounder solution for many of the problems that are f
 3. IOT integration in i-Smart portal.
 4. Live weather data in i-Smart portal.
 5. Farmers can create accounts and sell their products directly.
-6. They can remove and update their list of products.
+6. AI based crop suggestions for better yielding.
 7. Payment gateway integration.
 8. Stylish email delivery system is implemented for market and iot.
 9. Secret and highly secured admin portal (Not accessible to normal users).
