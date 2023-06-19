@@ -1073,9 +1073,19 @@ app.get("/ReportIssue", isLoggedIn, function (req, res) {
         ItemId: req.query.ItemId,
         ReporterID: req.user.usersId
     });
-    myFraudReport.save();
-    notifyAdmin();
-    res.render("message", { redirectTo: "/market", myMessage: "Ticket has been Raised. Thank you" });
+    async function checkPrevReports() {
+        let prevReports = await FraudReport.find({ ReporterID: req.user.usersId });
+        if (prevReports.length <= 5) {
+            myFraudReport.save();
+            notifyAdmin();
+            res.render("message", { redirectTo: "/market", myMessage: "Ticket has been Raised. Thank you" });
+        }
+        else {
+            res.render("message", { redirectTo: "/market", myMessage: "Sorry, your limit exceeded. Directly email us your issue." });
+        }
+    }
+    checkPrevReports();
+
 })
 //Get routes end
 
