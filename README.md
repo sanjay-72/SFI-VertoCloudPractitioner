@@ -74,9 +74,10 @@ in it is making this an all-rounder solution for many of the problems that are f
 4. Load Balancers - For balancing load among all the servers.
 5. Stripe - Handles all the payment related tasks.
 6. ThingSpeak - IOT cloud data storage and visualisations.
-7. Twilio - Used for mobile verification of new customers.
-8. NodeMailer - For sending acknowledgements to customers and notifying admin for any actions.
-9. OpenWeather - For getting location specific weather details.
+7. OpenAI - for crop suggestions.
+8. Twilio - Used for mobile verification of new customers.
+9. NodeMailer - For sending acknowledgements to customers and notifying admin for any actions.
+10. OpenWeather - For getting location specific weather details.
 
 
 ## <p align="center">Everything is explained in depth in video and document please take a look at them.</p>
