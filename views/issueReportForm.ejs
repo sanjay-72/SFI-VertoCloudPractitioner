@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <title>🍒Fruitful🍊 Bulk Orders.</title>
+    <title>🍒Fruitful🍊 Issues.</title>
 
     <!-- Favicon Link  -->
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
@@ -269,41 +269,21 @@
         <!-- Box for inputs start -->
         <div id="container" class="hiddenContainer">
 
-            <form action="/sendBulkRequest" method="post">
-                <h1 class="hiddenInput">Bulk Request</h1>
+            <form action="/reportIssue?ItemId=<%=ItemId %>" method="post">
+                <h1 class="hiddenInput">Report your issue</h1>
                 <br>
                 <div class="input-wrapper">
-                    <label for="ProductName" class="hiddenInput">Product Name :</label><br>
-                    <input name="ProductName" class="hiddenInput" type="text" value="<%= productData.ProductName %>"
-                        required style="font-size: 200%;" spellcheck="false" autocomplete="off" disabled>
-                </div>
-                <div class="input-wrapper">
-                    <label for="ProductType" class="hiddenInput">Product Type :</label><br>
-                    <input name="ProductType" class="hiddenInput" type="text" value="<%= productData.Variety %>"
-                        required style="font-size: 200%;" spellcheck="false" autocomplete="off" disabled>
-                </div>
-                <div class="input-wrapper" style="display: none;">
-                    <label for="ProductId" class="hiddenInput">Product ID :</label><br>
-                    <input name="ProductId" class="hiddenInput" type="number" value="<%= productData.ProductId %>"
-                        required style="font-size: 200%;" spellcheck="false" autocomplete="off">
-                </div>
-                <div class="input-wrapper">
-                    <label for="MarketPrice" class="hiddenInput">Market Price (per KG) :</label><br>
-                    <input name="MarketPrice" class="hiddenInput" type="number" value="<%= productData.cost %>" required
+                    <label for="ItemId" class="hiddenInput">Item Id :</label><br>
+                    <input name="ItemId" class="hiddenInput" type="text" value="<%=ItemId %>" required
                         style="font-size: 200%;" spellcheck="false" autocomplete="off" disabled>
                 </div>
                 <div class="input-wrapper">
-                    <label for="BidAmount" class="hiddenInput">Offer Value (per KG) :</label><br>
-                    <input name="BidAmount" class="hiddenInput" type="number" required style="font-size: 200%;"
-                        placeholder="Your bid amount" spellcheck="false" autocomplete="off" step="0.01" autofocus>
+                    <label for="Description" class="hiddenInput">Description (max 150 characters): *</label><br>
+                    <textarea name="Description" id="DescriptionField" cols="30" rows="4" autocomplete="off"
+                        spellcheck="false" autocomplete="off" maxlength="150" required
+                        placeholder="Describe your issue." class="hiddenInput" autofocus></textarea>
                 </div>
-                <div class="input-wrapper">
-                    <label for="Quantity" class="hiddenInput">Quantity Required (in KGs) :</label><br>
-                    <input name="Quantity" class="hiddenInput" type="number" required style="font-size: 200%;"
-                        placeholder="Quantity" spellcheck="false" autocomplete="off" autofocus>
-                </div>
-                <button class="myLoginBtn hiddenInput" type="submit" id="SubmitButton"><strong>Send Bulk
-                        Request</strong></button>
+                <button class="myLoginBtn hiddenInput" type="submit" id="SubmitButton"><strong>Report</strong></button>
             </form>
             <!-- Footer text start -->
             <h3 id="nameTextEng" class="hiddenInput">©️ Fruitful technologies.</h3>
