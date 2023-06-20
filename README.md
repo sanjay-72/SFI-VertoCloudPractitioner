@@ -38,7 +38,7 @@ in it is making this an all-rounder solution for many of the problems that are f
 3. IOT integration in i-Smart portal.
 4. Live weather data in i-Smart portal.
 5. Farmers can create accounts and sell their products directly.
-6. They can remove and update their list of products.
+6. AI based crop suggestions for better yielding.
 7. Payment gateway integration.
 8. Stylish email delivery system is implemented for market and iot.
 9. Secret and highly secured admin portal (Not accessible to normal users).
@@ -74,9 +74,10 @@ in it is making this an all-rounder solution for many of the problems that are f
 4. Load Balancers - For balancing load among all the servers.
 5. Stripe - Handles all the payment related tasks.
 6. ThingSpeak - IOT cloud data storage and visualisations.
-7. Twilio - Used for mobile verification of new customers.
-8. NodeMailer - For sending acknowledgements to customers and notifying admin for any actions.
-9. OpenWeather - For getting location specific weather details.
+7. OpenAI - for crop suggestions.
+8. Twilio - Used for mobile verification of new customers.
+9. NodeMailer - For sending acknowledgements to customers and notifying admin for any actions.
+10. OpenWeather - For getting location specific weather details.
 
 
 ## <p align="center">Everything is explained in depth in video and document please take a look at them.</p>
