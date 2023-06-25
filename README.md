@@ -4,10 +4,10 @@
 ### All in one solution for Indian Agriculture industry - 2023
 This is the solution developed by our team Verto Cloud Practitioners in Solving for India - 2023 Hackathon conducted by Geeks For Geeks in corporation with Google Cloud and AMD. We kept on updating the app for all the rounds. We won the Instutional Round in April '23, the Regional Round(North-India) in May '23 and looking for our place in National Round in June '23.
 
+![end devices](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/2b2e8cda-6740-4c6c-a28c-323915b9a7fc)
 
 Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdPPva-CGq5xhKVKIHsgqhPy3H4/edit?usp=sharing">FruitFul-Report</a>
 
-![end devices](https://github.com/sanjay-72/SFI-VertoCloudPractitioner/assets/94333583/4b317486-5792-440a-9931-0fc324d94481)
 
 
 ## Problem
