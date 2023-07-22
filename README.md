@@ -11,15 +11,12 @@ Document link : <a href="https://docs.google.com/document/d/1y9t6MsnguiRjqG6XbdP
 
 
 ## Problem
-Farmers in India realize only about 8-10% of their final harvest, compared to upwards of 30% in developed markets. This depreciation is due to complexities in the 
-conventional supply chain which is benefitting many people indirectly other than farmers and even the government is trying to regulate this supply chain 
-using Rythu-Bazaars. 
-
-In addition to this, there is no unified IOT platform for the farmers to monitor their farm and plan necessary things in case of any bad weather conditions. 
+Farmers in India realize only about 8-10% of their final harvest, compared to upwards of 30% in developed markets. This depreciation is due to complexities in the conventional supply chain. 
+For an e-commerce platform of agricultural products buyers are having only reviews as the base for buying a product which is not effective in case of agricultural products.
 
 ## Our solution
 
-We are presenting FruitFul, a MERN-based full-stack web application which acts as a platform that connects farmers, traders, and common people. In addition to this, we also have customized IOT features for registered farmers to help them monitor their farm to increase the yielding by following the best practices.
+We made FruitFul, a MERN-based full-stack web application which acts as a platform that connects farmers, traders, and common people. In addition to this, we are introducing a completely new dimension(Organic Quality Sensing) for the buyers online to see how good the product is.
 
 This application is not a biased solution to a particular problem in agro tech. This is made to solve most of the problems which can be solved in one go. So that 
 farmers can find this helpful because they can do many things in one app like they can see the market status, and sell their products and even IOT is embedded 
